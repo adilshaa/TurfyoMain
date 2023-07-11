@@ -1,0 +1,94 @@
+
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div
+    class="px-4 py-5 px-md-5 text-center text-lg-start"
+    style="background-color: hsl(0, 0%, 96%)"
+  >
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-5 col-sm-12 mb-5 mb-lg-0">
+          <h1 class="my-5 display-3 fw-bold ls-tight">
+            Login <br />
+            <span class="text-warning">for your business</span>
+          </h1>
+          <p style="color: rgb(0, 0, 0)" class="d-none d-sm-block">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+            itaque accusantium odio, soluta, corrupti aliquam quibusdam tempora
+            at cupiditate quis eum maiores libero veritatis? Dicta facilis sint
+            aliquid ipsum atque?
+          </p>
+        </div>
+
+        <div class="col-lg-5 col-sm-12 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <form [formGroup]="form" (submit)="loginSuperAdmin()">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+
+                <div class="form-outline mb-2">
+                  <input
+                    formControlName="name"
+                    type="text"
+                    id="name"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example1"> name</label>
+                </div>
+
+                <div class="form-outline mb-2">
+                  <input
+                    formControlName="email"
+                    type="email"
+                    id="form3Example2"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example2">Email</label>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input
+                    formControlName="number"
+                    type="number"
+                    id="form3Example3"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example3">Number</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input
+                    formControlName="password"
+                    type="password"
+                    id="form3Example4"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+                <p class="text-white-50 mb-5 text-danger">
+                  {{ error }}
+                </p>
+
+                <!-- Checkbox -->
+
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                  Login
+                </button>
+
+                <!-- Register buttons -->
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

@@ -1,0 +1,294 @@
+<!-- <div
+  class="container d-flex justify-content-center align-items-center min-vh-100"
+>
+
+  <div
+    class="row border rounded-5 p-3 bg-white shadow box-area"
+    style="border-radius: 25px"
+  >
+
+    <div
+      class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+      style="background: #f47210; border-radius: 25px"
+    >
+      <div class="featured-image mb-3" style="border-radius: 25px">
+        <img
+          src="card-lab-header-v2-2x.png"
+          class="img-fluid"
+          style="width: 250px"
+        />
+      </div>
+      <p
+        class="text-white fs-2"
+        style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
+      >
+        Be Verified
+      </p>
+      <small
+        class="text-white text-wrap text-center"
+        style="width: 17rem; font-family: 'Courier New', Courier, monospace"
+        >Join experienced Designers on this platform.</small
+      >
+    </div>
+
+
+    <div class="col-md-6 right-box">
+      <div class="row align-items-center">
+        <div class="header-text mb-4 text-center">
+          <h2>Hello,Again</h2>
+          <p>We are happy to have you back.</p>
+        </div>
+        <form [formGroup]="Form" (ngSubmit)="staffsLogin()">
+          <div class="email">
+            <div class="input-group mb-3 mx-auto" style="width: 75%">
+              <input
+                type="text"
+                class="form-control form-control-lg bg-light fs-6 w-75"
+                placeholder="Username"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': submitted && Form.controls['email'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted && Form.controls['email'].errors"
+                class=" text-danger emailerror"
+              >
+                <div
+                  *ngIf="submitted && Form.controls['email'].errors['required']"
+                >
+                  Email is requreid
+                </div>
+                <div
+                  *ngIf="submitted && Form.controls['email'].errors['email']"
+                >
+                  Email shoud be proper
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-1 mx-auto" style="width: 75%">
+            <input
+              type="password"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Password"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': submitted && Form.controls['password'].errors
+              }"
+            />
+          </div>
+          <div class="input-group mb-1 mt-2 mx-auto" style="width: 50%">
+            <select
+              id="role"
+              class="car-select"
+              name="role"
+              formControlName="role"
+              [ngClass]="{
+                'is-invalid': submitted && Form.controls['role'].errors
+              }"
+            >
+              <option value="cheffs">Cheff</option>
+              <option value="waiters">Waiter</option>
+              <option value="admins">Admin</option>
+              <option value="accountent">Accountent</option>
+            </select>
+          </div>
+          <div class="input-group mb-5 d-flex justify-content-between">
+            <div class="form-check mx-auto">
+              <input type="checkbox" class="form-check-input" id="formCheck" />
+              <label for="formCheck" class="form-check-label text-secondary"
+                ><small>Remember Me</small></label
+              >
+            </div>
+            <div class="forgot mx-auto">
+              <small><a href="#">Forgot Password?</a></small>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <button
+              class="btn btn-lg w-75 fs-6 mx-auto"
+              style="background: #f47210; border-radius: 25px; color: #fff"
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div class="input-group mb-3">
+          <button
+            class="btn btn-lg btn-light w-75 fs-6 mx-auto"
+            style="border-radius: 15px"
+          >
+            <img src="" style="width: 20px" class="me-2" /><small
+              >Sign In with Google</small
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->
+
+<div class="container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form class="sign-in-form" [formGroup]="Form" (ngSubmit)="resControlLogin()">
+        <h2 class="title">Login Now !!</h2>
+
+        <div class="input-field mb-3">
+          <i class="fas fa-envelope"></i>
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid': submitted && Form.controls['password'].errors
+            }"
+          />
+          
+        </div>
+        <a class="href " >
+          <div
+            *ngIf="submitted && Form.controls['email'].errors "
+            class="text-danger emailerror "
+          >
+            <div class="text-center" *ngIf="submitted && Form.controls['email'].errors['required']">
+              *Email is requreid
+            </div>
+            <div *ngIf="submitted && Form.controls['email'].errors['email']">
+              *Email shoud be proper format
+            </div>
+             
+          </div>
+        </a>
+        <div class="input-field mb-3">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid': submitted && Form.controls['password'].errors
+            }"
+          />
+          
+        </div>
+        <a class="href">
+          <div
+            *ngIf=" Form.controls['password'].errors"
+            class="text-danger emailerror"
+          >
+           
+             <div *ngIf="submitted && Form.controls['password'].errors['required']">
+             *password
+            </div>
+             <div *ngIf="submitted && Form.controls['password'].errors['minlength']">
+              *Password min 4 charectors
+            </div>
+          </div>
+        </a>
+       
+         
+
+        <input type="submit" value="Login " class="btn solid" />
+        <p class="social-text">Welcome to Turfyo</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </form>
+      <!-- <form action="#" class="sign-up-form">
+        <h2 class="title">Qeydiyyat</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Ad, Soyad" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-phone"></i>
+          <input type="email" placeholder="Telefon" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Şifrə" />
+        </div>
+        <div>
+          <input type="checkbox" /><a href="#" class="href">
+            <span class="rules-text">"Alıcı müqaviləsi"</span> </a
+          >nin şərtləri ilə razıyam
+        </div>
+
+        <input type="submit" class="btn" value="Qeydiyyatı tamamla" />
+        <p class="social-text">
+          Sosial şəbəkələr vasitəsi ilə qeydiyyatdan keçə bilərsiniz..
+        </p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </form> -->
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>Hesabınız yoxdur?</h3>
+        <p>
+          Qeydiyyatdan keçdikdən sonra mağazamızın bir çox xidmətlərindən
+          yararlana bilərsiniz..
+        </p>
+        <button class="btn transparent" id="sign-up-btn">
+          Qeydiyyatdan keç
+        </button>
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/sooleymanli/Login-Register-Form-Responsive/88389493c1cf548869e261f58014b343eb00ec36/img/login.svg"
+        class="image"
+        alt="Register"
+      />
+    </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>Hesabınız var?</h3>
+        <p>
+          Mağazamızdakı məhsullardan sifariş vermək üçün daxil olmağınız
+          şərtdir. Daxil olmağa tələsin..
+        </p>
+        <button class="btn transparent" id="sign-in-btn">Daxil ol</button>
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/sooleymanli/Login-Register-Form-Responsive/88389493c1cf548869e261f58014b343eb00ec36/img/login.svg"
+        class="image"
+        alt="Login"
+      />
+    </div>
+  </div>
+</div>

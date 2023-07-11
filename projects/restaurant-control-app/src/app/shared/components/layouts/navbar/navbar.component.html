@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Turfyo</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="login" *ngIf="authonticated">Login</a>
+      </li>
+      <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/partner"  *ngif="!authonticated">Partner</a>
+        </li> -->
+    </ul>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item mx-auto" *ngIf="!authonticated">
+        <a routerLink="login" class="nav-link">Staffs Login</a>
+      </li>
+      <li class="nav-item mx-auto" *ngIf="!authonticated">
+        <a class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

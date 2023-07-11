@@ -1,0 +1,113 @@
+<div *ngIf="resFullDetails$ | async as resDetails">
+  <div class="jumbotron text-center">
+    <h1>{{ resDetails.name }}</h1>
+    <p>Welcome {{ resDetails.name }} restaurant</p>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- <h2>About Us</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies mattis odio ac aliquam. Nulla tempus dui
+      eget vestibulum fringilla. Proin aliquet laoreet justo, nec tristique risus euismod at. Sed a libero eleifend,
+      pulvinar enim eget, ullamcorper mi. Sed laoreet justo ac sapien semper, nec semper nisi cursus. Phasellus
+      euismod leo vel semper placerat. Donec accumsan nunc id congue tempor.</p>
+
+    <h2>Menu</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="menu-item">
+          <h4>Item 1</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies mattis odio ac aliquam.</p>
+        </div>
+        <div class="menu-item">
+          <h4>Item 2</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies mattis odio ac aliquam.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="menu-item">
+          <h4>Item 3</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies mattis odio ac aliquam.</p>
+        </div>
+        <div class="menu-item">
+          <h4>Item 4</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies mattis odio ac aliquam.</p>
+        </div>
+      </div>
+    </div> -->
+      <form action="" [formGroup]="form" (submit)="saveEdit(resDetails._id)">
+        <div class="d-flex">
+          <div>
+            <h2>Contact</h2>
+            <div *ngIf="isEdit">
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [(ngModel)]="resDetails.name"
+              />
+            </div>
+            <div *ngIf="!isEdit">
+              <p>{{ resDetails.name }}</p>
+            </div>
+
+            <div *ngIf="isEdit">
+              <input
+                type="text"
+                formControlName="place"
+                class="form-control"
+                [(ngModel)]="resDetails.place"
+              />
+            </div>
+            <div *ngIf="!isEdit">
+              <p>{{ resDetails.place }}</p>
+            </div>
+
+            <div *ngIf="isEdit">
+              <input
+                type="text"
+                formControlName="owner_name"
+                class="form-control"
+                [(ngModel)]="resDetails.owner_name"
+              />
+            </div>
+            <div *ngIf="!isEdit">
+              <p>{{ resDetails.owner_name }}</p>
+            </div>
+          </div>
+
+          <div class="mx-auto">
+            <div *ngIf="isEdit">
+              <button class="btn btn-danger" type="submit" >Save</button>
+              <button class="btn btn-dark" (click)="isEdit = false">
+                cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div *ngIf="!isEdit" class="mx-auto">
+        <div>
+          <button class="btn btn-danger" (click)="editRestaurant()">
+            edit
+          </button>
+          <button
+            *ngIf="resDetails.status == true"
+            class="btn btn-dark"
+            (click)="listrestaurant(resDetails._id ,resDetails.status)"
+          >
+            List
+          </button>
+          <button
+            *ngIf="resDetails.status == false"
+            class="btn btn-dark"
+            (click)="listrestaurant(resDetails._id,resDetails.status)"
+          >
+            Un List
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

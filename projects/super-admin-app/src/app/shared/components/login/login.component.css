@@ -1,0 +1,6 @@
+.form-outline .form-control{
+    border:solid .2px rgb(243, 110, 8) ;
+     border-radius: 20px;
+     box-shadow: none;
+
+}
