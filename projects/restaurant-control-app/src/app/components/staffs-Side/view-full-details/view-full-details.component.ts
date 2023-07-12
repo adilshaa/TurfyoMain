@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResturantControlServiceService } from 'projects/restaurant-control-app/src/app/core/services/resturant-control-service.service';
-import { RestaurantControlEmitter } from '../../../emmiter/res-control-emmitter';
+import { RestaurantControlEmitter } from '../../../shared/emmiter/res-control-emmitter';
 
 @Component({
   selector: 'app-view-full-details',
@@ -50,7 +50,7 @@ export class ViewFullDetailsComponent implements OnInit {
       (res) => {
         this.router.navigate([this.router.url]);
         RestaurantControlEmitter.resEmitter.emit(true);
-        this.isEdit=false
+        this.isEdit = false;
       },
       (err) => {
         RestaurantControlEmitter.resEmitter.emit(false);
@@ -62,6 +62,6 @@ export class ViewFullDetailsComponent implements OnInit {
   }
 
   removeStaffs(id: any) {
-    this.resService.removeStaffs(id)
+    this.resService.removeStaffs(id);
   }
 }

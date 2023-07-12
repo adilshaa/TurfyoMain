@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResturantControlServiceService } from '../../../../core/services/resturant-control-service.service';
+import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -22,9 +22,9 @@ export class ListFoodsComponent implements OnInit {
     private resService: ResturantControlServiceService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private http: HttpClient,
-    // private resStore: Store<{ foodsData: Foodsstructure[] }>
-  ) {}
+    private http: HttpClient
+  ) // private resStore: Store<{ foodsData: Foodsstructure[] }>
+  {}
   ngOnInit(): void {
     // this.resStore.dispatch(fetchFoodsData());
     this.AddFood = this.formBuilder.group({

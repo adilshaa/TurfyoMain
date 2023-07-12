@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResturantControlServiceService } from '../../../../core/services/resturant-control-service.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 
 @Component({
   selector: 'app-addstaffs',
@@ -10,7 +15,7 @@ import { ResturantControlServiceService } from '../../../../core/services/restur
 })
 export class AddstaffsComponent implements OnInit {
   staffData!: FormGroup;
-  submitted:any
+  submitted: any;
   constructor(
     private formBulider: FormBuilder,
     private resService: ResturantControlServiceService

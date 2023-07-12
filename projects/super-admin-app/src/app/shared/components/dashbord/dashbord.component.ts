@@ -16,6 +16,8 @@ import { ServiceService } from '../../../core/services/service.service';
 export class DashbordComponent implements OnInit {
   data!: string;
   restaurantData$ = this.store.pipe(select(retaurantDatas));
+  
+  isLoader:Boolean=true
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -23,6 +25,9 @@ export class DashbordComponent implements OnInit {
     private store: Store<{ restaurantData: restaurantModel[] }>
   ) {}
   ngOnInit(): void {
+      setTimeout(() => {
+        this.isLoader = false;
+      }, 500);
     this.http
       .get('http://localhost:5000/superadmin/superAdminStatus', {
         withCredentials: true,

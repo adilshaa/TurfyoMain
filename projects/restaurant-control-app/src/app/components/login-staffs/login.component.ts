@@ -6,8 +6,8 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
-import { RestaurantControlEmitter } from '../../emmiter/res-control-emmitter';
+import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
+import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -64,11 +64,9 @@ export class LoginComponent implements OnInit {
             window.open(`${kitchenUrl}?${queryParams}`);
           }
           window.open(`${resadminUrl}?${queryParams}`);
-          localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
         },
         (err) => {
           this.toastr.error(err.error.message);
-
         }
       );
   }

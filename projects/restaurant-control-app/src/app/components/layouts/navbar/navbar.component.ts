@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantControlEmitter } from '../../../emmiter/res-control-emmitter';
+import { RestaurantControlEmitter } from '../../../shared/emmiter/res-control-emmitter';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({

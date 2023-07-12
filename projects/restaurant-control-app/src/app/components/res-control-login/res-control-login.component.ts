@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
+import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
 
 @Component({
   selector: 'app-res-control-login',
@@ -28,11 +28,14 @@ export class ResControlLoginComponent implements OnInit {
     });
   }
   resControlLogin() {
-    let LoginData = this.Form.getRawValue()
+    let LoginData = this.Form.getRawValue();
     if (LoginData) {
-      this.resService.LoginController(LoginData).subscribe((res) => {
-        this.router.navigate(['/'])
-      })
+      this.resService.LoginController(LoginData).subscribe((res:any) => {
+        let token=res.token
+        localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
+        localStorage.setItem('resadmin',token);
+        this.router.navigate(['/']);
+      });
     }
   }
 }

@@ -23,6 +23,7 @@
     "@ngrx/effects": "^16.0.1",
     "@ngrx/store": "^16.0.1",
     "install": "^0.13.0",
+    "ng-http-loader": "^14.0.0",
     "ngx-cookie-service": "^16.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",

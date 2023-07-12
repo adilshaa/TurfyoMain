@@ -33,6 +33,8 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 import { SuperAdminInterceptorInterceptor } from './core/interceptors/super-admin-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { AuthService } from './core/services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,25 +61,27 @@ import { ToastrModule } from 'ngx-toastr';
     SocialLoginModule,
     GoogleSigninButtonModule,
     ToastrModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [
     ServiceService,
     CookieService,
     authGuards,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SuperAdminInterceptorInterceptor,
       multi: true,
     },
     {
-      provide: 'SocialAuthServiceConfig',
+      provide: "SocialAuthServiceConfig",
       useValue: {
         autoLogin: false,
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '373314217149-ks6armu585104gmhg10drdk1odl70s3n.apps.googleusercontent.com'
+              "373314217149-ks6armu585104gmhg10drdk1odl70s3n.apps.googleusercontent.com"
             ),
           },
         ],

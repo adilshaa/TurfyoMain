@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantControlEmitter } from '../../emmiter/res-control-emmitter';
+import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { io } from 'socket.io-client';
@@ -22,19 +22,15 @@ export class DashboardComponent implements OnInit {
       console.log(data);
     });
     let result;
-    this.route.queryParams.subscribe((params) => {
-      result = params['result'];
-      // Process the received parameters
-      console.log('Received param2:', result);
-    });
+    //  this.route.queryParams.subscribe((params) => {
+    //    result = params['result'];
+    //    // Process the received parameters
+    //    console.log('Received param2:', result);
+    //  });
     this.http
-      .post(
-        'http://localhost:5000/resadmin/verifyresadmin',
-        { result },
-        {
-          withCredentials: true,
-        }
-      )
+      .get('http://localhost:5000/resadmin/verifyresadmin', {
+        withCredentials: true,
+      })
       .subscribe(
         (result: any) => {
           if (result) {
@@ -50,5 +46,13 @@ export class DashboardComponent implements OnInit {
           RestaurantControlEmitter.resEmitter.emit(false);
         }
       );
+    const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
+    if (isSuperAdmin) {
+      console.log(isSuperAdmin);
+
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/controllersLogin']);
+    }
   }
 }

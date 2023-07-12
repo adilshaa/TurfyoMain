@@ -2,28 +2,29 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
-import { StaffsComponent } from './shared/components/staffSide/staffs/staffs.component';
-import { NavbarComponent } from './shared/components/layouts/navbar/navbar.component';
-import { SidebarComponent } from './shared/components/layouts/sidebar/sidebar.component';
-import { LoginComponent } from './shared/components/login-staffs/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StaffsComponent } from './components/staffs-Side/staffs/staffs.component';
+import { NavbarComponent } from './components/layouts/navbar/navbar.component';
+import { SidebarComponent } from './components/layouts/sidebar/sidebar.component';
+import { LoginComponent } from './components/login-staffs/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResturantControlServiceService } from './core/services/resturant-control-service.service';
-import { KitchenitemsComponent } from './shared/components/kitchen-side/kitchenitems/kitchenitems.component';
-import { ListFoodsComponent } from './shared/components/kitchen-side/list-foods/list-foods.component';
-import { KitchenMenuComponent } from './shared/components/kitchen-side/kitchen-menu/kitchen-menu.component';
+import { KitchenitemsComponent } from './components/kitchen-side/kitchenitems/kitchenitems.component';
+import { ListFoodsComponent } from './components/kitchen-side/list-foods/list-foods.component';
+import { KitchenMenuComponent } from './components/kitchen-side/kitchen-menu/kitchen-menu.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddstaffsComponent } from './shared/components/staffSide/addstaffs/addstaffs.component';
+import { AddstaffsComponent } from './components/staffs-Side/addstaffs/addstaffs.component';
 import { StoreModule } from '@ngrx/store';
 import { staffsDetails } from './core/store/res-admin.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { Saffseffect } from './core/store/res-admin.effects';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ViewFullDetailsComponent } from './shared/components/staffSide/view-full-details/view-full-details.component';
-import { ResControlLoginComponent } from './shared/components/res-control-login/res-control-login.component';
+import { ViewFullDetailsComponent } from './components/staffs-Side/view-full-details/view-full-details.component';
+import { ResControlLoginComponent } from './components/res-control-login/res-control-login.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ResAdminAuthGuard } from './core/auth/res-admin-auth-guards.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +39,6 @@ import { ToastrModule } from 'ngx-toastr';
     KitchenMenuComponent,
     ViewFullDetailsComponent,
     ResControlLoginComponent,
-    
-
   ],
   imports: [
     BrowserModule,
@@ -54,7 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
     EffectsModule.forRoot([Saffseffect]),
     ToastrModule.forRoot(),
   ],
-  providers: [ResturantControlServiceService],
+  providers: [ResturantControlServiceService, ResAdminAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

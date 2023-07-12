@@ -8,7 +8,6 @@ import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmit
 export class ResAuthServiceService {
   constructor() {}
   isResAdminisLoggedIN() {
-    // console.log(!!localStorage.getItem('isLoggedIN'));
     RestaurantControlEmitter.resEmitter.emit(true);
     return !!localStorage.getItem('ResadminisLoggedIN');
   }
