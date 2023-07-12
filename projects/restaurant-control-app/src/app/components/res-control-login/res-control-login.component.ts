@@ -22,12 +22,22 @@ export class ResControlLoginComponent implements OnInit {
     private resService: ResturantControlServiceService
   ) {}
   ngOnInit(): void {
+    const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
+    if (isSuperAdmin) {
+      console.log(isSuperAdmin);
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/controllersLogin']);
+    }
+
     this.Form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
   }
   resControlLogin() {
+
+
     let LoginData = this.Form.getRawValue();
     if (LoginData) {
       this.resService.LoginController(LoginData).subscribe((res:any) => {

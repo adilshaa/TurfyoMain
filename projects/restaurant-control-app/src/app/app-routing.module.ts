@@ -11,10 +11,11 @@ import { ResControlLoginComponent } from './components/res-control-login/res-con
 import { authGuards } from 'projects/super-admin-app/src/app/core/services/auth.guard';
 const routes: Routes = [
   {
+    path: 'controllersLogin',
+    component: ResControlLoginComponent,
+  },
+  {
     path: '',
-    // canActivate: [authGuards],
-
-    canActivate: [ResAuthServiceService],
 
     component: DashboardComponent,
     children: [
@@ -40,9 +41,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+
   {
-    path: 'controllersLogin',
-    component: ResControlLoginComponent,
+    path: '**',
+    redirectTo: '/controllersLogin',
   },
 ];
 @NgModule({

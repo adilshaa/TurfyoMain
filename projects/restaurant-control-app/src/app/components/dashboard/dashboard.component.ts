@@ -9,13 +9,20 @@ import { io } from 'socket.io-client';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+
+  
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    let jwt = localStorage.getItem('ResadminisLoggedIN');
+    console.log(jwt+"123");
+    
+  }
 
   ngOnInit(): void {
+  
     const socket = io('http://localhost:5000');
 
     socket.on('hello', (data) => {
@@ -49,7 +56,6 @@ export class DashboardComponent implements OnInit {
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {
       console.log(isSuperAdmin);
-
       this.router.navigate(['/']);
     } else {
       this.router.navigate(['/controllersLogin']);
