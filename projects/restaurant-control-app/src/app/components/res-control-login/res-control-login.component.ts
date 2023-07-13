@@ -41,7 +41,8 @@ export class ResControlLoginComponent implements OnInit {
     let LoginData = this.Form.getRawValue();
     if (LoginData) {
       this.resService.LoginController(LoginData).subscribe((res:any) => {
-        let token=res.token
+        let token = res.token
+        
         localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
         localStorage.setItem('resadmin',token);
         this.router.navigate(['/']);

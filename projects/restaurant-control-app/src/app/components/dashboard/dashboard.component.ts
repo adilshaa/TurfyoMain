@@ -9,26 +9,22 @@ import { io } from 'socket.io-client';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
-  
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    let jwt = localStorage.getItem('ResadminisLoggedIN');
-    console.log(jwt+"123");
-    
+    // let jwt = localStorage.getItem('ResadminisLoggedIN');
+    // console.log(jwt + '123');
   }
 
   ngOnInit(): void {
-  
-    const socket = io('http://localhost:5000');
+    // const socket = io('http://localhost:5000');
 
-    socket.on('hello', (data) => {
-      console.log(data);
-    });
-    let result;
+    // socket.on('hello', (data) => {
+    //   console.log(data);
+    // });
+    // let result;
     //  this.route.queryParams.subscribe((params) => {
     //    result = params['result'];
     //    // Process the received parameters
@@ -40,22 +36,19 @@ export class DashboardComponent implements OnInit {
       })
       .subscribe(
         (result: any) => {
-          if (result) {
+          console.log(result);
             this.router.navigate(['.']);
             RestaurantControlEmitter.resEmitter.emit(true);
-          } else {
-            RestaurantControlEmitter.resEmitter.emit(false);
-            // this.router.navigate(['/login']);
-          }
         },
-        (err) => {
-          // this.router.navigate(['/login']);
+        ((err) => {
+          console.log(err); 
+          localStorage.removeItem('ResadminisLoggedIN');
+          this.router.navigate(['/controllersLogin']);
           RestaurantControlEmitter.resEmitter.emit(false);
-        }
+        })
       );
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {
-      console.log(isSuperAdmin);
       this.router.navigate(['/']);
     } else {
       this.router.navigate(['/controllersLogin']);

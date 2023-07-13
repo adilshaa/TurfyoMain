@@ -66,7 +66,7 @@ export class ResturantControlServiceService {
   }
   LoginController(data: any) {
     return this.http.post(
-      `${this.url}${this.backoRouter}/ControllerLogin`,
+      `${this.url}${this.backoRouter}ControllerLogin`,
       data,
       {
         withCredentials: true,
