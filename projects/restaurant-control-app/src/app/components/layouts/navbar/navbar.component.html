@@ -14,17 +14,17 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="login" *ngIf="authonticated">Login</a>
+        <a class="nav-link" routerLink="login" *ngIf="!authonticated">Login</a>
       </li>
       <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/partner"  *ngif="!authonticated">Partner</a>
         </li> -->
     </ul>
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item mx-auto" *ngIf="!authonticated">
+      <li class="nav-item mx-auto" *ngIf="authonticated">
         <a routerLink="login" class="nav-link">Staffs Login</a>
       </li>
-      <li class="nav-item mx-auto" *ngIf="!authonticated">
+      <li class="nav-item mx-auto" *ngIf="authonticated">
         <a class="nav-link">Logout</a>
       </li>
     </ul>

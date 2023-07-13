@@ -73,4 +73,7 @@ export class ResturantControlServiceService {
       }
     );
   }
+  LogOutResAdmin() {
+   return this.http.get(`${this.url}${this.backoRouter}/logout`, {withCredentials:true})
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantControlEmitter } from '../../../shared/emmiter/res-control-emmitter';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,25 +10,17 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class NavbarComponent implements OnInit {
   authonticated!: boolean;
-  constructor() {}
+  constructor(private resService:ResturantControlServiceService) {}
   ngOnInit(): void {
     console.log(this.authonticated);
 
     RestaurantControlEmitter.resEmitter.subscribe((res: boolean) => {
       this.authonticated = res;
-      console.log(res);
-
-      // this.authonticated=false
+      
     });
+  }
+  logoutResAdmin() {
+    this.resService.LogOutResAdmin()
   }
 }
 
-trigger('fadeSlideInOut', [
-  transition(':enter', [
-    style({ opacity: 0, transform: 'translateY(10px)' }),
-    animate('500ms', style({ opacity: 1, transform: 'translateY(0)' })),
-  ]),
-  transition(':leave', [
-    animate('500ms', style({ opacity: 0, transform: 'translateY(10px)' })),
-  ]),
-]);

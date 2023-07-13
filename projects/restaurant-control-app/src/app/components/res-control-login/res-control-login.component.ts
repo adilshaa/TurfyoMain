@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
 
 @Component({
   selector: 'app-res-control-login',
@@ -19,7 +21,8 @@ export class ResControlLoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private resService: ResturantControlServiceService
+    private resService: ResturantControlServiceService,
+    private tostr: ToastrService
   ) {}
   ngOnInit(): void {
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
@@ -36,17 +39,26 @@ export class ResControlLoginComponent implements OnInit {
     });
   }
   resControlLogin() {
-
-
     let LoginData = this.Form.getRawValue();
     if (LoginData) {
-      this.resService.LoginController(LoginData).subscribe((res:any) => {
-        let token = res.token
-        
-        localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
-        localStorage.setItem('resadmin',token);
-        this.router.navigate(['/']);
-      });
+      this.resService.LoginController(LoginData).subscribe(
+        (res: any) => {
+          let token = res.token;
+          this.tostr.success('Success Fully Loggined');
+          localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
+          localStorage.setItem('resadmin', token);
+            RestaurantControlEmitter.resEmitter.emit(true);
+
+          this.router.navigate(['/']);
+        },
+        (err) => {
+          this.tostr.error(err.error.message);
+          let localdata = localStorage.getItem('resadmin');
+          if (localdata) {
+          let localdata = localStorage.removeItem('resadmin');
+          }
+        }
+      );
     }
   }
 }
