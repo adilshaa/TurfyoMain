@@ -1,22 +1,23 @@
 
     <div class="container mt-5">
-       <form class="row g-3" [formGroup]="staffData" (submit)="addStaffs()">
+        <h1 class="mb-5">Add Stock</h1>
+       <form class="row g-3" [formGroup]="stockData" (submit)="AddStocks()">
         <div class="col-sm-12 col-lg-6">
-          <label for="inputEmail4" class="form-label">Employee Name</label>
+          <label for="inputEmail4" class="form-label">Stock Name</label>
           <input
             type="text"
-            formControlName="employeeName"
+            formControlName="stockName"
             class="form-control"
              [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
+              'is-invalid': submitted && stockData.controls['stockName'].errors
             }"
           />
             <div
-            *ngIf="submitted && staffData.controls['employeeName'].errors "
+            *ngIf="submitted && stockData.controls['stockName'].errors "
             class="text-danger emailerror "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeeName'].errors['required']">
-              *Name is required
+            <div class="text-center" *ngIf="submitted && stockData.controls['stockName'].errors['required']">
+              *Stock namre is required
             </div>
             
           </div>
@@ -24,46 +25,44 @@
         <div class="col-sm-12 col-lg-6">
           <label for="inputPassword4" class="form-label">Place</label>
           <input
-            type="text"
-            formControlName="employeePlace"
+            type="date"
+            formControlName="stockExpairy"
             class="form-control"
              [ngClass]="{
-              'is-inval-id': submitted && staffData.controls['employeePlace'].errors
+              'is-inval-id': submitted && stockData.controls['stockExpairy'].errors
             }"
           />
            <div
-            *ngIf="submitted && staffData.controls['employeePlace'].errors "
+            *ngIf="submitted && stockData.controls['stockExpairy'].errors "
             class="text-danger emailerror "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeePlace'].errors['required']">
-              *place is requreid
+            <div class="text-center" *ngIf="submitted && stockData.controls['stockExpairy'].errors['required']">
+              *expairy Date is requried
             </div>
             
              
           </div>
         </div>
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputAddress" class="form-label">Email</label>
+        <div class="col-sm-12 col-lg-5">
+          <label for="inputAddress" class="form-label">Stocks Quantity</label>
           <input
-            type="email"
-            formControlName="employeeEmail"
+            type="number"
+            formControlName="stockQuantity"
             class="form-control"
              [ngClass]="{
-              'is-invalid': submitted && staffData.controls['employeeEmail'].errors
+              'is-invalid': submitted && stockData.controls['stockQuantity'].errors
             }"
           />
           <div
-            *ngIf="submitted && staffData.controls['employeeEmail'].errors "
+            *ngIf="submitted && stockData.controls['stockQuantity'].errors "
             class="text-danger emailerror "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeeEmail'].errors['required']">
-              *Email is requreid
+            <div class="text-center" *ngIf="submitted && stockData.controls['stockQuantity'].errors['required']">
+              * Please enter quantity of product
             </div>
-           
-             
           </div>
         </div>
-        <div class="col-sm-12 col-lg-6">
+        <!-- <div class="col-sm-12 col-lg-6">
           <label for="inputAddress2" class="form-label">Password </label>
           <input
             type="password"
@@ -177,7 +176,7 @@
             </div>
              
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="col-md-6">
           <label for="inputState" class="form-label"></label>
@@ -190,15 +189,13 @@
             </label>
           </div>
         </div> -->
-        <div class="col-6">
+        <div class="col-8">
           <button
             id="submitBtn"
             type="submit"
             class="btn btn-primary"
-            data-bs-dismiss="modal"
-            aria-label="Close"
           >
-            Sign in
+            Add Stock
           </button>
         </div>
       </form>

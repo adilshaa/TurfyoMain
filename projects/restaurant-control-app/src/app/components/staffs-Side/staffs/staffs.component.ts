@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 import { staffsStructure } from 'projects/restaurant-control-app/src/app/core/models/staffs';
 import { staffsDatas } from 'projects/restaurant-control-app/src/app/core/store/res-admin.selector';
 import { fetchStaffsData } from 'projects/restaurant-control-app/src/app/core/store/res-admin.actions';
-import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-staffs',
@@ -18,7 +17,6 @@ export class StaffsComponent implements OnInit {
   constructor(
     private formBulider: FormBuilder,
     private resService: ResturantControlServiceService,
-    public dialog: MatDialog,
     private router: Router,
     private resStore: Store<{ staffsData: staffsStructure[] }>
   ) {}
@@ -42,7 +40,6 @@ export class StaffsComponent implements OnInit {
   }
   ViewDetails(id: string) {
     console.log(id);
-
     this.router.navigate(['/editStaffs', id]);
   }
 }

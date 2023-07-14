@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,11 @@ import { Observable } from 'rxjs';
 export class ResturantControlServiceService {
   url: string = 'http://localhost:5000/';
   backoRouter = 'resadmin/';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   RegisterStaffs(data: any) {
     if (data) {
@@ -73,7 +77,19 @@ export class ResturantControlServiceService {
       }
     );
   }
+
+  getAllStocks() {
+    return this.http.get(`${this.url}${this.backoRouter}/KitchenStocks`, {
+      withCredentials: true,
+    });
+  }
+
+  addStock(data:any) {
+    return this.http.post(`${this.url}${this.backoRouter}addStock`,data,{withCredentials:true})
+  }
   LogOutResAdmin() {
-   return this.http.get(`${this.url}${this.backoRouter}/logout`, {withCredentials:true})
+    return this.http.get(`${this.url}${this.backoRouter}/logout`, {
+      withCredentials: true,
+    });
   }
 }

@@ -20,12 +20,13 @@ import { StoreModule } from '@ngrx/store';
 import { staffsDetails } from './core/store/res-admin.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { Saffseffect } from './core/store/res-admin.effects';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ViewFullDetailsComponent } from './components/staffs-Side/view-full-details/view-full-details.component';
 import { ResControlLoginComponent } from './components/res-control-login/res-control-login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ResAdminAuthGuard } from './core/auth/res-admin-auth-guards.guard';
 import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-interseptor.interceptor';
+import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
+import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,8 @@ import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-in
     KitchenMenuComponent,
     ViewFullDetailsComponent,
     ResControlLoginComponent,
+    ListStockComponent,
+    AddStockComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,6 @@ import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-in
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-    MatDialogModule,
     FormsModule,
     StoreModule.forRoot({ staffsData: staffsDetails }),
     EffectsModule.forRoot([Saffseffect]),

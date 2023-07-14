@@ -1,0 +1,72 @@
+<button
+  class="btn btn-danger"
+  data-bs-toggle="modal"
+  routerLink="/addStocks"
+>
+  add staffs
+</button>
+<table class="table"   >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> Name</th>
+      <th scope="col" class="email">Email</th>
+      <th scope="col"  class="number">Number</th>
+      <th scope="col" class="place">Place</th>
+      <th scope="col"  class="role">Role</th>
+      <th scope="col">Status</th>
+      <th scope="col">Full Details</th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr >
+      <th scope="row"></th>
+      <!-- <td class="name"> {{staffs.username}}</td>
+      <td class="email"> {{staffs.email}}</td>
+      <td class="number"> {{staffs.number}}</td>
+
+      <td class="place"> {{staffs.place}}</td>
+
+      <td   class="role"> {{staffs.role}}</td>
+
+      <td *ngIf="staffs.status ===true" style="color: rgb(91, 241, 3);"> {{staffs.status}} </td>
+      <td *ngIf="staffs.status ===false" style="color: red;"> {{staffs.status}} </td> -->
+
+    </tr>
+  </tbody>
+</table>
+<!-- <router-outlet></router-outlet> -->
+
+<script>
+  $(document).ready(function () {
+    $("#sidebarCollapse").on("click", function () {
+      $("#sidebar").toggleClass("active");
+    });
+  });
+</script>
+
+<div
+  class="modal fade"
+  id="modalRegisterForm"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content container">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Sign up</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+ 

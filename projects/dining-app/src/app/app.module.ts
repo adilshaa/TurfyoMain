@@ -19,13 +19,14 @@ import { FoodsData } from './core/store/dining.effects';
 
 @NgModule({
   declarations: [
+    NavbarComponent,
+
     AppComponent,
     DiningDeskComponent,
     TableViewComponent,
     OrdersViewComponent,
     FoodViewComponent,
     SidebarComponent,
-    NavbarComponent,
     CategoryMenuComponent,
   ],
   imports: [

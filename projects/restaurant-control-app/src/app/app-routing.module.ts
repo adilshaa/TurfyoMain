@@ -9,6 +9,8 @@ import { AddstaffsComponent } from './components/staffs-Side/addstaffs/addstaffs
 import { ViewFullDetailsComponent } from './components/staffs-Side/view-full-details/view-full-details.component';
 import { ResControlLoginComponent } from './components/res-control-login/res-control-login.component';
 import { authGuards } from 'projects/super-admin-app/src/app/core/services/auth.guard';
+import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
+import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
 const routes: Routes = [
   {
     path: 'controllersLogin',
@@ -28,12 +30,20 @@ const routes: Routes = [
         component: AddstaffsComponent,
       },
       {
-        path: 'listFoods',
+        path: 'Foods',
         component: ListFoodsComponent,
       },
       {
         path: 'editStaffs/:id',
         component: ViewFullDetailsComponent,
+      },
+      {
+        path: 'Stocks',
+        component: ListStockComponent,
+      },
+      {
+        path: 'addStocks',
+        component: AddStockComponent,
       },
     ],
   },

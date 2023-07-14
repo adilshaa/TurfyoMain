@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (result: any) => {
           console.log(result);
-            this.router.navigate(['.']);
             RestaurantControlEmitter.resEmitter.emit(true);
         },
         ((err) => {
@@ -49,7 +48,7 @@ export class DashboardComponent implements OnInit {
       );
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {
-      this.router.navigate(['/']);
+      this.router.navigate([this.route.url]);
     } else {
       this.router.navigate(['/controllersLogin']);
     }
