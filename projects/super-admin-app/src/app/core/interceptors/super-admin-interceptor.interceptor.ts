@@ -13,9 +13,8 @@ export class SuperAdminInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem('resadmin');
-    console.log();
-    
+    const token = localStorage.getItem("superadmin");
+    console.log(token);
     const modifiedRequest = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
