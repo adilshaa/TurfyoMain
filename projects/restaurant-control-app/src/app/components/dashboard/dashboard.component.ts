@@ -14,22 +14,16 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    // let jwt = localStorage.getItem('ResadminisLoggedIN');
-    // console.log(jwt + '123');
+   
   }
 
   ngOnInit(): void {
-    // const socket = io('http://localhost:5000');
+    const socket = io('http://localhost:5000');
 
-    // socket.on('hello', (data) => {
-    //   console.log(data);
-    // });
-    // let result;
-    //  this.route.queryParams.subscribe((params) => {
-    //    result = params['result'];
-    //    // Process the received parameters
-    //    console.log('Received param2:', result);
-    //  });
+    socket.on('hello', (data) => {
+      console.log(data);
+    });
+    
     this.http
       .get('http://localhost:5000/resadmin/verifyresadmin', {
         withCredentials: true,

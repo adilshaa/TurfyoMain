@@ -1,45 +1,3 @@
-/* This css file is to over write bootstarp css
----------------------------------------------------------------------- */
-
-
-/*
-Theme Name: Modern - Bootstrap 4 Cards
-Theme URI: http://adamthemes.com/
-Author: AdamThemes
-Author URI: http://adamthemes.com/
-Description: Modern - Bootstrap 4 Cards by AdamThemes
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: card, cards, css3, modern, adamthemes, bootstrap, profile
-*---------------------------------------------------------------------- */
-
-
-/*---------------------------------------------------------------------- 
-TABLE OF CONTENTS
-
-// 1. SECTIONS
-// 2. CARDS
-//      2.1 Card Table 
-//      2.1 Card Blog 
-//      2.1 Card Background 
-//      2.1 Card Profile 
-//      2.1 Card Category 
-//      2.1 Card Author 
-//      2.1 Card Product
-//      2.1 Card Testimonial
-//      2.1 Text Color
-// 3. BUTTONS
-// 4. SOCIAL MEDIA BUTTONS
-// 5. BOOTSTRAP COL-MD-12 CLASS
-// 6. FONT AWESOME FA CLASS
-
-------------------------------------------------------------------------*/
-
-
-/*---------------------------------------------------------------------- /
-SECTIONS
------------------------------------------------------------------------ */
 
 .section-cards {
     z-index: 3;
@@ -834,3 +792,78 @@ h6, .h6 {
   font-size: 0.9em;
   font-weight: 500;
 }
+
+
+
+
+
+
+
+
+/* 
+
+.card {
+  height: 250px;
+  width: 250px;
+  box-shadow: 1px 5px 10px rgb(159, 157, 157);
+  background-color: rgb(242, 234, 234);
+  border-radius: 20px;
+  border: 1px solid rgb(238, 83, 0);
+  margin-bottom: 20px;
+}
+
+.card .card-head {
+  display: flex;
+  flex-direction: row;
+  color: #ff0000;
+}
+
+.card .card-head img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 30px;
+}
+
+.card .card-head h3 {
+  padding-top: 50px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-body button {
+  background-color: red;
+  border: none;
+  border-radius: 30px;
+  height: 30px;
+  width: 100px;
+  color: wheat;
+}
+/* 
+@media (max-width: 576px) {
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  .card .card-head {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card .card-head img {
+    margin: 20px;
+  }
+
+  .card .card-head h3 {
+    padding-top: 20px;
+  }
+
+  .card-body button {
+    margin-left: 0;
+  }
+} */

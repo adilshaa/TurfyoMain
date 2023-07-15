@@ -43,14 +43,14 @@ ul li {
 }
 .sidebar_design {
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 11px orange;
+  box-shadow: 0px 0px 11px rgb(209, 207, 206);
   height: 46px;
   width: 177px;
   border-radius: 20px;
 }
 .sidebar_design:hover {
   background-color: rgb(255, 255, 255);
-  transition: .4s;
+  transition: .2s;
   box-shadow: 0px 0px 11px rgb(255, 128, 0);
   height: 46px;
   width: 177px;
@@ -62,7 +62,7 @@ ul li {
   display: flex;
   align-items: center;
 }
-
+ 
 .sidebar__link {
   display: flex;
   align-items: center;

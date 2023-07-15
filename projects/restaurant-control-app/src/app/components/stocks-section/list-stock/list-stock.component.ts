@@ -7,11 +7,14 @@ import { ResturantControlServiceService } from '../../../core/services/resturant
   styleUrls: ['./list-stock.component.css'],
 })
 export class ListStockComponent implements OnInit {
-  stocksData$:any
+  stocksData!: any[];
+  currentDate!: any;
   constructor(private _resService: ResturantControlServiceService) {}
   ngOnInit(): void {
-    this._resService.getAllStocks().subscribe((res:any) => {
-      this.stocksData$=res.stocks
-    })
+    this.currentDate = new Date().toLocaleDateString();
+
+    this._resService.getAllStocks().subscribe((res: any) => {
+      this.stocksData = res;
+    });
   }
 }

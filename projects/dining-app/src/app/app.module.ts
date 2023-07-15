@@ -16,11 +16,10 @@ import { DiningServicesService } from './core/services/dining-services.service';
 import { CategoryMenuComponent } from './shared/components/foods-section/category-menu/category-menu.component';
 import { fooodDataReducer } from './core/store/dining.reducers';
 import { FoodsData } from './core/store/dining.effects';
-
+ 
 @NgModule({
   declarations: [
     NavbarComponent,
-
     AppComponent,
     DiningDeskComponent,
     TableViewComponent,

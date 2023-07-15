@@ -9,7 +9,7 @@ export class DiningServicesService {
   backRouterUrl: string = 'dining/';
   constructor(private http: HttpClient) {}
   fetchFoods() {
-    
+
     console.log("ON Dinig Service");
     
     return this.http.get(`${this.mainUrl}${this.backRouterUrl}fetchFoods`, {

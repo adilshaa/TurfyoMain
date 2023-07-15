@@ -13,6 +13,7 @@ import { io } from 'socket.io-client';
 })
 export class ListFoodsComponent implements OnInit {
   foodsData$ = this.kitchenStore.pipe(select(FoodsDatas));
+  foodData!:any
   socket = io('http://localhost:5000');
 
   constructor(
@@ -21,16 +22,14 @@ export class ListFoodsComponent implements OnInit {
     private kitchenService: KitchenServiceService
   ) {}
   ngOnInit(): void {
-    this.socket.on('hello', (data) => {
-      console.log(data);
-      this.kitchenStore.dispatch(fetchFoodsData());
-    });
-
     this.kitchenStore.dispatch(fetchFoodsData());
+        this.socket.emit('listFoods');
+
   }
   listFood(id: any, status: boolean) {
     this.kitchenService.listFoods(id, status).subscribe(
       (result) => {
+        this.socket.emit('listFoods')
         this.kitchenStore.dispatch(fetchFoodsData());
 
         console.log(result);

@@ -27,6 +27,8 @@ import { ResAdminAuthGuard } from './core/auth/res-admin-auth-guards.guard';
 import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-interseptor.interceptor';
 import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
+import { GoogleLoginProvider,SocialLoginModule ,GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +54,8 @@ import { AddStockComponent } from './components/stocks-section/add-stock/add-sto
     RouterModule,
     BrowserAnimationsModule,
     FormsModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
     StoreModule.forRoot({ staffsData: staffsDetails }),
     EffectsModule.forRoot([Saffseffect]),
     ToastrModule.forRoot(),
@@ -63,6 +67,23 @@ import { AddStockComponent } from './components/stocks-section/add-stock/add-sto
       provide: HTTP_INTERCEPTORS,
       useClass: ResAdminInterseptorInterceptor,
       multi: true,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '373314217149-ks6armu585104gmhg10drdk1odl70s3n.apps.googleusercontent.com'
+            ),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

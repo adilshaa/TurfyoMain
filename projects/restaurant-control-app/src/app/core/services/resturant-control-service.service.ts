@@ -68,6 +68,11 @@ export class ResturantControlServiceService {
         }
       );
   }
+  resAdminLoginWothGoogle(resasmin: any) {
+    return this.http.post(`${this.url}${this.backoRouter}googleLogin`,resasmin, {
+      withCredentials: true,
+    });
+  }
   LoginController(data: any) {
     return this.http.post(
       `${this.url}${this.backoRouter}ControllerLogin`,
@@ -78,14 +83,19 @@ export class ResturantControlServiceService {
     );
   }
 
-  getAllStocks() {
-    return this.http.get(`${this.url}${this.backoRouter}/KitchenStocks`, {
-      withCredentials: true,
-    });
+  getAllStocks(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.url}${this.backoRouter}/KitchenStocks`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
-  addStock(data:any) {
-    return this.http.post(`${this.url}${this.backoRouter}addStock`,data,{withCredentials:true})
+  addStock(data: any) {
+    return this.http.post(`${this.url}${this.backoRouter}addStock`, data, {
+      withCredentials: true,
+    });
   }
   LogOutResAdmin() {
     return this.http.get(`${this.url}${this.backoRouter}/logout`, {

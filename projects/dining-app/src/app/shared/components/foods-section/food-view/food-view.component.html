@@ -2,13 +2,13 @@
 
     <div class="container">
 
-<article class="col-md-11" *ngIf="(foodsData$|async) as foods">
+<article class="col-md-11">
   <!-- Modern - Bootstrap Cards -->
 
   <div class="cards-1 section-white">
     <div class="">
       <div class="row">
-        <div class="col-md-3"  *ngFor="let  foodsData of foods " >
+        <div class="col-md-3"  *ngFor="let  foodsData of foodData " >
           <div class="card card-blog" *ngIf="foodsData.status===true">
             <div class="card-image">
               <a href="#">

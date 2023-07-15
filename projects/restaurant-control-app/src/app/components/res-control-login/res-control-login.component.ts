@@ -5,6 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  SocialAuthService,
+  SocialUser,
+  GoogleSigninButtonDirective,
+} from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,14 +22,25 @@ import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmit
 })
 export class ResControlLoginComponent implements OnInit {
   Form!: FormGroup;
+  resadmin!: SocialUser;
   submitted!: boolean;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private resService: ResturantControlServiceService,
-    private tostr: ToastrService
+    private tostr: ToastrService,
+    private authService: SocialAuthService
   ) {}
   ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      console.log(user);
+      this.resadmin = user;
+      console.log(user);
+      if (this.resadmin) {
+        this.readminLoginWithGoogle(user);
+      }
+    });
+
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {
       console.log(isSuperAdmin);
@@ -32,11 +48,29 @@ export class ResControlLoginComponent implements OnInit {
     } else {
       this.router.navigate(['/controllersLogin']);
     }
-
     this.Form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+  }
+
+  readminLoginWithGoogle(resadmin: any) {
+    this.resService.resAdminLoginWothGoogle(resadmin).subscribe(
+      (res:any) => {
+        let token = res.token;
+        this.tostr.success('Success Fully Loggined');
+        localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
+        localStorage.setItem('resadmin', token);
+        RestaurantControlEmitter.resEmitter.emit(true);
+
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        this.tostr.error(err.error.message);
+        let localdata = localStorage.getItem('resadmin');
+        if (localdata) localStorage.removeItem('resadmin');
+      }
+    );
   }
   resControlLogin() {
     let LoginData = this.Form.getRawValue();
@@ -47,16 +81,15 @@ export class ResControlLoginComponent implements OnInit {
           this.tostr.success('Success Fully Loggined');
           localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
           localStorage.setItem('resadmin', token);
-            RestaurantControlEmitter.resEmitter.emit(true);
+          RestaurantControlEmitter.resEmitter.emit(true);
 
           this.router.navigate(['/']);
         },
         (err) => {
           this.tostr.error(err.error.message);
           let localdata = localStorage.getItem('resadmin');
-          if (localdata) {
-          let localdata = localStorage.removeItem('resadmin');
-          }
+          if (localdata) localStorage.removeItem('resadmin');
+          
         }
       );
     }

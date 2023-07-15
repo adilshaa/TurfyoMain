@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,12 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit(): void {
-    this.router.navigate(['/foods'])
+    this.router.navigate(['/foods']);
+
+    // const socket = io('http://localhost:5000');
+
+    // socket.on('hello', (data) => {
+    //   console.log(data);
+    // });
   }
 }

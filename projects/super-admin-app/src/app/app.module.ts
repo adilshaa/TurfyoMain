@@ -61,7 +61,6 @@ import { AuthService } from './core/services/auth.service';
     SocialLoginModule,
     GoogleSigninButtonModule,
     ToastrModule.forRoot(),
-    NgHttpLoaderModule.forRoot(),
   ],
   providers: [
     ServiceService,

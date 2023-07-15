@@ -5,33 +5,30 @@
 >
   add staffs
 </button>
-<table class="table"   >
+<table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col"> Name</th>
-      <th scope="col" class="email">Email</th>
-      <th scope="col"  class="number">Number</th>
-      <th scope="col" class="place">Place</th>
-      <th scope="col"  class="role">Role</th>
-      <th scope="col">Status</th>
-      <th scope="col">Full Details</th>
+      <th scope="col">No</th>
+      <th scope="col">Stock Name</th>
+      <th scope="col" class="email">Stock Quantity</th>
+      <th scope="col"  class="number">Expairy Date</th>
+      <th scope="col" class="place">Stocks Status</th>
+      <th scope="col"  class="role">Expairy Status</th>
     </tr>
   </thead>
   <tbody >
-    <tr >
-      <th scope="row"></th>
-      <!-- <td class="name"> {{staffs.username}}</td>
-      <td class="email"> {{staffs.email}}</td>
-      <td class="number"> {{staffs.number}}</td>
+    <tr  *ngFor="let stocks of stocksData let i=index">
+      <td class="name"> {{i+1}}</td>
 
-      <td class="place"> {{staffs.place}}</td>
+      <td class="name"> {{stocks.name}}</td>
+      <td class="email"> {{stocks.quantity}}.kg</td>
+      <td class="number"> {{stocks.expairy_Data| date: 'MM-dd-yyyy' }}</td>
 
-      <td   class="role"> {{staffs.role}}</td>
-
-      <td *ngIf="staffs.status ===true" style="color: rgb(91, 241, 3);"> {{staffs.status}} </td>
-      <td *ngIf="staffs.status ===false" style="color: red;"> {{staffs.status}} </td> -->
-
+      <td *ngIf="stocks.stockStatus ===true" style="color: rgb(91, 241, 3);"> Stock in </td>
+      <td *ngIf="stocks.stockStatus ===false" style="color: red;"> Stock Out </td>
+      <!-- <td *ngIf="stocks.expairy_Data >=currentDate" style="color: rgb(91, 241, 3);;"> Product Not Expaired </td> -->
+     
+      <td *ngIf="stocks.expairy_Data<=currentDate" style="color: red;"> Product Expaired </td>
     </tr>
   </tbody>
 </table>
