@@ -1,8 +1,4 @@
-<button
-  class="btn btn-danger"
-  data-bs-toggle="modal"
-  routerLink="/addStocks"
->
+<button class="btn btn-danger" data-bs-toggle="modal" routerLink="/addStocks">
   add staffs
 </button>
 <table class="table">
@@ -11,25 +7,40 @@
       <th scope="col">No</th>
       <th scope="col">Stock Name</th>
       <th scope="col" class="email">Stock Quantity</th>
-      <th scope="col"  class="number">Expairy Date</th>
+      <th scope="col" class="number">Expairy Date</th>
       <th scope="col" class="place">Stocks Status</th>
-      <th scope="col"  class="role">Expairy Status</th>
+      <th scope="col" class="role">Expairy Status</th>
     </tr>
   </thead>
-  <tbody >
-    <tr  *ngFor="let stocks of stocksData let i=index">
-      <td class="name"> {{i+1}}</td>
+  <tbody>
 
-      <td class="name"> {{stocks.name}}</td>
-      <td class="email"> {{stocks.quantity}}.kg</td>
-      <td class="number"> {{stocks.expairy_Data| date: 'MM-dd-yyyy' }}</td>
+    <tr *ngFor="let stocks of stocksData; let i = index">
 
-      <td *ngIf="stocks.stockStatus ===true" style="color: rgb(91, 241, 3);"> Stock in </td>
-      <td *ngIf="stocks.stockStatus ===false" style="color: red;"> Stock Out </td>
-      <!-- <td *ngIf="stocks.expairy_Data >=currentDate" style="color: rgb(91, 241, 3);;"> Product Not Expaired </td> -->
-     
-      <td *ngIf="stocks.expairy_Data<=currentDate" style="color: red;"> Product Expaired </td>
+        <td class="name">{{ i + 1 }}</td>
+
+        <td class="name">{{ stocks.name }}</td>
+        <td class="email">{{ stocks.quantity }}.kg</td>
+        <td class="number">{{ stocks.expairy_Data | date : "MM-dd-yyyy" }}</td>
+
+        <td *ngIf="stocks.stockStatus === true" style="color: rgb(91, 241, 3)">
+          Stock in
+        </td>
+        <td *ngIf="stocks.stockStatus === false" style="color: red">
+          Stock Out
+        </td>
+        <!-- <td *ngIf="stocks.expairy_Data >=currentDate" style="color: rgb(91, 241, 3);;"> Product Not Expaired </td> -->
+
+        <td *ngIf="stocks.expairy_Data <= currentDate" style="color: red">
+          Product Expaired
+        </td>
+        <td>
+          <button class="btn btn-warning" type="submit" (ngSubmit)="editStock()">
+            Edit
+          </button>
+        </td>
+
     </tr>
+
   </tbody>
 </table>
 <!-- <router-outlet></router-outlet> -->
@@ -60,10 +71,14 @@
           aria-label="Close"
         ></button>
       </div>
-      
     </div>
   </div>
 </div>
 
 
- 
+
+
+
+
+
+

@@ -39,7 +39,6 @@ export class StaffsComponent implements OnInit {
     this.resService.RegisterStaffs(staffsInfromation);
   }
   ViewDetails(id: string) {
-    console.log(id);
     this.router.navigate(['/editStaffs', id]);
   }
 }

@@ -14,7 +14,6 @@ import { io } from 'socket.io-client';
   styleUrls: ['./food-view.component.css'],
 })
 export class FoodViewComponent implements OnInit {
-  foodsData$ = this.diningStore.pipe(select(foodsDatas));
   searchFoods: string = '';
   socket = io('http://localhost:5000');
   foodData: any;
@@ -24,22 +23,16 @@ export class FoodViewComponent implements OnInit {
     private diningStore: Store<{ foodsData: foodsStructure[] }>
   ) {}
   ngOnInit(): void {
-        this.socket.emit('listFoods');
-
-    // console.log("this.socket");
-  
-const showFoods$ = fromEvent(this.socket, 'showFoods');
-
-const subscription = showFoods$.subscribe(
-  (data) => {
-    console.log(data);
-    this.foodData = data;
-    console.log(this.foodData);
-  },
-  (error) => {
-    console.error('An error occurred:', error);
-  }
-);
-    this.diningStore.dispatch(getAllFoods());
+    this.socket.emit('listFoods');
+    const showFoods$ = fromEvent(this.socket, 'showFoods');
+    const subscription = showFoods$.subscribe(
+      (data) => {
+        this.foodData = data;
+      },
+      (error) => {
+        console.error('An error occurred:', error);
+      }
+    );
   }
 }
+

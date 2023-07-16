@@ -1,47 +1,27 @@
-<!-- <div class="col-md-8"> -->
-
-    <div class="container">
-
-<article class="col-md-11">
-  <!-- Modern - Bootstrap Cards -->
-
-  <div class="cards-1 section-white">
-    <div class="">
-      <div class="row">
-        <div class="col-md-3"  *ngFor="let  foodsData of foodData " >
-          <div class="card card-blog" *ngIf="foodsData.status===true">
-            <div class="card-image">
-              <a href="#">
-                <img
-                  class="img"
-                 [src]='"http://localhost:5000/foods-images/"+foodsData.image'
-                />
-                <div class="card-caption">{{foodsData.name}}</div>
-              </a>
-              <div class="ripple-cont"></div>
-            </div>
-             <div class="table">
-              <h3 class="category text-info">{{foodsData.name}}</h3>
-              
-            </div>
-            <div class="table row mx-auto">
-               
-                <button class="btn btn-success" > TYPE</button>
-               
-                <button class="btn btn-primary" > ADD</button>
-            </div>
-          </div>
-          
+<div class="col-md-8">
+  <!-- <div class="col-md-12"> -->
+  <div class="container">
+    <div class="row mt-5 justify-content-center">
+      <section class="card" *ngFor="let foodsData of foodData">
+        <div class="product-image">
+          <img
+            [src]="'http://localhost:5000/foods-images/' + foodsData.image"
+            alt="OFF-white Red Edition"
+            draggable="false"
+          />
         </div>
-        
-        
-      </div>
-       
-
+        <div class="product-info">
+          <h2>{{ foodsData.name }}</h2>
+          <div class="price">$999</div>
+        </div>
+        <div class="btn"></div>
+      </section>
     </div>
   </div>
-  <!-- PLAIN CARDS -->
-</article>
+  <!-- </div> -->
 
-<!-- </div> -->
+  <div class="col-md-4">
+    <div class="container">
     </div>
+  </div>
+</div>

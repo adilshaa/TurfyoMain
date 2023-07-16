@@ -39,7 +39,6 @@ export class AddstaffsComponent implements OnInit {
       return;
     }
     let staffsInfromation = this.staffData.getRawValue();
-    console.log(staffsInfromation);
 
     this.resService.RegisterStaffs(staffsInfromation);
   }

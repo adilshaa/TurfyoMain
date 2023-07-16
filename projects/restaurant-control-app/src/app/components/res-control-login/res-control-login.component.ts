@@ -43,7 +43,6 @@ export class ResControlLoginComponent implements OnInit {
 
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {
-      console.log(isSuperAdmin);
       this.router.navigate(['/']);
     } else {
       this.router.navigate(['/controllersLogin']);

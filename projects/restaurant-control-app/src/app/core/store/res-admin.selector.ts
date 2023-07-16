@@ -9,7 +9,6 @@ export const StaffsRootsSelector = (state: StaffsState) => state.staffsData;
 export const staffsDatas = createSelector(
   StaffsRootsSelector,
   (staffsDatas: staffsStructure[]) => {
-    console.log(staffsDatas);
 
     return [...staffsDatas];
   }

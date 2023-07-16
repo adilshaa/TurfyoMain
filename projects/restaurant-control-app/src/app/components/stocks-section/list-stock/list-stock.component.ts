@@ -14,7 +14,12 @@ export class ListStockComponent implements OnInit {
     this.currentDate = new Date().toLocaleDateString();
 
     this._resService.getAllStocks().subscribe((res: any) => {
+      console.log(res);
+      
       this.stocksData = res;
     });
+  }
+  editStock() {
+    
   }
 }

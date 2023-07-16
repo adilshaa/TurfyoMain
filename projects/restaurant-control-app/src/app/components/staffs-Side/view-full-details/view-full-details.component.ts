@@ -21,14 +21,12 @@ export class ViewFullDetailsComponent implements OnInit {
     private router: Router
   ) {
     this.restaurantId = this.route.snapshot.paramMap.get('id');
-    console.log(this.restaurantId);
   }
 
   ngOnInit(): void {
     let data = this.resService
       .getStaff(this.restaurantId)
       .subscribe((res: any) => {
-        console.log(res);
         this.staffsData$ = res;
       });
 
@@ -44,7 +42,6 @@ export class ViewFullDetailsComponent implements OnInit {
   }
   saveEdit(id: any) {
     let updataData = this.StaffsForm.getRawValue();
-    console.log(updataData);
 
     this.resService.saveEditOfStaffs(id, updataData).subscribe(
       (res) => {

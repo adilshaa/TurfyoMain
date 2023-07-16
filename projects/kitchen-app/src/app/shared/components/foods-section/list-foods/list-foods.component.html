@@ -1,21 +1,58 @@
 <!-- <div class="col-md-8"> -->
 <div class="container">
+  <div
+    class="row mt-5 justify-content-center"
+    *ngIf="foodsData$ | async as foods"
+  >
+    <section class="card" *ngFor="let foodsData of foods">
+      <div class="product-image">
+        <img
+          [src]="'http://localhost:5000/foods-images/' + foodsData.image"
+          alt="OFF-white Red Edition"
+          draggable="false"
+        />
+      </div>
+      <div class="product-info">
+        <h2>{{ foodsData.name }}</h2>
+        <div class="price">$999</div>
+      </div>
+      <div class="btn">
+        <button
+          style="background-color: red; border-radius: 10px; color: #fff"
+          class="buy-btn mx-auto"
+          *ngIf="foodsData.status === true"
+          (click)="listFood(foodsData._id, foodsData.status)"
+        >
+          Unlist
+        </button>
+        <button
+          style="
+            background-color: rgb(33, 183, 3);
+            border-radius: 10px;
+            color: #fff;
+          "
+          class="buy-btn mx-auto"
+          *ngIf="foodsData.status === false"
+          (click)="listFood(foodsData._id, foodsData.status)"
+        >
+          List
+        </button>
+      </div>
+    </section>
 
-<article class="col-md-10 " *ngIf="foodsData$ | async as foods">
-  <!-- Modern - Bootstrap Cards -->
+    <article class="col-md-10">
+      <!-- Modern - Bootstrap Cards -->
 
-  <div class="cards-1 section-white">
+      <!-- <div class="cards-1 section-white">
     <div class="">
       <div class="row  justify-content-center ">
-        <div class="col-lg-3 col-sm-6 col-7 " *ngFor="let foodsData of foods" >
+        <div class="col-lg-3 col-sm-6 col-7 "  >
           <div class="card card-blog" >
             <div class="card-image">
               <a href="#">
                 <img
                   class="img"
-                  [src]="
-                    'http://localhost:5000/foods-images/' + foodsData.image
-                  "
+                 
                 />
                 <div class="card-caption">{{ foodsData.name }}</div>
               </a>
@@ -26,22 +63,7 @@
             </div>
             <div class="table row mx-auto">
               <div class="table">
-                <button  style="background-color: red; border-radius: 10px; color: #fff;"
-                  class="btn  mx-auto"
-                  *ngIf="foodsData.status === true"
-                  (click)="listFood(foodsData._id, foodsData.status)"
-                >
-                  Unlist
-                </button>
-                <button 
-                style="background-color: rgb(33, 183, 3); border-radius: 10px; color: #fff;"
-                  class="btn  mx-auto"
-                  *ngIf="foodsData.status === false"
-                  (click)="listFood(foodsData._id ,foodsData.status)"
-
-                >
-                  List
-                </button>
+              
               </div>
             </div>
           </div>
@@ -49,8 +71,8 @@
       </div>
     </div>
   </div>
-  <!-- PLAIN CARDS -->
-</article>
-
-<!-- </div> -->
+ PLAIN CARDS -->
+    </article>
+  </div>
+  <!-- </div> -->
 </div>

@@ -12,11 +12,9 @@ export class NavbarComponent implements OnInit {
   authonticated!: boolean;
   constructor(private resService:ResturantControlServiceService) {}
   ngOnInit(): void {
-    console.log(this.authonticated);
 
     RestaurantControlEmitter.resEmitter.subscribe((res: boolean) => {
       this.authonticated = res;
-      
     });
   }
   logoutResAdmin() {

@@ -7,7 +7,6 @@ export const initialStattsStaffs: staffsStructure[] = [];
 export const _staffsDetails = createReducer(
   initialStattsStaffs,
   on(reciveStaffsData, (state, { staffsData }) => {
-    console.log(staffsData);
 
     return [...staffsData];
   })
