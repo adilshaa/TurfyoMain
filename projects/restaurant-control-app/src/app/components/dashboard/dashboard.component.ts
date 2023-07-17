@@ -8,29 +8,32 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  isLoader: Boolean = true;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     this.http
       .get('http://localhost:5000/resadmin/verifyresadmin', {
         withCredentials: true,
       })
       .subscribe(
         (result: any) => {
-            RestaurantControlEmitter.resEmitter.emit(true);
+          RestaurantControlEmitter.resEmitter.emit(true);
         },
-        ((err) => {
-          console.log(err); 
+        (err) => {
+          console.log(err);
           localStorage.removeItem('ResadminisLoggedIN');
           this.router.navigate(['/controllersLogin']);
           RestaurantControlEmitter.resEmitter.emit(false);
-        })
+        }
       );
     const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
     if (isSuperAdmin) {

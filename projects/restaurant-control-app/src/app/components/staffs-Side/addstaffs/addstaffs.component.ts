@@ -16,11 +16,16 @@ import { ResturantControlServiceService } from '../../../core/services/resturant
 export class AddstaffsComponent implements OnInit {
   staffData!: FormGroup;
   submitted: any;
+    isLoader: Boolean = true;
+
   constructor(
     private formBulider: FormBuilder,
     private resService: ResturantControlServiceService
   ) {}
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     this.staffData = this.formBulider.group({
       employeeName: new FormControl('', [Validators.required]),
       employeePlace: new FormControl('', [Validators.required]),

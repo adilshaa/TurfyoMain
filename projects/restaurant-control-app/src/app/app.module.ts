@@ -28,6 +28,7 @@ import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-in
 import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
 import { GoogleLoginProvider,SocialLoginModule ,GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { ResLoaderComponent } from './components/loader/res-loader/res-loader.component';
  
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { GoogleLoginProvider,SocialLoginModule ,GoogleSigninButtonModule, Social
     ResControlLoginComponent,
     ListStockComponent,
     AddStockComponent,
+    ResLoaderComponent,
   ],
   imports: [
     BrowserModule,

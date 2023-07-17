@@ -16,16 +16,20 @@ import { Store, select } from '@ngrx/store';
 export class ListFoodsComponent implements OnInit {
   AddFood!: FormGroup;
   selectedFile!: File;
+  isLoader: Boolean = true;
+
   // foodsData = this.resStore.pipe(select(FoodsDatas));
 
   constructor(
     private resService: ResturantControlServiceService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private http: HttpClient
-  ) // private resStore: Store<{ foodsData: Foodsstructure[] }>
-  {}
+    private http: HttpClient // private resStore: Store<{ foodsData: Foodsstructure[] }>
+  ) {}
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     // this.resStore.dispatch(fetchFoodsData());
     this.AddFood = this.formBuilder.group({
       dishName: '',

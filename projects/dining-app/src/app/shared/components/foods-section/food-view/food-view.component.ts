@@ -17,6 +17,8 @@ export class FoodViewComponent implements OnInit {
   searchFoods: string = '';
   socket = io('http://localhost:5000');
   foodData: any;
+  empty!: boolean;
+
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
@@ -28,6 +30,11 @@ export class FoodViewComponent implements OnInit {
     const subscription = showFoods$.subscribe(
       (data) => {
         this.foodData = data;
+        if (this.foodData[0] == null) {
+          this.empty = true;
+        } else {
+          this.empty = false;
+        }
       },
       (error) => {
         console.error('An error occurred:', error);
@@ -35,4 +42,3 @@ export class FoodViewComponent implements OnInit {
     );
   }
 }
-

@@ -1,94 +1,103 @@
-
-<!-- Section: Design Block -->
-<section class="">
-  <!-- Jumbotron -->
-  <div
-    class="px-4 py-5 px-md-5 text-center text-lg-start"
-    style="background-color: hsl(0, 0%, 96%)"
-  >
-    <div class="container">
-      <div class="row gx-lg-5 align-items-center">
-        <div class="col-lg-5 col-sm-12 mb-5 mb-lg-0">
-          <h1 class="my-5 display-3 fw-bold ls-tight">
-            Login <br />
-            <span class="text-warning">for your business</span>
-          </h1>
-          <p style="color: rgb(0, 0, 0)" class="d-none d-sm-block">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-            itaque accusantium odio, soluta, corrupti aliquam quibusdam tempora
-            at cupiditate quis eum maiores libero veritatis? Dicta facilis sint
-            aliquid ipsum atque?
-          </p>
+<div class="container mx-auto">
+  <div class="card card0">
+    <div class="d-flex flex-lg-row flex-column-reverse">
+      <div class="card card2">
+        <div class="my-auto mx-md-5 px-md-5 right">
+          <h3 class="text-white">We are more than just a company</h3>
+          <small class="text-white"
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.</small
+          >
         </div>
+      </div>
+      <div class="card card1">
+        <div class="row justify-content-center my-auto">
+          <div class="col-md-8 col-10">
+            <div class="row justify-content-center px-3 mb-3">
+              <img id="logo" src="https://i.imgur.com/PSXxjNY.png" />
+            </div>
+            <h3 class="mb-5 text-center heading">Welcome To Turfyo</h3>
 
-        <div class="col-lg-5 col-sm-12 mb-5 mb-lg-0">
-          <div class="card">
-            <div class="card-body py-5 px-md-5">
-              <form [formGroup]="form" (submit)="loginSuperAdmin()">
-                <!-- 2 column grid layout with text inputs for the first and last names -->
-
-                <div class="form-outline mb-2">
-                  <input
-                    formControlName="name"
-                    type="text"
-                    id="name"
-                    class="form-control"
-                  />
-                  <label class="form-label" for="form3Example1"> name</label>
+            <h6 class="msg-info">Please login to your account</h6>
+            <form [formGroup]="form" (submit)="loginSuperAdmin()">
+              <div class="form-group">
+                 <label
+                   
+                    class="form-control-label text-muted"
+                    >Email</label
+                  >
+                <input
+                  formControlName="email"
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Phone no or email id"
+                  class="form-control"
+                />
+                <div
+                  *ngIf="form.controls['email'].errors"
+                  class="text-danger emailerror"
+                >
+                 
+                  <label
+                    *ngIf="
+                      submitted && form.controls['email'].errors['required']
+                    "
+                    class="form-control-label text-danger"
+                    >Email is requried</label
+                  >
+                  <label
+                    *ngIf="submitted && form.controls['email'].errors['email']"
+                    class="form-control-label text-danger"
+                    >Email should be proper formate</label
+                  >
                 </div>
+                <div class="form-group">
+                  <label class="form-control-label text-muted">Password</label>
 
-                <div class="form-outline mb-2">
-                  <input
-                    formControlName="email"
-                    type="email"
-                    id="form3Example2"
-                    class="form-control"
-                  />
-                  <label class="form-label" for="form3Example2">Email</label>
-                </div>
-
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input
-                    formControlName="number"
-                    type="number"
-                    id="form3Example3"
-                    class="form-control"
-                  />
-                  <label class="form-label" for="form3Example3">Number</label>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-outline mb-4">
                   <input
                     formControlName="password"
                     type="password"
-                    id="form3Example4"
+                    id="psw"
+                    name="psw"
+                    placeholder="Password"
                     class="form-control"
                   />
-                  <label class="form-label" for="form3Example4">Password</label>
+                  <div
+                    *ngIf="form.controls['password'].errors"
+                    class="text-danger emailerror"
+                  >
+                    <label
+                      *ngIf="
+                        submitted &&
+                        form.controls['password'].errors['required']
+                      "
+                      class="form-control-label text-danger"
+                      >Password is requried</label
+                    >
+                    <label
+                      *ngIf="
+                        submitted &&
+                        form.controls['password'].errors['minlength']
+                      "
+                      class="form-control-label text-danger"
+                      >Password min more than 4
+                    </label>
+                  </div>
                 </div>
-                <p class="text-white-50 mb-5 text-danger">
-                  {{ error }}
-                </p>
 
-                <!-- Checkbox -->
-
-
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">
-                  Login
-                </button>
-
-                <!-- Register buttons -->
-               
-              </form>
-            </div>
+                <div class="row justify-content-center my-3 px-3">
+                  <button type="submit" class="btn-block btn-color">
+                    Login to Turfyo
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Jumbotron -->
-</section>
-<!-- Section: Design Block -->
+</div>

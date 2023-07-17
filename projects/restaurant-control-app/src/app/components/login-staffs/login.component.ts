@@ -20,6 +20,8 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   Form!: FormGroup;
   submitted: boolean = false;
+  isLoader: Boolean = true;
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -29,6 +31,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     this.Form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [

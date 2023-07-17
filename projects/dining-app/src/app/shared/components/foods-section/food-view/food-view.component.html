@@ -1,4 +1,8 @@
-<div class="col-md-8">
+<div class="container" *ngIf="empty==true">
+<img  class="empty-img" src="../../../../../assets/farmers-food-design-image-file.jpg" alt="">
+</div>
+
+<div class="col-md-8" *ngIf="empty ==false ">
   <!-- <div class="col-md-12"> -->
   <div class="container">
     <div class="row mt-5 justify-content-center">

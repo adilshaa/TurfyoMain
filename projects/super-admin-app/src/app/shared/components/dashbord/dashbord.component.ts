@@ -28,6 +28,7 @@ export class DashbordComponent implements OnInit {
       setTimeout(() => {
         this.isLoader = false;
       }, 500);
+    
     this.http
       .get('http://localhost:5000/superadmin/superAdminStatus', {
         withCredentials: true,

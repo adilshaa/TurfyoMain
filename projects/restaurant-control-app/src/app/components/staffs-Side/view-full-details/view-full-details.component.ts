@@ -14,6 +14,8 @@ export class ViewFullDetailsComponent implements OnInit {
   restaurantId: any;
   staffsData$!: any;
   isEdit!: boolean;
+  isLoader: Boolean = true;
+
   constructor(
     private resService: ResturantControlServiceService,
     private formBuilder: FormBuilder,
@@ -24,6 +26,9 @@ export class ViewFullDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     let data = this.resService
       .getStaff(this.restaurantId)
       .subscribe((res: any) => {

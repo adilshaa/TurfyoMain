@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 export class StaffsComponent implements OnInit {
   staffData!: FormGroup;
   staffsData$ = this.resStore.pipe(select(staffsDatas));
+    isLoader: Boolean = true;
+
   constructor(
     private formBulider: FormBuilder,
     private resService: ResturantControlServiceService,
@@ -21,6 +23,9 @@ export class StaffsComponent implements OnInit {
     private resStore: Store<{ staffsData: staffsStructure[] }>
   ) {}
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 1900);
     this.resStore.dispatch(fetchStaffsData());
     this.staffData = this.formBulider.group({
       employeeName: '',

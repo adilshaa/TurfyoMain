@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { FullRestaurantDetails } from '../../../core/models/restaurant.model';
-import { retriveResFullDetails } from '../../../core/store/super-admin.actions';
-import { restaurantsFullDetails } from '../../../core/store/super-admin.selectors';
-import { HttpClient } from '@angular/common/http';
-import { SuperAdminEmitter } from '../../emitters/emitters';
-import { ServiceService } from '../../../core/services/service.service';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Store, select } from "@ngrx/store";
+import { FullRestaurantDetails } from "../../../core/models/restaurant.model";
+import { retriveResFullDetails } from "../../../core/store/super-admin.actions";
+import { restaurantsFullDetails } from "../../../core/store/super-admin.selectors";
+import { HttpClient } from "@angular/common/http";
+import { SuperAdminEmitter } from "../../emitters/emitters";
+import { ServiceService } from "../../../core/services/service.service";
+import { Form, FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
-  selector: 'app-details-restaurants',
-  templateUrl: './details-restaurants.component.html',
-  styleUrls: ['./details-restaurants.component.css'],
+  selector: "app-details-restaurants",
+  templateUrl: "./details-restaurants.component.html",
+  styleUrls: ["./details-restaurants.component.css"],
 })
 export class DetailsRestaurantsComponent implements OnInit {
   restaurantId: any;
@@ -30,13 +30,13 @@ export class DetailsRestaurantsComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.resFullDetails$);
 
-    this.restaurantId = this.route.snapshot.paramMap.get('id');
+    this.restaurantId = this.route.snapshot.paramMap.get("id");
     // console.log(this.restaurantId);
     this.resDataStore.dispatch(
       retriveResFullDetails({ id: this.restaurantId })
     );
     this.http
-      .get('http://localhost:5000/superadmin/superAdminStatus', {
+      .get("http://localhost:5000/superadmin/superAdminStatus", {
         withCredentials: true,
       })
       .subscribe(
@@ -47,17 +47,18 @@ export class DetailsRestaurantsComponent implements OnInit {
           SuperAdminEmitter.Emitter.emit(true);
         },
         (err) => {
-          this.router.navigate(['/login']);
-          console.log('error');
-          localStorage.removeItem('isLoggedIN');
+          this.router.navigate(["/login"]);
+          console.log("error");
+          localStorage.removeItem("isLoggedIN");
           SuperAdminEmitter.Emitter.emit(false);
         }
       );
 
     this.form = this.formBuilder.group({
-      name: '',
-      place: '',
-      owner_name: '',
+      name: "",
+      place: "",
+      owner_name: "",
+      owner_number: "",
     });
   }
   listrestaurant(id: any, status: boolean) {

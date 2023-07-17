@@ -1,13 +1,18 @@
-<div *ngIf="staffsData$ as staff">
-  <div class="jumbotron text-center">
-    <h1></h1>
-    <p>Welcome {{ staffsData$.username }} restaurant</p>
-  </div>
+<div *ngIf="isLoader">
+  <app-res-loader></app-res-loader>
+</div>
 
-  <div class="container"> 
-    <div class="main-body  w-75">
-      <!-- Breadcrumb -->
-      <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
+<div *ngIf="!isLoader">
+  <div *ngIf="staffsData$ as staff">
+    <div class="jumbotron text-center">
+      <h1></h1>
+      <p>Welcome {{ staffsData$.username }} restaurant</p>
+    </div>
+
+    <div class="container">
+      <div class="main-body w-75">
+        <!-- Breadcrumb -->
+        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
@@ -16,196 +21,195 @@
           </li>
         </ol>
       </nav> -->
-      <!-- /Breadcrumb -->
+        <!-- /Breadcrumb -->
 
-      <div class="row gutters-sm">
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body ">
-              <div class="d-flex flex-column align-items-center text-center">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                  alt="Admin"
-                  class="rounded-circle"
-                  width="150"
-                />
-                <div class="mt-3">
-                  <h4>{{ staffsData$.username }}</h4>
-                  <p class="text-secondary mb-1">{{ staffsData$.role }}</p>
-                  <p class="text-muted font-size-sm">
-                    Bay Area, San Francisco, CA
-                  </p>
-                  <!-- <button class="btn btn-primary">Follow</button>
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img
+                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                    alt="Admin"
+                    class="rounded-circle"
+                    width="150"
+                  />
+                  <div class="mt-3">
+                    <h4>{{ staffsData$.username }}</h4>
+                    <p class="text-secondary mb-1">{{ staffsData$.role }}</p>
+                    <p class="text-muted font-size-sm">
+                      Bay Area, San Francisco, CA
+                    </p>
+                    <!-- <button class="btn btn-primary">Follow</button>
                 <button class="btn btn-outline-primary">Message</button> -->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        
-        </div>
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card-body">
-              <form
-                [formGroup]="StaffsForm"
-                (submit)="saveEdit(staffsData$._id)"
-              >
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Full Name</h6>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <form
+                  [formGroup]="StaffsForm"
+                  (submit)="saveEdit(staffsData$._id)"
+                >
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.username }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        formControlName="employeeName"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="staffsData$.username"
+                      />
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.username }}
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Place</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.place }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="employeePlace"
+                        [(ngModel)]="staffsData$.place"
+                      />
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      formControlName="employeeName"
-                      class="form-control form-control-sm"
-                      [(ngModel)]="staffsData$.username"
-                    />
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Phone Number</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.number }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="employeeNumber"
+                        [(ngModel)]="staffsData$.number"
+                      />
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Place</h6>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.email }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        formControlName="employeeEmail"
+                        class="form-control form-control-sm"
+                        [(ngModel)]="staffsData$.email"
+                      />
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.place }}
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Date Of Birth</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.dateofbirth }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="employeeDataOFBirth"
+                        [(ngModel)]="staffsData$.dateofbirth"
+                      />
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="employeePlace"
-                      [(ngModel)]="staffsData$.place"
-                    />
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Age</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.age }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="employeeAge"
+                        [(ngModel)]="staffsData$.age"
+                      />
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Phone Number</h6>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Role</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
+                      {{ staffsData$.role }}
+                    </div>
+                    <div class="col-sm-9 text-secondary" *ngIf="isEdit">
+                      <select
+                        id="inputState"
+                        formControlName="employeeRole"
+                        class="form-select form-select-sm"
+                        required
+                      >
+                        <option value="cheffs">cheff</option>
+                        <option value="admin">Admin</option>
+                        <option value="waiters">Waiter</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.number }}
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <button
+                        *ngIf="!isEdit"
+                        class="btn btn-info"
+                        (click)="cheakStatus()"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        *ngIf="isEdit"
+                        class="btn btn-dark"
+                        (click)="isEdit = false"
+                      >
+                        Cancel
+                      </button>
+                      <button *ngIf="isEdit" class="btn btn-dark" type="submit">
+                        Save
+                      </button>
+                      <button
+                        class="btn btn-info"
+                        *ngIf="!isEdit"
+                        class="btn btn-dark"
+                        (click)="removeStaffs(staffsData$._id)"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="employeeNumber"
-                      [(ngModel)]="staffsData$.number"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Email</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.email }}
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      formControlName="employeeEmail"
-                      class="form-control form-control-sm"
-                      [(ngModel)]="staffsData$.email"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Date Of Birth</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.dateofbirth }}
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="employeeDataOFBirth"
-                      [(ngModel)]="staffsData$.dateofbirth"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Age</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.age }}
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="employeeAge"
-                      [(ngModel)]="staffsData$.age"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Role</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="!isEdit">
-                    {{ staffsData$.role }}
-                  </div>
-                  <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                    <select
-                      id="inputState"
-                      formControlName="employeeRole"
-                      class="form-select form-select-sm"
-                      required
-                    >
-                      <option value="cheffs">cheff</option>
-                      <option value="admin">Admin</option>
-                      <option value="waiters">Waiter</option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-12">
-                    <button
-                      *ngIf="!isEdit"
-                      class="btn btn-info"
-                      (click)="cheakStatus()"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      *ngIf="isEdit"
-                      class="btn btn-dark"
-                      (click)="isEdit = false"
-                    >
-                      Cancel
-                    </button>
-                    <button *ngIf="isEdit" class="btn btn-dark" type="submit">
-                      Save
-                    </button>
-                    <button
-                      class="btn btn-info"
-                      *ngIf="!isEdit"
-                      class="btn btn-dark"
-                      (click)="removeStaffs(staffsData$._id)"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

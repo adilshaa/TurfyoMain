@@ -24,6 +24,8 @@ export class ResControlLoginComponent implements OnInit {
   Form!: FormGroup;
   resadmin!: SocialUser;
   submitted!: boolean;
+  isLoader: Boolean = true;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -32,6 +34,9 @@ export class ResControlLoginComponent implements OnInit {
     private authService: SocialAuthService
   ) {}
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoader = false;
+    }, 500);
     this.authService.authState.subscribe((user) => {
       console.log(user);
       this.resadmin = user;
@@ -55,7 +60,7 @@ export class ResControlLoginComponent implements OnInit {
 
   readminLoginWithGoogle(resadmin: any) {
     this.resService.resAdminLoginWothGoogle(resadmin).subscribe(
-      (res:any) => {
+      (res: any) => {
         let token = res.token;
         this.tostr.success('Success Fully Loggined');
         localStorage.setItem('ResadminisLoggedIN', 'res admin is login true');
@@ -88,7 +93,6 @@ export class ResControlLoginComponent implements OnInit {
           this.tostr.error(err.error.message);
           let localdata = localStorage.getItem('resadmin');
           if (localdata) localStorage.removeItem('resadmin');
-          
         }
       );
     }

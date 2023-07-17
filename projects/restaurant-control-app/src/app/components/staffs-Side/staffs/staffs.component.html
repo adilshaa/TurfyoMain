@@ -1,38 +1,45 @@
-<button
-  class="btn btn-danger"
-  data-bs-toggle="modal"
-  routerLink="/addstaffs"
->
+<div *ngIf="isLoader">
+  <app-res-loader ></app-res-loader>
+</div>
+<div *ngIf="!isLoader">
+<button class="btn btn-danger" data-bs-toggle="modal" routerLink="/addstaffs">
   add staffs
 </button>
-<table class="table" *ngIf="(staffsData$ |async) as staff"  >
+<table class="table" *ngIf="staffsData$ | async as staff">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col"> Name</th>
+      <th scope="col">Name</th>
       <th scope="col" class="email">Email</th>
-      <th scope="col"  class="number">Number</th>
+      <th scope="col" class="number">Number</th>
       <th scope="col" class="place">Place</th>
-      <th scope="col"  class="role">Role</th>
+      <th scope="col" class="role">Role</th>
       <th scope="col">Status</th>
       <th scope="col">Full Details</th>
     </tr>
   </thead>
-  <tbody >
-    <tr *ngFor=" let staffs of staff">
+  <tbody>
+    <tr *ngFor="let staffs of staff">
       <th scope="row"></th>
-      <td class="name"> {{staffs.username}}</td>
-      <td class="email"> {{staffs.email}}</td>
-      <td class="number"> {{staffs.number}}</td>
+      <td class="name">{{ staffs.username }}</td>
+      <td class="email">{{ staffs.email }}</td>
+      <td class="number">{{ staffs.number }}</td>
 
-      <td class="place"> {{staffs.place}}</td>
+      <td class="place">{{ staffs.place }}</td>
 
-      <td   class="role"> {{staffs.role}}</td>
+      <td class="role">{{ staffs.role }}</td>
 
-      <td *ngIf="staffs.status ===true" style="color: rgb(91, 241, 3);"> {{staffs.status}} </td>
-      <td *ngIf="staffs.status ===false" style="color: red;"> {{staffs.status}} </td>
-      <td> <button class="btn btn-warning" (click)="ViewDetails(staffs._id)"> View</button></td>
-
+      <td *ngIf="staffs.status === true" style="color: rgb(91, 241, 3)">
+        {{ staffs.status }}
+      </td>
+      <td *ngIf="staffs.status === false" style="color: red">
+        {{ staffs.status }}
+      </td>
+      <td>
+        <button class="btn btn-warning" (click)="ViewDetails(staffs._id)">
+          View
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -64,10 +71,7 @@
           aria-label="Close"
         ></button>
       </div>
-      
     </div>
   </div>
 </div>
-
-
- 
+</div>
