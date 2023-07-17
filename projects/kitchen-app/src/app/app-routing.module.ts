@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListFoodsComponent } from './shared/components/foods-section/list-foods/list-foods.component';
 import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
 import { ListStocksComponent } from './shared/components/stock-section/list-stocks/list-stocks.component';
+import { KitchenLoginComponent } from './shared/components/login/kitchen-login/kitchen-login.component';
 
 const routes: Routes = [
   {
@@ -10,12 +11,16 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'kitchenLogin',
+    component: KitchenLoginComponent,
+  },
+  {
     path: 'foods',
     component: ListFoodsComponent,
   },
   {
     path: 'stocks',
-    component:ListStocksComponent
+    component: ListStocksComponent,
   },
 ];
 

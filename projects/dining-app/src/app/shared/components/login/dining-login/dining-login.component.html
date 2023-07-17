@@ -21,7 +21,7 @@
             <h3 class="mb-5 text-center heading">Welcome To Turfyo</h3>
 
             <h6 class="msg-info">Please login to your account</h6>
-            <form [formGroup]="form" (submit)="loginSuperAdmin()">
+            <form [formGroup]="form" (submit)="diningLogin()">
               <div class="form-group">
                 <label class="form-control-label text-muted">Email</label>
                 <input
@@ -55,8 +55,6 @@
                   <input
                     formControlName="password"
                     type="password"
-                    id="psw"
-                    name="psw"
                     placeholder="Password"
                     class="form-control"
                   />

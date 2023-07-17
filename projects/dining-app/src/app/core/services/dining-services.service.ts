@@ -16,9 +16,15 @@ export class DiningServicesService {
       withCredentials: true,
     });
   }
-  leadTables():Observable<any[]> {
-    return this.http.get<any[]>(`${this.mainUrl}${this.backRouterUrl}loadTable`, {
-      withCredentials:true
-    })
+  leadTables(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.mainUrl}${this.backRouterUrl}loadTable`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  diningLogin(data:any) {
+    return this.http.post(`${this.mainUrl}${this.backRouterUrl}/dinigLogin`,data,{withCredentials:true})
   }
 }

@@ -14,6 +14,8 @@ import { SidebarComponent } from './shared/components/layouts/sidebar/sidebar.co
 import { foodDetails } from './core/store/kitchen-reducer';
 import { Foodseffect } from './core/store/kitchen.effects';
 import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { KitchenLoginComponent } from './shared/components/login/kitchen-login/kitchen-login.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { DashboardComponent } from './shared/components/dashboard/dashboard.comp
     NavbarComponent,
     SidebarComponent,
     DashboardComponent,
+    KitchenLoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ foodsData: foodDetails }),
     EffectsModule.forRoot([Foodseffect]),
   ],

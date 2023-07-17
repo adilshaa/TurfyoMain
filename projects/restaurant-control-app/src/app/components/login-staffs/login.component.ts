@@ -66,9 +66,9 @@ export class LoginComponent implements OnInit {
           let posUrl = 'http://localhost:5200';
           let kitchenUrl = 'http://localhost:1200';
           if (result.role == 'cheffs') {
-            window.open(`${kitchenUrl}?${queryParams}`);
+            window.open(`${kitchenUrl}`);
           }
-          window.open(`${resadminUrl}?${queryParams}`);
+          window.open(`${resadminUrl}`);
         },
         (err) => {
           this.toastr.error(err.error.message);

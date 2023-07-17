@@ -4,6 +4,7 @@ import { NavbarComponent } from './shared/components/layouts/navbar/navbar.compo
 import { SidebarComponent } from './shared/components/layouts/sidebar/sidebar.component';
 import { DiningDeskComponent } from './shared/components/dining-desk/dining-desk.component';
 import { FoodViewComponent } from './shared/components/foods-section/food-view/food-view.component';
+import { DiningLoginComponent } from './shared/components/login/dining-login/dining-login.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
     component: DiningDeskComponent,
     children: [{ path: 'viewFoods', component: FoodViewComponent }],
   },
+  {
+    path: 'diningLogin',
+    component:DiningLoginComponent
+  }
 ];
 
 @NgModule({

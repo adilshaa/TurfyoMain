@@ -16,6 +16,8 @@ import { DiningServicesService } from './core/services/dining-services.service';
 import { CategoryMenuComponent } from './shared/components/foods-section/category-menu/category-menu.component';
 import { fooodDataReducer } from './core/store/dining.reducers';
 import { FoodsData } from './core/store/dining.effects';
+import { DiningLoginComponent } from './shared/components/login/dining-login/dining-login.component';
+import { ReactiveFormsModule } from '@angular/forms';
  
 @NgModule({
   declarations: [
@@ -27,12 +29,14 @@ import { FoodsData } from './core/store/dining.effects';
     FoodViewComponent,
     SidebarComponent,
     CategoryMenuComponent,
+    DiningLoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ foodsData: fooodDataReducer }),
     EffectsModule.forRoot([FoodsData]),
   ],
