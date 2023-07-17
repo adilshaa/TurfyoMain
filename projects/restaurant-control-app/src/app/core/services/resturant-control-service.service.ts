@@ -69,9 +69,13 @@ export class ResturantControlServiceService {
       );
   }
   resAdminLoginWothGoogle(resasmin: any) {
-    return this.http.post(`${this.url}${this.backoRouter}googleLogin`,resasmin, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${this.url}${this.backoRouter}googleLogin`,
+      resasmin,
+      {
+        withCredentials: true,
+      }
+    );
   }
   LoginController(data: any) {
     return this.http.post(
@@ -84,12 +88,9 @@ export class ResturantControlServiceService {
   }
 
   getAllStocks(): Observable<any[]> {
-    return this.http.get<any[]>(
-      `${this.url}${this.backoRouter}/KitchenStocks`,
-      {
-        withCredentials: true,
-      }
-    );
+    return this.http.get<any[]>(`${this.url}${this.backoRouter}KitchenStocks`, {
+      withCredentials: true,
+    });
   }
 
   addStock(data: any) {
@@ -97,8 +98,21 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
+  loadTables():Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}${this.backoRouter}/getTables`, {
+      withCredentials:true
+    })
+  }
+  createTable() {
+    console.log('here');
+    return this.http
+      .get(`${this.url}${this.backoRouter}createTable`, {
+        withCredentials: true,
+      })
+      
+  }
   LogOutResAdmin() {
-    return this.http.get(`${this.url}${this.backoRouter}/logout`, {
+    return this.http.get(`${this.url}${this.backoRouter}logout`, {
       withCredentials: true,
     });
   }

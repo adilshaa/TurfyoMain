@@ -11,6 +11,7 @@ import { ResControlLoginComponent } from './components/res-control-login/res-con
 import { authGuards } from 'projects/super-admin-app/src/app/core/services/auth.guard';
 import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
+import { TableViewComponent } from './components/table-side/table-view/table-view.component';
 const routes: Routes = [
   {
     path: 'controllersLogin',
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'addStocks',
         component: AddStockComponent,
+      },
+      {
+        path: 'tables',
+        component: TableViewComponent,
       },
     ],
   },

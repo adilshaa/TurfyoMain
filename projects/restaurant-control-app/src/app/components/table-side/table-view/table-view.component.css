@@ -1,0 +1,89 @@
+
+.container {
+  height: 100%;
+  width: 850px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.card-free-table {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(48, 229, 12);
+  box-shadow: 10px 15px 30px -12px rgb(48, 229, 12) inset;
+
+  border: solid rgba(47, 255, 0, 0.518) 10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(47, 255, 0, 0.518);
+  cursor: pointer;
+}
+
+.card-blue {
+  background: var(--blue-card);
+}
+
+.product-table {
+  margin-top: 2.3rem;
+  height: 100px;
+  width: 100%;
+  /* display: flex; Add flex display */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  transform: translate(0, -1.5rem);
+  transition: transform 0.6s ease-in-out;
+  filter: drop-shadow(5px 10px 15px rgba(165, 165, 165, 0.873));
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+.table-name{
+text-decoration: wavy;
+font-weight: 600;
+}
+
+.card-reseved-table{
+   position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725);
+  box-shadow: 10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;
+
+  border: solid rgba(255, 145, 0, 0.725) 10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color:rgba(255, 145, 0, 0.637)  ;
+  cursor: pointer;
+
+}
+
+.custom-style-true {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(48, 229, 12), 10px 15px 30px -12px rgb(48, 229, 12) inset;
+  border: solid rgba(47, 255, 0, 0.518) 10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(47, 255, 0, 0.518);
+  cursor: pointer;
+}
+
+.custom-style-false {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725), 10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;
+  border: solid rgba(255, 145, 0, 0.725) 10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(255, 145, 0, 0.637);
+  cursor: pointer;
+}

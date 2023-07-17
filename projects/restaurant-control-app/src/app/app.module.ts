@@ -29,6 +29,7 @@ import { ListStockComponent } from './components/stocks-section/list-stock/list-
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
 import { GoogleLoginProvider,SocialLoginModule ,GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { ResLoaderComponent } from './components/loader/res-loader/res-loader.component';
+import { TableViewComponent } from './components/table-side/table-view/table-view.component';
  
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ResLoaderComponent } from './components/loader/res-loader/res-loader.co
     ListStockComponent,
     AddStockComponent,
     ResLoaderComponent,
+    TableViewComponent,
   ],
   imports: [
     BrowserModule,

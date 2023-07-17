@@ -25,7 +25,7 @@
         <a routerLink="login" class="nav-link">Staffs Login</a>
       </li>
       <li class="nav-item mx-auto" *ngIf="authonticated">
-        <a class="nav-link">Logout</a>
+        <a class="nav-link" (click)="logoutResAdmin()">Logout</a>
       </li>
     </ul>
   </div>
