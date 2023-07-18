@@ -98,18 +98,30 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
-  loadTables():Observable<any[]> {
+  loadTables(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}${this.backoRouter}/getTables`, {
-      withCredentials:true
-    })
+      withCredentials: true,
+    });
   }
   createTable() {
     console.log('here');
-    return this.http
-      .get(`${this.url}${this.backoRouter}createTable`, {
+    return this.http.get(`${this.url}${this.backoRouter}createTable`, {
+      withCredentials: true,
+    });
+  }
+  loadEditStock(id: any) {
+   return this.http.get(`${this.url}${this.backoRouter}loadEditableStock/${id}`, {
+     withCredentials: true,
+   });
+  }
+  upadteStock(data: any, id:any) {
+    return this.http.post(
+      `${this.url}${this.backoRouter}updateStock/${id}`,
+      data,
+      {
         withCredentials: true,
-      })
-      
+      }
+    );
   }
   LogOutResAdmin() {
     return this.http.get(`${this.url}${this.backoRouter}logout`, {

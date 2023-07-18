@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-stock',
@@ -9,7 +10,8 @@ import { ResturantControlServiceService } from '../../../core/services/resturant
 export class ListStockComponent implements OnInit {
   stocksData!: any[];
   currentDate!: any;
-  constructor(private _resService: ResturantControlServiceService) {}
+  constructor(private _resService: ResturantControlServiceService,
+  private router:Router) { }
   ngOnInit(): void {
     this.currentDate = new Date().toLocaleDateString();
 
@@ -19,7 +21,7 @@ export class ListStockComponent implements OnInit {
       this.stocksData = res;
     });
   }
-  editStock() {
-    
+  editStock(id:any) {
+    this.router.navigate(['/editStock', id]);
   }
 }

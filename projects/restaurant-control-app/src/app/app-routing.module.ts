@@ -12,6 +12,7 @@ import { authGuards } from 'projects/super-admin-app/src/app/core/services/auth.
 import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
 import { TableViewComponent } from './components/table-side/table-view/table-view.component';
+import { EditStocksComponent } from './components/stocks-section/edit-stocks/edit-stocks.component';
 const routes: Routes = [
   {
     path: 'controllersLogin',
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'addStocks',
         component: AddStockComponent,
+      },
+      {
+        path: 'editStock/:id',
+        component: EditStocksComponent,
       },
       {
         path: 'tables',

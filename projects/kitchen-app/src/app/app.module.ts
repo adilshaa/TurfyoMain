@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -17,7 +17,9 @@ import { DashboardComponent } from './shared/components/dashboard/dashboard.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { KitchenLoginComponent } from './shared/components/login/kitchen-login/kitchen-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastModule } from 'primeng/toast';
+import { KitchenInterceptorInterceptor } from './core/auth/interceptor/kitchen-interceptor.interceptor';
+import { KitchenServiceService } from './core/services/kitchen-service.service';
 
 @NgModule({
   declarations: [
@@ -36,11 +38,18 @@ import { ToastrModule } from 'ngx-toastr';
     RouterModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    ToastModule,
     StoreModule.forRoot({ foodsData: foodDetails }),
     EffectsModule.forRoot([Foodseffect]),
-    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    KitchenServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KitchenInterceptorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

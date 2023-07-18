@@ -1,0 +1,86 @@
+<div class="container mt-5">
+  <h1 class="mb-5">Edit Stock</h1>
+  <form class="row g-3" [formGroup]="stockData" (ngSubmit)="AddStocks()">
+    <div class="col-sm-12 col-lg-6">
+      <label for="inputEmail4" class="form-label">Stock Name</label>
+      <input
+        type="text"
+        formControlName="stockName"
+        class="form-control"
+        [(ngModel)]="stock.name"
+        [ngClass]="{
+          'is-invalid': submitted && stockData.controls['stockName'].errors
+        }"
+      />
+      <div
+        *ngIf="submitted && stockData.controls['stockName'].errors"
+        class="text-danger emailerror"
+      >
+        <div
+          class="text-center"
+          *ngIf="
+            submitted && stockData.controls['stockName'].errors['required']
+          "
+        >
+          *Stock namre is required
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+      <label for="inputPassword4" class="form-label">Quantity</label>
+      <input
+        type="number"
+        formControlName="stockQuantity"
+        [(ngModel)]="stock.quantity"
+        class="form-control"
+        [ngClass]="{
+          'is-inval-id': submitted && stockData.controls['stockQuantity'].errors
+        }"
+      />
+      <div
+        *ngIf="submitted && stockData.controls['stockQuantity'].errors"
+        class="text-danger emailerror"
+      >
+        <div
+          class="text-center"
+          *ngIf="
+            submitted && stockData.controls['stockQuantity'].errors['required']
+          "
+        >
+          *expairy Date is requried
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-5">
+      <label for="inputAddress" class="form-label">Stocks Quantity</label>
+      <input
+        type="date"
+        formControlName="stockExpairy"
+        [(ngModel)]="stock.expairy_Data"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && stockData.controls['stockExpairy'].errors
+        }"
+      />
+      <div
+        *ngIf="submitted && stockData.controls['stockExpairy'].errors"
+        class="text-danger emailerror"
+      >
+        <div
+          class="text-center"
+          *ngIf="
+            submitted && stockData.controls['stockExpairy'].errors['required']
+          "
+        >
+          * Please enter quantity of product
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <button id="submitBtn" type="submit" class="btn btn-primary">
+        Add Stock
+      </button>
+    </div>
+  </form>
+</div>

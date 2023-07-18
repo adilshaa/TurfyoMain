@@ -10,13 +10,12 @@ export class KitchenServiceService {
   constructor(private http: HttpClient) {}
 
   fetchFoodsData() {
-    return this.http.get(`${this.url}${this.backoRouter}/fetchFoods`, {
+    return this.http.get(`${this.url}${this.backoRouter}fetchFoods`, {
       withCredentials: true,
     });
   }
   listFoods(id: string, status: boolean) {
-    
-    console.log(status,id);
+    console.log(status, id);
 
     if (status == true) {
       status = false;
@@ -26,8 +25,15 @@ export class KitchenServiceService {
 
     return this.http.post(
       `${this.url}${this.backoRouter}listFoods/${id}`,
-      { status: status},
+      { status: status },
       { withCredentials: true }
     );
   }
+  staffLogin(data:any) {
+    return this.http.post(`${this.url}${this.backoRouter}loginStaff`,data,{withCredentials:true});
+  }
+  verifyStaff() {
+  return this.http.get(`${this.url}${this.backoRouter}verfiyStaff`,{withCredentials:true});
+}
+
 }

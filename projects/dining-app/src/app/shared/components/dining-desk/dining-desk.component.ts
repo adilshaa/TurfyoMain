@@ -14,7 +14,9 @@ export class DiningDeskComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.diningService.verifyStaffs().subscribe(
-      (res) => {},
+      (res) => {
+        
+      },
       (err) => {
         console.log(err);
         localStorage.removeItem('dining-staffs');

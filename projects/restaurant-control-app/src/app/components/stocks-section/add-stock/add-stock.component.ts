@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 import { Router } from '@angular/router';
@@ -10,9 +15,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-stock.component.css'],
 })
 export class AddStockComponent implements OnInit {
-  stockData!: FormGroup
-  submitted!: boolean
-  constructor(private _FormBuilder: FormBuilder,private _router:Router, private _tostr: ToastrService, private _resService:ResturantControlServiceService) { }
+  stockData!: FormGroup;
+  submitted!: boolean;
+  constructor(
+    private _FormBuilder: FormBuilder,
+    private _router: Router,
+    private _tostr: ToastrService,
+    private _resService: ResturantControlServiceService
+  ) {}
   ngOnInit(): void {
     this.stockData = this._FormBuilder.group({
       stockName: new FormControl('', [Validators.required]),
@@ -26,15 +36,11 @@ export class AddStockComponent implements OnInit {
       if (this.stockData.invalid) {
         return;
       }
-      let stocksData = this.stockData.getRawValue()
-      if(!stocksData) this._tostr.error("somthing went worng")
+      let stocksData = this.stockData.getRawValue();
+      if (!stocksData) this._tostr.error('somthing went worng');
       this._resService.addStock(stocksData).subscribe((res) => {
-          this._router.navigate(['Stocks']);
-        })
-       
-      
-    } catch (error) {
-      
-    }
+        this._router.navigate(['/Stocks']);
+      });
+    } catch (error) {}
   }
 }

@@ -5,7 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
+import { KitchenServiceService } from 'projects/kitchen-app/src/app/core/services/kitchen-service.service';
 
 @Component({
   selector: 'app-kitchen-login',
@@ -15,10 +17,19 @@ import { DiningServicesService } from 'projects/dining-app/src/app/core/services
 export class KitchenLoginComponent implements OnInit {
   submitted: boolean = false;
   form!: FormGroup;
-  constructor(private formBuilder: FormBuilder,
-    
-  ) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private kitchenService: KitchenServiceService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
+    let key = localStorage.getItem('kitchen-staffs');
+    if (key) {
+      this.router.navigate(['/'])
+    } else {
+      this.router.navigate(['/diningLogin']);
+    }
+
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -33,5 +44,17 @@ export class KitchenLoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    let loginData = this.form.getRawValue();
+    this.kitchenService.staffLogin(loginData).subscribe(
+      (res: any) => {
+        this.router.navigate(['/']);
+        localStorage.setItem('kitchen-staffs', ' true_and_verifyed');
+        localStorage.setItem('token', res.token);
+      },
+      (err) => {
+        console.log(err.error.message);
+        this.router.navigate(['/kitchenLogin']);
+      }
+    );
   }
 }
