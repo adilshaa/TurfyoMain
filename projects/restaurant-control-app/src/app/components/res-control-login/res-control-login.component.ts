@@ -34,6 +34,12 @@ export class ResControlLoginComponent implements OnInit {
     private authService: SocialAuthService
   ) {}
   ngOnInit(): void {
+    const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
+    if (isSuperAdmin) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/controllersLogin']);
+    }
     setTimeout(() => {
       this.isLoader = false;
     }, 500);
@@ -46,12 +52,6 @@ export class ResControlLoginComponent implements OnInit {
       }
     });
 
-    const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
-    if (isSuperAdmin) {
-      this.router.navigate(['/']);
-    } else {
-      this.router.navigate(['/controllersLogin']);
-    }
     this.Form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -69,6 +69,8 @@ export class ResControlLoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (err) => {
+        console.log('error');
+
         this.tostr.error(err.error.message);
         let localdata = localStorage.getItem('resadmin');
         if (localdata) localStorage.removeItem('resadmin');
@@ -86,7 +88,6 @@ export class ResControlLoginComponent implements OnInit {
           localStorage.setItem('resadmin', token);
           RestaurantControlEmitter.resEmitter.emit(true);
           this.router.navigate(['/']);
-
         },
         (err) => {
           this.tostr.error(err.error.message);

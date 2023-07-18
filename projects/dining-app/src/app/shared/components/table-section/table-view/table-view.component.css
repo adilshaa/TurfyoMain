@@ -1,0 +1,144 @@
+.container {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.card-free-table {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(35, 179, 6);
+
+  border: solid rgba(47, 255, 0, 0.518);
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(47, 255, 0, 0.518);
+  cursor: pointer;
+}
+
+.card-blue {
+  background: var(--blue-card);
+}
+
+.product-table {
+  margin-top: 2.3rem;
+  height: 100px;
+  width: 100%;
+  /* display: flex; Add flex display */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  transform: translate(0, -1.5rem);
+  transition: transform 0.6s ease-in-out;
+  filter: drop-shadow(5px 10px 15px rgba(165, 165, 165, 0.873));
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+.table-name{
+text-decoration: wavy;
+font-weight: 600;
+}
+
+
+
+
+.card-free-table.custom-style-true {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(48, 229, 12), 10px 15px 30px -12px rgb(48, 229, 12) inset;
+  border: solid rgba(44, 171, 15, 0.899)10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(47, 255, 0, 0.518);
+  cursor: pointer;
+    box-shadow: 0px 0px 20px 10px rgba(47, 255, 0, 0.518);
+  animation: shadows_ture 2s infinite;
+}
+
+.card-free-table.custom-style-false {
+  position: relative;
+  margin: 1rem 1rem;
+  width: 180px;
+  height: 100px;
+  box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725), 10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;
+  border: solid rgba(255, 145, 0, 0.725) 10px;
+  border-radius: 0.9rem;
+  background-color: var(--red-card);
+  color: rgba(255, 145, 0, 0.637);
+  cursor: pointer;
+    /* box-shadow: 0px 0px 20px 10px rgb(255, 145, 0, 0.725);
+  animation: shadows_false 2s infinite; */
+}
+
+
+
+.glow-item {
+  text-align: center;
+  margin: 30px 100px;
+}
+
+.card {
+  width: fit-content;
+  height: fit-content;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: #48abe0;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 50px 15px #48abe0;
+}
+
+
+@keyframes shadows_ture {
+  0% {
+    /* text-shadow: #48abe0 0 0 10px; */
+    box-shadow: 0px 0px 10px 5px rgba(47, 255, 0, 0.518);
+  }
+  25% {
+    /* text-shadow: #48abe0 0 0 10px; */
+    box-shadow: 0px 0px 10px 5px rgba(47, 255, 0, 0.518);
+    box-shadow: 0px 0px 10px 5px #fff;
+
+  }
+  50% {
+    /* text-shadow: blueviolet 0 0 10px; */
+    box-shadow: 0px 0px 10px 5px #fff;
+  }
+  75% {
+    /* text-shadow: #fff 0 0 10px; */
+    box-shadow: 0px 0px 10px 5px #fff;
+  }
+  100% {
+    /* text-shadow: #48abe0 0 0 10px; */
+    box-shadow: 0px 0px 10px 5px rgba(47, 255, 0, 0.518);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

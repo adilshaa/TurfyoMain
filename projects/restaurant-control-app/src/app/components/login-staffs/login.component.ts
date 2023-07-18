@@ -7,10 +7,9 @@ import {
   FormControl,
 } from '@angular/forms';
 import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
-import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -71,7 +70,7 @@ export class LoginComponent implements OnInit {
           window.open(`${resadminUrl}`);
         },
         (err) => {
-          this.toastr.error(err.error.message);
+           this.toastr.error(err.error.message);
         }
       );
   }

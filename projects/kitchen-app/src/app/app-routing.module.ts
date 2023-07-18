@@ -9,18 +9,20 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-  },
-  {
-    path: 'kitchenLogin',
-    component: KitchenLoginComponent,
-  },
-  {
-    path: 'foods',
-    component: ListFoodsComponent,
-  },
-  {
-    path: 'stocks',
-    component: ListStocksComponent,
+    children: [
+      {
+        path: 'kitchenLogin',
+        component: KitchenLoginComponent,
+      },
+      {
+        path: 'foods',
+        component: ListFoodsComponent,
+      },
+      {
+        path: 'stocks',
+        component: ListStocksComponent,
+      },
+    ],
   },
 ];
 

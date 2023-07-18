@@ -8,14 +8,14 @@ import {
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ResAdminInterseptorInterceptor implements HttpInterceptor {
+export class DiningInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem('resadmin');
+    let token = localStorage.getItem('token');
     const modifiedRequest = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,

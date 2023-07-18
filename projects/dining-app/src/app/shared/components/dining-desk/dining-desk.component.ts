@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DiningServicesService } from '../../../core/services/dining-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dining-desk',
   templateUrl: './dining-desk.component.html',
-  styleUrls: ['./dining-desk.component.css']
+  styleUrls: ['./dining-desk.component.css'],
 })
-export class DiningDeskComponent {
-
+export class DiningDeskComponent implements OnInit {
+  constructor(
+    private diningService: DiningServicesService,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    this.diningService.verifyStaffs().subscribe(
+      (res) => {},
+      (err) => {
+        console.log(err);
+        localStorage.removeItem('dining-staffs');
+        this.router.navigate(['/diningLogin']);
+      }
+    );
+    let key = localStorage.getItem('dining-staffs');
+    if (key) {
+    } else {
+      this.router.navigate(['/diningLogin']);
+    }
+  }
 }
+

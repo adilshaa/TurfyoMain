@@ -23,13 +23,12 @@ export class ListFoodsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.kitchenStore.dispatch(fetchFoodsData());
-        this.socket.emit('listFoods');
 
   }
   listFood(id: any, status: boolean) {
     this.kitchenService.listFoods(id, status).subscribe(
       (result) => {
-        this.socket.emit('listFoods')
+        this.socket.emit('listFoods' ,result)
         this.kitchenStore.dispatch(fetchFoodsData());
 
         console.log(result);

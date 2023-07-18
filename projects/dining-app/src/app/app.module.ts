@@ -6,7 +6,10 @@ import { DiningDeskComponent } from './shared/components/dining-desk/dining-desk
 import { TableViewComponent } from './shared/components/table-section/table-view/table-view.component';
 import { OrdersViewComponent } from './shared/components/order-section/orders-view/orders-view.component';
 import { FoodViewComponent } from './shared/components/foods-section/food-view/food-view.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -17,8 +20,11 @@ import { CategoryMenuComponent } from './shared/components/foods-section/categor
 import { fooodDataReducer } from './core/store/dining.reducers';
 import { FoodsData } from './core/store/dining.effects';
 import { DiningLoginComponent } from './shared/components/login/dining-login/dining-login.component';
-import { ReactiveFormsModule } from '@angular/forms';
- 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
+import { DiningInterceptorInterceptor } from './core/auth/interceptor/dining-interceptor.interceptor';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -35,12 +41,24 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule,
+    ToastModule,
     ReactiveFormsModule,
+    FormsModule,
     StoreModule.forRoot({ foodsData: fooodDataReducer }),
     EffectsModule.forRoot([FoodsData]),
+    ToastrModule.forRoot(),
   ],
-  providers: [DiningServicesService],
+  providers: [
+    DiningServicesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DiningInterceptorInterceptor,
+      multi: true,
+    },
+    MessageService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

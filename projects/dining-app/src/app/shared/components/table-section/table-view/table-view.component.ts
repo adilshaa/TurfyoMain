@@ -10,6 +10,11 @@ export class TableViewComponent implements OnInit {
   tables:any
   constructor(private dinigService:DiningServicesService) {}
   ngOnInit(): void {
-    this.dinigService.leadTables()
+    this.dinigService.leadTables().subscribe((res: any) => {
+      this.tables = res.tables;
+
+      console.log(this.tables);
+      
+    })
   }
 }

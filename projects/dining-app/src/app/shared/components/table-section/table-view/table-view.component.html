@@ -1,21 +1,29 @@
-<div class="container">
-  <div class="tabels">
-    <div class="row">
-      <section
-        *ngFor="let Table of tables"
-        [ngClass]="{
-          'card-free-table': true,
-          ' custom-style-false': Table.table_status,
-          'custom-style-true': !Table.table_status
-        }"
-      >
-        <div class="product-table">
-          <h3 class="table-name">{{Table.table_Name}}-{{Table.table_No}}</h3>
-          <p *ngIf="!Table.table_status"> Free</p>
-          <p *ngIf="Table.table_status"> Reserved</p>
-
-        </div>
-      </section>
+<div class="col-md-9">
+  <div class="container">
+    <div class="tabels">
+      <div class="row">
+        <section
+          *ngFor="let Table of tables"
+          [ngClass]="{
+            'card-free-table': true,
+            ' custom-style-false': Table.table_status,
+            'custom-style-true': !Table.table_status
+          }"
+        >
+          <div class="product-table">
+            <h3 class="table-name">
+              {{ Table.table_Name }}-{{ Table.table_No }}
+            </h3>
+            <p *ngIf="!Table.table_status">Free</p>
+            <p *ngIf="Table.table_status">Reserved</p>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
+  <div class="col-md-3">
+
+    
+  </div>
 </div>
+

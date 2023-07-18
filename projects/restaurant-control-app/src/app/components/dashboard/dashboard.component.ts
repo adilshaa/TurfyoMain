@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+          
           localStorage.removeItem('ResadminisLoggedIN');
           this.router.navigate(['/controllersLogin']);
           RestaurantControlEmitter.resEmitter.emit(false);

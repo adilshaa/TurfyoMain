@@ -6,8 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-dining-login',
   templateUrl: './dining-login.component.html',
@@ -19,9 +20,17 @@ export class DiningLoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private diningService: DiningServicesService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private messageService: MessageService
   ) {}
   ngOnInit(): void {
+    let key = localStorage.getItem('dining-staffs');
+    if (key) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/diningLogin']);
+    }
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -32,16 +41,30 @@ export class DiningLoginComponent implements OnInit {
   }
   diningLogin() {
     this.submitted = true;
-
     if (this.form.invalid) {
       return;
     }
     let Logindata = this.form.getRawValue();
     this.diningService.diningLogin(Logindata).subscribe(
-      (res) => {
+      (res: any) => {
+        console.log('sucess');
         this.router.navigate(['/']);
+        localStorage.setItem('dining-staffs', ' true_and_verifyed');
+        localStorage.setItem('token', res.token);
       },
-      (err) => this.router.navigate(['/diningLogin'])
+      (err) => {
+        this.messageService.add({
+          key: 'tc',
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error.message,
+        });
+
+        setTimeout(() => {
+          this.messageService.clear();
+        }, 1000);
+        this.router.navigate(['/diningLogin']);
+      }
     );
   }
 }

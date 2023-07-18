@@ -24,7 +24,14 @@ export class DiningServicesService {
       }
     );
   }
-  diningLogin(data:any) {
-    return this.http.post(`${this.mainUrl}${this.backRouterUrl}/dinigLogin`,data,{withCredentials:true})
+  diningLogin(data: any) {
+    return this.http.post(
+      `${this.mainUrl}${this.backRouterUrl}dinigLogin`,
+      data,
+      { withCredentials: true }
+    );
+  }
+  verifyStaffs() {
+    return this.http.get(`${this.mainUrl}${this.backRouterUrl}/verifyStaff`,{withCredentials:true})
   }
 }
