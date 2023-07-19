@@ -30,11 +30,12 @@
       <td class="role">{{ staffs.role }}</td>
 
       <td *ngIf="staffs.status === true" style="color: rgb(91, 241, 3)">
-        {{ staffs.status }}
+        Active
       </td>
       <td *ngIf="staffs.status === false" style="color: red">
-        {{ staffs.status }}
+        Not Active
       </td>
+
       <td>
         <button class="btn btn-warning" (click)="ViewDetails(staffs._id)">
           View

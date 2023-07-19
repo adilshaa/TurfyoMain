@@ -32,6 +32,13 @@ export class DiningServicesService {
     );
   }
   verifyStaffs() {
-    return this.http.get(`${this.mainUrl}${this.backRouterUrl}/verifyStaff`,{withCredentials:true})
+    return this.http.get(`${this.mainUrl}${this.backRouterUrl}verifyStaff`, {
+      withCredentials: true,
+    });
+  }
+  logoutStaff() {
+    return this.http.get(`${this.mainUrl}${this.backRouterUrl}logoutStaff`, {
+      withCredentials: true,
+    });
   }
 }

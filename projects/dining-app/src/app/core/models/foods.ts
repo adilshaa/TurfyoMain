@@ -6,3 +6,12 @@ export interface foodsStructure {
   status:boolean,
   _id: string;
 }
+
+export interface Item {
+   itemName: string;
+   itemType: string;
+   restaurantName: string;
+   location: string;
+   price: number;
+   vote: number;
+}

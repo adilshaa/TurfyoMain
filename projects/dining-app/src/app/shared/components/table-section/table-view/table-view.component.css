@@ -5,11 +5,15 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  background-color: rgba(236, 231, 231, 0.638);
+  box-shadow: 10px 15px 30px -12px rgb(203, 204, 203);
+
+  border-radius: 25px;
 }
 .card-free-table {
   position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 176px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(35, 179, 6);
 
@@ -46,7 +50,7 @@
 .card-free-table.custom-style-true {
   position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 160px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(48, 229, 12),
     10px 15px 30px -12px rgb(48, 229, 12) inset;
@@ -62,7 +66,7 @@
 .card-free-table.custom-style-false {
   position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 176px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725),
     10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;

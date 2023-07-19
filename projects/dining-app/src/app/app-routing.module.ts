@@ -6,6 +6,7 @@ import { DiningDeskComponent } from './shared/components/dining-desk/dining-desk
 import { FoodViewComponent } from './shared/components/foods-section/food-view/food-view.component';
 import { DiningLoginComponent } from './shared/components/login/dining-login/dining-login.component';
 import { TableViewComponent } from './shared/components/table-section/table-view/table-view.component';
+import { CartComponent } from './shared/components/foods-section/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'viewFoods', component: FoodViewComponent },
       { path: 'tables', component: TableViewComponent },
+      { path: 'cart', component: CartComponent },
     ],
   },
   {

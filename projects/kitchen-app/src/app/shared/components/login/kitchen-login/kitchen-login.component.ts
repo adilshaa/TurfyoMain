@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
 import { KitchenServiceService } from 'projects/kitchen-app/src/app/core/services/kitchen-service.service';
 
@@ -20,6 +21,7 @@ export class KitchenLoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private kitchenService: KitchenServiceService,
+    private tostr:ToastrService,
     private router: Router
   ) {}
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class KitchenLoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
       },
       (err) => {
+        this.tostr.error(err.error.message)
         console.log(err.error.message);
         this.router.navigate(['/kitchenLogin']);
       }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { foodsStructure } from 'projects/dining-app/src/app/core/models/foods';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
 import { getAllFoods } from 'projects/dining-app/src/app/core/store/dining.actions';
@@ -22,6 +23,7 @@ export class FoodViewComponent implements OnInit {
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
+    private tostr:ToastrService,
     private diningStore: Store<{ foodsData: foodsStructure[] }>
   ) {}
   ngOnInit(): void {
@@ -29,12 +31,17 @@ export class FoodViewComponent implements OnInit {
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
       (data) => {
+        this.tostr.info("Foods is updated 🍔")
         this.foodData = data;
         if (this.foodData[0] == null) {
           this.empty = true;
         } else {
           this.empty = false;
         }
+        setTimeout(() => {
+        this.tostr.clear();
+  
+        },2000)
       },
       (error) => {
         console.error('An error occurred:', error);

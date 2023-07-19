@@ -1,16 +1,19 @@
 
 .container {
   height: 100%;
-  width: 850px;
+  width: 100%;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  border-radius: 25px;
+   background-color: rgba(236, 231, 231, 0.638);
+  box-shadow: 10px 15px 30px -12px rgb(203, 204, 203);
 }
 .card-free-table {
   position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 176px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(48, 229, 12);
   box-shadow: 10px 15px 30px -12px rgb(48, 229, 12) inset;
@@ -49,7 +52,7 @@ font-weight: 600;
 .card-reseved-table{
    position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 176px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725);
   box-shadow: 10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;
@@ -65,7 +68,7 @@ font-weight: 600;
 .custom-style-true {
   position: relative;
   margin: 1rem 1rem;
-  width: 180px;
+  width: 176px;
   height: 100px;
   box-shadow: 10px 15px 30px -12px rgb(48, 229, 12), 10px 15px 30px -12px rgb(48, 229, 12) inset;
   border: solid rgba(47, 255, 0, 0.518) 10px;

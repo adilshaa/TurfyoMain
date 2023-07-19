@@ -1,0 +1,83 @@
+<div class="container mt-3">
+  <div class="form-section">
+    <!-- {{foodItemForm.value | json}} {{location.valid}} -->
+    <form [class.form-none]="!isFormVisible" [formGroup]="foodItemForm" (ngSubmit)="onSubmitFoodItem()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="itemName">Item Name</label>
+        <div class="col-md-10">
+          <input  formControlName="itemName" type="text" id="itemName"
+            class="form-control">
+          <div >
+            <small  class="text-danger">Item name is required !</small>
+            <small  class="text-danger">Item name except contains digits !</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="itemType">Item Type</label>
+        <div class="col-md-10">
+          <input  formControlName="itemType" type="text" id="itemType" class="form-control">
+          <div>
+              <small  class="text-danger">Item type is required !</small>
+              <small class="text-danger">Item type except contains digits !</small>
+            </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="restaurantName">Restaurant Name</label>
+        <div class="col-md-10">
+          <input formControlName="restaurantName" type="text" id="restaurantName" class="form-control">
+          <div >
+              <small class="text-danger">Restaurant name is required !</small>
+              <small class="text-danger">Restaurant name except contains digits !</small>
+            </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="location">Location</label>
+        <div class="col-md-10">
+          <input  formControlName="location" type="text" id="location" class="form-control">
+          <small  class="text-danger">Location is required !</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="price">Price</label>
+        <div class="col-md-10">
+          <input  formControlName="price" type="text" id="price" class="form-control">
+          <div >
+              <small class="text-danger">Price is required !</small>
+              <small  class="text-danger">Price must be > 0 !</small>
+              <small  class="text-danger">Price contains only digits !</small>
+            </div>
+        </div>
+      </div>
+      <button [disabled]="foodItemForm.invalid" type="submit" class="btn btn-primary float-right">Add This Item</button>
+    </form>
+
+    <button (click)="toggleForm(this.formControlButton)" class="btn btn-secondary form-control-button">{{formControlButton}}</button>
+
+  </div>
+
+  <div class="food-content-box mt-5">
+    <div class="food-content-title">
+      <h1 class="text-center text-capitalize">List of All The good mood foods</h1>
+    </div>
+    <hr />
+    <div class="row">
+      <div *ngFor="let item of listOfItem" class="col-md-6 mb-3">
+        <div class="item-box text-center">
+          <h4 class="text-capitalize">{{item.itemName}}</h4>
+          <h5 class="text-capitalize">( {{item.itemType}} )</h5>
+
+          <p class="text-capitalize">At {{item.restaurantName}}, {{item.location}}</p>
+          <p class="text-capitalize">{{item.price}} Tk</p>
+          <div class="vote-box">
+            <span>{{item.vote > 0 ? '+' + item.vote : item.vote}} votes</span> 
+            <button (click)="like(item.itemName)" class="btn btn-primary ml-2">+</button>
+            <button (click)="dislike(item.itemName)" class="btn btn-danger ml-2">-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 <img  class="empty-img" src="../../../../../assets/farmers-food-design-image-file.jpg" alt="">
 </div>
 
-<div class="col-md-8" *ngIf="empty ==false ">
+<div class="col-md-9" *ngIf="empty ==false ">
   <!-- <div class="col-md-12"> -->
   <div class="container">
     <div class="row mt-5 justify-content-center">
@@ -16,7 +16,7 @@
         </div>
         <div class="product-info">
           <h2>{{ foodsData.name }}</h2>
-          <div class="price">$999</div>
+          <div class="price">₹ {{foodsData.price}}</div>
         </div>
         <div class="btn"></div>
       </section>

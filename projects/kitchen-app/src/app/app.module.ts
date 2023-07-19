@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { KitchenInterceptorInterceptor } from './core/auth/interceptor/kitchen-interceptor.interceptor';
 import { KitchenServiceService } from './core/services/kitchen-service.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { KitchenServiceService } from './core/services/kitchen-service.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     ToastModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot({ foodsData: foodDetails }),
     EffectsModule.forRoot([Foodseffect]),
   ],

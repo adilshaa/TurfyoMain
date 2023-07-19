@@ -3,7 +3,9 @@ import { ResturantControlServiceService } from '../../../core/services/resturant
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Store, select } from '@ngrx/store';
+import { fromEvent } from 'rxjs';
+import { io } from 'socket.io-client';
+
 // import { Foodsstructure } from 'projects/restaurant-control-app/src/app/core/models/foods';
 // import { FoodsDatas } from 'projects/restaurant-control-app/src/app/core/store/res-admin.selector';
 // import { fetchFoodsData } from 'projects/restaurant-control-app/src/app/core/store/res-admin.actions';
@@ -17,7 +19,9 @@ export class ListFoodsComponent implements OnInit {
   AddFood!: FormGroup;
   selectedFile!: File;
   isLoader: Boolean = true;
-
+  socket = io('http://localhost:5000');
+  foodData: any;
+  empty:boolean=false
   // foodsData = this.resStore.pipe(select(FoodsDatas));
 
   constructor(
@@ -27,6 +31,22 @@ export class ListFoodsComponent implements OnInit {
     private http: HttpClient // private resStore: Store<{ foodsData: Foodsstructure[] }>
   ) {}
   ngOnInit(): void {
+    this.socket.emit('listFoods');
+    const showFoods$ = fromEvent(this.socket, 'showFoods');
+    const subscription = showFoods$.subscribe(
+      (data) => {
+        this.foodData = data;
+        if (this.foodData[0] == null) {
+          this.empty = true;
+        } else {
+          this.empty = false;
+        }
+      },
+      (error) => {
+        console.error('An error occurred:', error);
+      }
+    );
+
     setTimeout(() => {
       this.isLoader = false;
     }, 500);

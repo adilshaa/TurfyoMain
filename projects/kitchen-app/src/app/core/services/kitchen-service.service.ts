@@ -34,6 +34,13 @@ export class KitchenServiceService {
   }
   verifyStaff() {
   return this.http.get(`${this.url}${this.backoRouter}verfiyStaff`,{withCredentials:true});
-}
+  }
+  logoutStaff() {
+  return this.http.get(`${this.url}${this.backoRouter}logoutStaff`, {
+    withCredentials: true,
+  });
+
+    
+  }
 
 }

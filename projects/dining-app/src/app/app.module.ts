@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from 'primeng/api';
 import { DiningInterceptorInterceptor } from './core/auth/interceptor/dining-interceptor.interceptor';
+import { CartComponent } from './shared/components/foods-section/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DiningInterceptorInterceptor } from './core/auth/interceptor/dining-int
     SidebarComponent,
     CategoryMenuComponent,
     DiningLoginComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
