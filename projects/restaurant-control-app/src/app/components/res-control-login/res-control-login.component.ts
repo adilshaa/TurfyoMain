@@ -65,6 +65,8 @@ export class ResControlLoginComponent implements OnInit {
         this.tostr.success('Success Fully Loggined');
         localStorage.setItem('ResadminisLoggedIN', 'res_adminis_login_true');
         localStorage.setItem('resadmin', token);
+        localStorage.setItem('resId', res.resId);
+
         RestaurantControlEmitter.resEmitter.emit(true);
         this.router.navigate(['/']);
       },
@@ -85,7 +87,9 @@ export class ResControlLoginComponent implements OnInit {
           let token = res.token;
           this.tostr.success('Success Fully Loggined');
           localStorage.setItem('ResadminisLoggedIN', 'res_admin_is_login_true');
-          localStorage.setItem('resadmin', token);
+          localStorage.setItem('resadmin', token);          
+        localStorage.setItem('resId', res.resId);
+
           RestaurantControlEmitter.resEmitter.emit(true);
           this.router.navigate(['/']);
         },

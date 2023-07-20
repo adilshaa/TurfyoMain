@@ -27,11 +27,16 @@ import { ResAdminAuthGuard } from './core/auth/res-admin-auth-guards.guard';
 import { ResAdminInterseptorInterceptor } from './core/interceptors/res-admin-interseptor.interceptor';
 import { ListStockComponent } from './components/stocks-section/list-stock/list-stock.component';
 import { AddStockComponent } from './components/stocks-section/add-stock/add-stock.component';
-import { GoogleLoginProvider,SocialLoginModule ,GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  SocialLoginModule,
+  GoogleSigninButtonModule,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
 import { ResLoaderComponent } from './components/loader/res-loader/res-loader.component';
 import { TableViewComponent } from './components/table-side/table-view/table-view.component';
 import { EditStocksComponent } from './components/stocks-section/edit-stocks/edit-stocks.component';
- 
+
 @NgModule({
   declarations: [
     AppComponent,

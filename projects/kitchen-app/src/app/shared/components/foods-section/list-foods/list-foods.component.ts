@@ -28,7 +28,8 @@ export class ListFoodsComponent implements OnInit {
   listFood(id: any, status: boolean) {
     this.kitchenService.listFoods(id, status).subscribe(
       (result) => {
-        this.socket.emit('listFoods' ,result)
+        let resId=localStorage.getItem("resId")
+        this.socket.emit('listFoods', resId);
         this.kitchenStore.dispatch(fetchFoodsData());
 
         console.log(result);

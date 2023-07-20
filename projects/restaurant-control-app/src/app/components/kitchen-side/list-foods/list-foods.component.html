@@ -83,12 +83,20 @@
   </div>
 </div>
 
-<div class="text-center"></div>
+<div class="text-center">
+  <a
+    href="#"
+    class="btn btn-danger btn-rounded w-25"
+    data-bs-toggle="modal"
+    data-bs-target="#modalRegisterForm"
+    >Add Foods</a
+  >
+</div>
 
 <div class="container" *ngIf="empty == true">
   <img
     class="empty-img"
-    src="../../../../../assets/farmers-food-design-image-file.jpg"
+    src="../../../../assets/farmers-food-design-image-file.jpg"
     alt=""
   />
 </div>
@@ -96,14 +104,6 @@
 <div class="col-md-8" *ngIf="empty == false">
   <!-- <div class="col-md-12"> -->
   <div class="container">
-    <a
-      href="#"
-      class="btn btn-danger btn-rounded w-24"
-      data-bs-toggle="modal"
-      data-bs-target="#modalRegisterForm"
-      >Add Foods</a
-    >
-
     <div class="row mt-2 justify-content-center">
       <section class="card" *ngFor="let foodsData of foodData">
         <div class="product-image">

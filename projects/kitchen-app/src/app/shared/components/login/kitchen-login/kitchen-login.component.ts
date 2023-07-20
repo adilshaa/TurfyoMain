@@ -52,6 +52,8 @@ export class KitchenLoginComponent implements OnInit {
         this.router.navigate(['/']);
         localStorage.setItem('kitchen-staffs', ' true_and_verifyed');
         localStorage.setItem('token', res.token);
+        localStorage.setItem('resId', res.resId);
+
       },
       (err) => {
         this.tostr.error(err.error.message)

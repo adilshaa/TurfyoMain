@@ -47,10 +47,11 @@ export class DiningLoginComponent implements OnInit {
     let Logindata = this.form.getRawValue();
     this.diningService.diningLogin(Logindata).subscribe(
       (res: any) => {
-        console.log('sucess');
         this.router.navigate(['/']);
         localStorage.setItem('dining-staffs', ' true_and_verifyed');
         localStorage.setItem('token', res.token);
+        localStorage.setItem('resId', res.resId);
+
       },
       (err) => {
         this.messageService.add({

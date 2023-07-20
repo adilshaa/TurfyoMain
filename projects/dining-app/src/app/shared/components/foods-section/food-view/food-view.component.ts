@@ -23,15 +23,17 @@ export class FoodViewComponent implements OnInit {
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
-    private tostr:ToastrService,
+    private tostr: ToastrService,
     private diningStore: Store<{ foodsData: foodsStructure[] }>
   ) {}
   ngOnInit(): void {
-    this.socket.emit('listFoods');
+    let resId = localStorage.getItem('resId');
+   
+    this.socket.emit('listFoods', resId);
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
       (data) => {
-        this.tostr.info("Foods is updated 🍔")
+        this.tostr.info('Foods is updated 🍔');
         this.foodData = data;
         if (this.foodData[0] == null) {
           this.empty = true;
@@ -39,9 +41,8 @@ export class FoodViewComponent implements OnInit {
           this.empty = false;
         }
         setTimeout(() => {
-        this.tostr.clear();
-  
-        },2000)
+          this.tostr.clear();
+        }, 2000);
       },
       (error) => {
         console.error('An error occurred:', error);
