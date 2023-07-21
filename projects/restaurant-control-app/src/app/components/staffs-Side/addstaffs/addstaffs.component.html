@@ -1,191 +1,216 @@
-<div *ngIf="isLoader">
-  <app-res-loader></app-res-loader>
-</div>
 <div *ngIf="!isLoader">
-    <div class="container mt-5">
-       <form class="row g-3" [formGroup]="staffData" (submit)="addStaffs()">
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputEmail4" class="form-label">Employee Name</label>
-          <input
-            type="text"
-            formControlName="employeeName"
-            class="form-control"
-             [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
-            }"
-          />
-            <div
-            *ngIf="submitted && staffData.controls['employeeName'].errors "
-            class="text-danger emailerror "
-          >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeeName'].errors['required']">
-              *Name is required
-            </div>
-            
-          </div>
-        </div>
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputPassword4" class="form-label">Place</label>
-          <input
-            type="text"
-            formControlName="employeePlace"
-            class="form-control"
-             [ngClass]="{
-              'is-inval-id': submitted && staffData.controls['employeePlace'].errors
-            }"
-          />
-           <div
-            *ngIf="submitted && staffData.controls['employeePlace'].errors "
-            class="text-danger emailerror "
-          >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeePlace'].errors['required']">
-              *place is requreid
-            </div>
-            
-             
-          </div>
-        </div>
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputAddress" class="form-label">Email</label>
-          <input
-            type="email"
-            formControlName="employeeEmail"
-            class="form-control"
-             [ngClass]="{
-              'is-invalid': submitted && staffData.controls['employeeEmail'].errors
-            }"
-          />
+  <div class="container mt-5">
+    <form class="row g-3" [formGroup]="staffData" (submit)="addStaffs()">
+      <div class="col-sm-12 col-lg-6">
+        <label for="inputEmail4" class="form-label">Employee Name</label>
+        <input
+          type="text"
+          formControlName="employeeName"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && staffData.controls['password'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['employeeName'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['employeeEmail'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="
+              submitted && staffData.controls['employeeName'].errors['required']
+            "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeeEmail'].errors['required']">
-              *Email is requreid
-            </div>
-           
-             
+            *Name is required
           </div>
         </div>
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputAddress2" class="form-label">Password </label>
-          <input
-            type="password"
-            formControlName="password"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
-            }"
-          />
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <label for="inputPassword4" class="form-label">Place</label>
+        <input
+          type="text"
+          formControlName="employeePlace"
+          class="form-control"
+          [ngClass]="{
+            'is-inval-id':
+              submitted && staffData.controls['employeePlace'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['employeePlace'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['password'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="
+              submitted &&
+              staffData.controls['employeePlace'].errors['required']
+            "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['password'].errors['required']">
-              *password is requreid
-            </div>
-           
-             
+            *place is requreid
           </div>
         </div>
-        <div class="col-sm-12 col-lg-6">
-          <label for="inputAddress2" class="form-label">Phone No: </label>
-          <input
-            type="number"
-            formControlName="employeeNumber"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': submitted && staffData.controls['employeeNumber'].errors
-            }"
-          />
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <label for="inputAddress" class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="employeeEmail"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              submitted && staffData.controls['employeeEmail'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['employeeEmail'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['employeeNumber'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="
+              submitted &&
+              staffData.controls['employeeEmail'].errors['required']
+            "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['employeeNumber'].errors['required']">
-              *Number is requreid
-            </div>
-             
+            *Email is requreid
           </div>
         </div>
-        <div class="col-lg-4">
-          <label for="inputCity" class="form-label">Age</label>
-          <input
-            type="number"
-            formControlName="employeeAge"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
-            }"
-          />
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <label for="inputAddress2" class="form-label">Password </label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && staffData.controls['password'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['password'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['email'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="
+              submitted && staffData.controls['password'].errors['required']
+            "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['email'].errors['required']">
-              *Email is requreid
-            </div>
-            <div *ngIf="submitted && staffData.controls['email'].errors['email']">
-              *Email shoud be proper format
-            </div>
-             
+            *password is requreid
           </div>
         </div>
-        <div class="col-lg-4">
-          <label for="inputCity" class="form-label">Date of Birth</label>
-          <input
-            type="date"
-            formControlName="employeeDataOFBirth"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
-            }"
-          />
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <label for="inputAddress2" class="form-label">Phone No: </label>
+        <input
+          type="number"
+          formControlName="employeeNumber"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              submitted && staffData.controls['employeeNumber'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['employeeNumber'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['email'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="
+              submitted &&
+              staffData.controls['employeeNumber'].errors['required']
+            "
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['email'].errors['required']">
-              *Email is requreid
-            </div>
-            <div *ngIf="submitted && staffData.controls['email'].errors['email']">
-              *Email shoud be proper format
-            </div>
-             
+            *Number is requreid
           </div>
         </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">Role</label>
-          <select
-            id="inputState"
-            formControlName="employeeRole"
-            class="form-select"
-            
-            [ngClass]="{
-              'is-invalid': submitted && staffData.controls['password'].errors
-            }"
-          >
-            <option value="cheffs">cheff</option>
-            <option value="admin">Admin</option>
-            <option value="waiters">Waiter</option>
-          </select>
+      </div>
+      <div class="col-lg-4">
+        <label for="inputCity" class="form-label">Age</label>
+        <input
+          type="number"
+          formControlName="employeeAge"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && staffData.controls['password'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['email'].errors"
+          class="text-danger emailerror"
+        >
           <div
-            *ngIf="submitted && staffData.controls['email'].errors "
-            class="text-danger emailerror "
+            class="text-center"
+            *ngIf="submitted && staffData.controls['email'].errors['required']"
           >
-            <div class="text-center" *ngIf="submitted && staffData.controls['email'].errors['required']">
-              *Email is requreid
-            </div>
-            <div *ngIf="submitted && staffData.controls['email'].errors['email']">
-              *Email shoud be proper format
-            </div>
-             
+            *Email is requreid
+          </div>
+          <div *ngIf="submitted && staffData.controls['email'].errors['email']">
+            *Email shoud be proper format
           </div>
         </div>
+      </div>
+      <div class="col-lg-4">
+        <label for="inputCity" class="form-label">Date of Birth</label>
+        <input
+          type="date"
+          formControlName="employeeDataOFBirth"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && staffData.controls['password'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && staffData.controls['email'].errors"
+          class="text-danger emailerror"
+        >
+          <div
+            class="text-center"
+            *ngIf="submitted && staffData.controls['email'].errors['required']"
+          >
+            *Email is requreid
+          </div>
+          <div *ngIf="submitted && staffData.controls['email'].errors['email']">
+            *Email shoud be proper format
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Role</label>
+        <select
+          id="inputState"
+          formControlName="employeeRole"
+          class="form-select"
+          [ngClass]="{
+            'is-invalid': submitted && staffData.controls['password'].errors
+          }"
+        >
+          <option value="cheffs">cheff</option>
+          <option value="admin">Admin</option>
+          <option value="waiters">Waiter</option>
+        </select>
+        <div
+          *ngIf="submitted && staffData.controls['email'].errors"
+          class="text-danger emailerror"
+        >
+          <div
+            class="text-center"
+            *ngIf="submitted && staffData.controls['email'].errors['required']"
+          >
+            *Email is requreid
+          </div>
+          <div *ngIf="submitted && staffData.controls['email'].errors['email']">
+            *Email shoud be proper format
+          </div>
+        </div>
+      </div>
 
-        <!-- <div class="col-md-6">
+      <!-- <div class="col-md-6">
           <label for="inputState" class="form-label"></label>
         </div> -->
-        <!-- <div class="col-12">
+      <!-- <div class="col-12">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="gridCheck" />
             <label class="form-check-label" for="gridCheck">
@@ -193,25 +218,17 @@
             </label>
           </div>
         </div> -->
-        <div class="col-6">
-          <button
-            id="submitBtn"
-            type="submit"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            Sign in
-          </button>
-        </div>
-      </form>
-    </div>
-
-
-
-
-
-
-    
-
-  
+      <div class="col-6">
+        <button
+          id="submitBtn"
+          type="submit"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

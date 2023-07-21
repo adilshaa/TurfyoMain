@@ -31,7 +31,8 @@ export class ListFoodsComponent implements OnInit {
     private http: HttpClient // private resStore: Store<{ foodsData: Foodsstructure[] }>
   ) {}
   ngOnInit(): void {
-    this.socket.emit('listFoods');
+    let resId=localStorage.getItem("resId")
+    this.socket.emit('listFoods', resId);
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
       (data) => {

@@ -1,0 +1,21 @@
+.btn {
+  width: 100px;
+  height: auto;
+}
+
+.btn-warning {
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 2px 10px rgb(155, 151, 151);
+}
+.btn-warning:hover {
+  border-radius: 30px;
+  background-color: rgb(244, 122, 0);
+  box-shadow: 1px 2px 10px orange;
+}
+.total_row {
+    display: flex;
+  bottom: 0;
+ position: fixed;
+  
+}

@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addstaffs',
@@ -16,11 +18,13 @@ import { ResturantControlServiceService } from '../../../core/services/resturant
 export class AddstaffsComponent implements OnInit {
   staffData!: FormGroup;
   submitted: any;
-    isLoader: Boolean = true;
+  isLoader: Boolean = true;
 
   constructor(
     private formBulider: FormBuilder,
-    private resService: ResturantControlServiceService
+    private resService: ResturantControlServiceService,
+    private tostr: ToastrService,
+    private router:Router
   ) {}
   ngOnInit(): void {
     setTimeout(() => {
@@ -44,7 +48,18 @@ export class AddstaffsComponent implements OnInit {
       return;
     }
     let staffsInfromation = this.staffData.getRawValue();
+     this.resService.RegisterStaffs(staffsInfromation).subscribe(
+      (res) => {
+         this.tostr.success('Staff registration completed');
+         this.router.navigate(['/staffs']);
+      },
+      (err) => {
+    this.submitted = false;
 
-    this.resService.RegisterStaffs(staffsInfromation);
+      console.log(err.error.message);
+
+        this.tostr.warning(err.error.message);
+      }
+    );
   }
 }

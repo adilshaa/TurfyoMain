@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 col-lg-5">
+    <div class="col-sm-12 col-lg-6">
       <label for="inputAddress" class="form-label">Stocks Quantity</label>
       <input
         type="date"
@@ -73,6 +73,31 @@
           "
         >
           * Please enter quantity of product
+        </div>
+      </div>
+    </div>
+     <div class="col-sm-12 col-lg-6">
+      <label for="inputAddress" class="form-label">Stocks Price</label>
+      <input
+        type="text"
+        formControlName="stockprice"
+        [(ngModel)]="stock.price"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && stockData.controls['stockprice'].errors
+        }"
+      />
+      <div
+        *ngIf="submitted && stockData.controls['stockprice'].errors"
+        class="text-danger emailerror"
+      >
+        <div
+          class="text-center"
+          *ngIf="
+            submitted && stockData.controls['stockprice'].errors['required']
+          "
+        >
+          * Please enter price of product
         </div>
       </div>
     </div>

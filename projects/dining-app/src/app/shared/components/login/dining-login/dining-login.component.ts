@@ -8,7 +8,6 @@ import {
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
-import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-dining-login',
   templateUrl: './dining-login.component.html',
@@ -21,8 +20,7 @@ export class DiningLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private diningService: DiningServicesService,
     private router: Router,
-    private toastr: ToastrService,
-    private messageService: MessageService
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     let key = localStorage.getItem('dining-staffs');
@@ -48,23 +46,12 @@ export class DiningLoginComponent implements OnInit {
     this.diningService.diningLogin(Logindata).subscribe(
       (res: any) => {
         this.router.navigate(['/']);
-        localStorage.setItem('dining-staffs', ' true_and_verifyed');
+        localStorage.setItem('dining-staffs', 'true_and_verifyed');
         localStorage.setItem('token', res.token);
         localStorage.setItem('resId', res.resId);
-
       },
       (err) => {
-        this.messageService.add({
-          key: 'tc',
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error.message,
-        });
-
-        setTimeout(() => {
-          this.messageService.clear();
-        }, 1000);
-        this.router.navigate(['/diningLogin']);
+        this.toastr.error(err.error.message)
       }
     );
   }

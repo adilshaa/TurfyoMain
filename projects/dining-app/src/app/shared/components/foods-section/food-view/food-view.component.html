@@ -1,10 +1,12 @@
-<div class="container" *ngIf="empty==true">
-<img  class="empty-img" src="../../../../../assets/farmers-food-design-image-file.jpg" alt="">
+<div class="container" *ngIf="empty == true">
+  <img
+    class="empty-img"
+    src="../../../../../assets/farmers-food-design-image-file.jpg"
+    alt=""
+  />
 </div>
-
-<div class="col-md-9" *ngIf="empty ==false ">
-  <!-- <div class="col-md-12"> -->
-  <div class="container">
+<div class="container">
+  <div class="col-md-7" *ngIf="empty == false">
     <div class="row mt-5 justify-content-center">
       <section class="card" *ngFor="let foodsData of foodData">
         <div class="product-image">
@@ -16,16 +18,38 @@
         </div>
         <div class="product-info">
           <h2>{{ foodsData.name }}</h2>
-          <div class="price">₹ {{foodsData.price}}</div>
+          <div class="price">₹ {{ foodsData.price }}</div>
         </div>
-        <div class="btn"></div>
+        <div class="btn">
+          <div class="type-btn">
+            <button>Types</button>
+          </div>
+          <div class="add-btn">
+            <button (click)="addTocart(foodsData._id)">Add</button>
+          </div>
+        </div>
       </section>
     </div>
   </div>
-  <!-- </div> -->
 
   <div class="col-md-4">
-    <div class="container">
-    </div>
+    <section class="cart-card">
+      <div class="cart-header">
+        <h3>Current Order</h3>
+      </div>
+      <div class="cart-info" *ngFor="let items of cartItems">
+        <div class="items-img">
+          <img
+            [src]="'http://localhost:5000/foods-images/' + items.image"
+            alt=""
+          />
+        </div>
+        <div class="items-name"> {{ items.name }}</div>
+        <div class="items-type">full</div>
+        <div class="items-price">₹{{ items.price }}</div>
+      <button class="btn" (click)="removeFromCart(items._id)">D</button>
+
+      </div>
+    </section>
   </div>
 </div>

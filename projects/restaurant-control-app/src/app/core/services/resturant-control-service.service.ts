@@ -17,21 +17,11 @@ export class ResturantControlServiceService {
   ) {}
 
   RegisterStaffs(data: any) {
-    if (data) {
-      this.http
-        .post(`${this.url}${this.backoRouter}addstaffs`, data, {
-          withCredentials: true,
-        })
-        .subscribe(
-          (result) => {
-            this.router.navigate(['/staffs']);
-          },
-          (err) => {
-            this.router.navigate(['.']);
-          }
-        );
-    }
+    return this.http.post(`${this.url}${this.backoRouter}addstaffs`, data, {
+      withCredentials: true,
+    });
   }
+
   fetcheStaffData() {
     console.log('reched service');
 
@@ -92,6 +82,9 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
+  getCars(query:any) {
+    return;
+  }
 
   addStock(data: any) {
     return this.http.post(`${this.url}${this.backoRouter}addStock`, data, {
@@ -110,11 +103,14 @@ export class ResturantControlServiceService {
     });
   }
   loadEditStock(id: any) {
-   return this.http.get(`${this.url}${this.backoRouter}loadEditableStock/${id}`, {
-     withCredentials: true,
-   });
+    return this.http.get(
+      `${this.url}${this.backoRouter}loadEditableStock/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
-  upadteStock(data: any, id:any) {
+  upadteStock(data: any, id: any) {
     return this.http.post(
       `${this.url}${this.backoRouter}updateStock/${id}`,
       data,

@@ -28,6 +28,7 @@ export class AddStockComponent implements OnInit {
       stockName: new FormControl('', [Validators.required]),
       stockQuantity: new FormControl('', [Validators.required]),
       stockExpairy: new FormControl([Validators.required]),
+      stockprice: new FormControl([Validators.required]),
     });
   }
   AddStocks() {

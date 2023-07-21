@@ -96,6 +96,7 @@ import { EditStocksComponent } from './components/stocks-section/edit-stocks/edi
         },
       } as SocialAuthServiceConfig,
     },
+    
   ],
   bootstrap: [AppComponent],
 })

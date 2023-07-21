@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResturantControlServiceService } from 'projects/restaurant-control-app/src/app/core/services/resturant-control-service.service';
 import { RestaurantControlEmitter } from '../../../shared/emmiter/res-control-emmitter';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-view-full-details',
   templateUrl: './view-full-details.component.html',
   styleUrls: ['./view-full-details.component.css'],
 })
 export class ViewFullDetailsComponent implements OnInit {
+
   StaffsForm!: FormGroup;
   restaurantId: any;
   staffsData$!: any;
@@ -20,7 +21,8 @@ export class ViewFullDetailsComponent implements OnInit {
     private resService: ResturantControlServiceService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private tostr: ToastrService,
   ) {
     this.restaurantId = this.route.snapshot.paramMap.get('id');
   }
@@ -55,7 +57,7 @@ export class ViewFullDetailsComponent implements OnInit {
         this.isEdit = false;
       },
       (err) => {
-        RestaurantControlEmitter.resEmitter.emit(false);
+        this.tostr.warning(err.error.message);
       }
     );
   }
@@ -66,4 +68,6 @@ export class ViewFullDetailsComponent implements OnInit {
   removeStaffs(id: any) {
     this.resService.removeStaffs(id);
   }
+
+ 
 }

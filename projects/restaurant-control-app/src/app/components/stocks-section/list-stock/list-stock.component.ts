@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 import { Router } from '@angular/router';
 
@@ -8,20 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-stock.component.css'],
 })
 export class ListStockComponent implements OnInit {
-  stocksData!: any[];
+  stocksData!: any[]; 
   currentDate!: any;
-  constructor(private _resService: ResturantControlServiceService,
-  private router:Router) { }
+  @ViewChild('carSearch') searchInput!: ElementRef;
+  constructor(
+    private _resService: ResturantControlServiceService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.currentDate = new Date().toLocaleDateString();
 
     this._resService.getAllStocks().subscribe((res: any) => {
       console.log(res);
-      
+
       this.stocksData = res;
     });
+
   }
-  editStock(id:any) {
+
+  editStock(id: any) {
     this.router.navigate(['/editStock', id]);
   }
 }

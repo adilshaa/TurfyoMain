@@ -17,9 +17,10 @@ import { io } from 'socket.io-client';
 export class FoodViewComponent implements OnInit {
   searchFoods: string = '';
   socket = io('http://localhost:5000');
-  foodData: any;
+  foodData!: any[];
   empty!: boolean;
-
+  modal: boolean = false;
+  cartItems: any[] = [];
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
@@ -28,7 +29,7 @@ export class FoodViewComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     let resId = localStorage.getItem('resId');
-   
+
     this.socket.emit('listFoods', resId);
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
@@ -48,5 +49,20 @@ export class FoodViewComponent implements OnInit {
         console.error('An error occurred:', error);
       }
     );
+  }
+  addTocart(id: any) {
+    this.foodData.map((item) => {
+      if (item._id == id) {
+        this.cartItems.push(item);
+        console.log(this.cartItems);
+      }
+    });
+  }
+  removeFromCart(id: any) {
+     let index=this.cartItems.findIndex((items:any) =>items._id==id )
+    if (index > -1) {
+        this.cartItems.splice(index,1)
+      } 
+    
   }
 }
