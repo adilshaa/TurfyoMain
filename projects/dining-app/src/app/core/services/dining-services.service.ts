@@ -41,4 +41,7 @@ export class DiningServicesService {
       withCredentials: true,
     });
   }
+  proceedOrder(cartitems:any) {
+    return this.http.post(`${this.mainUrl}${this.backRouterUrl}orderFoods`,cartitems,{withCredentials:true});
+  }
 }

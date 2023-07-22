@@ -16,27 +16,18 @@
   --btn: #141414;
   --btn-hover: #3a3a3a;
   --text: #fbf7f7;
-  --main-color:rgb(255, 149, 0);
+  --main-color: rgb(255, 149, 0);
 }
 
 /*===== RESET =====*/
-*,
+/* *,
 ::before,
 ::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--dark-color-lighten);
-  font-family: "Montserrat", sans-serif;
-}
 button {
   font-family: "Montserrat", sans-serif;
   display: inline-block;
@@ -125,7 +116,7 @@ img {
   padding: 2px;
   font-size: 1rem;
   font-weight: 600;
-  color:orange;
+  color: orange;
 }
 .btn {
   display: flex;
@@ -180,27 +171,48 @@ img {
   /* margin: 1rem 1rem; */
   width: 350px;
   height: 30rem !important;
-  box-shadow: 1px 2px 10px 1px rgb(159, 157, 157);
-  border-radius: 0.9rem;
+  box-shadow: 1px 0px 10px rgb(159, 157, 157);
+  border-radius: 0.9rem 0.9rem 0rem 0rem;
   background-color: var(--red-card);
   color: var(--text);
   cursor: pointer;
-  overflow: hidden;
-  overflow-y: auto ;
-}
-.cart-header {
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.cart-header {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
   text-align: center;
   font-weight: 600;
   font-size: medium;
 }
 .cart-header h3 {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding: 10px;
+  justify-content: left;
+
+  text-align: left;
   font-weight: 500;
   font-size: 20px;
+  font-weight: 600;
+  color: #3a3a3a;
+}
+select {
+  /* width: 100%; */
+  background-color: rgb(243, 243, 243);
+  border: solid #ff8800 2px;
+  color: #ff8800;
+  border-radius: 25px;
+}
+
+option {
+  background-color: #ffffff;
+  color: rgb(255, 255, 255);
+  border: solid #ff8800 2px;
+  color: #ff8800;
 }
 
 .cart-info {
@@ -239,14 +251,12 @@ img {
 }
 .items-price {
   color: orange;
-
 }
 .btn {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   color: #fff;
-
 }
 .type-btn,
 .add-btn {
@@ -283,13 +293,151 @@ img {
   border-radius: 1px 10px 1px 10px;
   transform: rotate(10deg);
 }
+.item-delete {
+  background-color: #ff0000;
+  color: #fff;
+  width: 20px;
+  border-radius: 50px;
+}
+.proceed-btn {
+  position: relative;
+  /* margin: 1rem 1rem; */
+  width: 351px;
+  height: 50px;
+  box-shadow: 1px 2px 10px 1px rgb(159, 157, 157);
+  border-radius: 0rem 0rem 0.9rem 0.9rem;
+  background-color: var(--red-card);
+  color: var(--text);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.proceed-btn button {
+  height: 40px;
+  width: 12rem;
+  background-color: rgb(255, 149, 0);
+  color: #fff;
+  border-radius: 2rem 2rem 2rem 2rem;
+}
+.empty_img {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 6rem 0rem;
+}
+.empty_img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.fade.show {
+  opacity: 1;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+.modal-dialog {
+  max-width: 350px;
+  height: auto;
+  border-radius: 25px;
+  background: #4bb7e6;
+}
+.modal-dialog .modal-content {
+  background-color: #fbfbfb;
+  border-radius: 10px;
+}
+
+.dialog-cnt {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.confirmation-head h4 {
+  text-decoration: solid;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+.action-btn {
+  margin: 1rem;
+  justify-content: end;
+  display: flex;
+}
+.confirm-btn button {
+  color: #f1f1f1;
+  background-color: rgb(255, 149, 0);
+  height: 32px;
+  width: 5.5rem;
+  border-radius: 10px 10px 10px 10px;
+  /* transform: rotate(-10deg); */
+}
+
+.confirm-cnt input {
+  margin: 10px;
+  border-radius: 15px;
+  width: 200px;
+  height: 40px;
+  border: solid orange 2px;
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px rgb(188, 186, 186);
+}
+.choose_table{
+  color: #ff7700;
+   font-weight: 600;
+  font-size: 1rem;
+  padding: 1.5rem;
+}
+.choose_Quantity{
+  color: #ff7700;
+   font-weight: 600;
+  font-size: 1rem;
+  padding: 1.5rem;
+}
 
 
-/*  */
+.confirm-cnt input::placeholder {
+  color: #ff7700;
+  font-weight: 500;
+}
+.modal-dialog-food-details {
+  max-width: 350px;
+  height: auto;
+  border-radius: 25px;
+}
+.modal-content-food-details {
+  background-color: #fbfbfb;
+  border-radius: 10px;
+}
+.dialog-cnt-food-details {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
 
 /* For Chrome, Edge, and Safari */
 .cart-card::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
   background-color: #f1f1f1;
 }
 
@@ -304,9 +452,3 @@ img {
 }
 
 /* Rest of the existing CSS styles */
-
-
-.cart-card {
-  height: 90%; /* Set a fixed height or a percentage height depending on your layout */
-  /* overflow-y: auto; Enable vertical scrollbar */
-}

@@ -28,7 +28,6 @@ import { CartComponent } from './shared/components/foods-section/cart/cart.compo
   declarations: [
     NavbarComponent,
     AppComponent,
-
     DiningDeskComponent,
     TableViewComponent,
     OrdersViewComponent,
