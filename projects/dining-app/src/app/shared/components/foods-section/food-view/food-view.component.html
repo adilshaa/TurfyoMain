@@ -6,8 +6,8 @@
   />
 </div>
 <div class="container">
-  <div class="col-md-7" *ngIf="empty == false">
-    <div class="row mt-5 justify-content-center">
+  <div class="foods__Section " *ngIf="empty == false">
+    <div class="foods_container grid">
       <section class="card" *ngFor="let foodsData of foodData">
         <div class="product-image">
           <img
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div class="col-md-4">
+  <div class="order_section">
     <section class="cart-card">
       <div class="cart-header">
         <h3>Current Order</h3>

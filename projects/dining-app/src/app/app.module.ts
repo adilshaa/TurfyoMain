@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { DiningInterceptorInterceptor } from './core/auth/interceptor/dining-interceptor.interceptor';
 import { CartComponent } from './shared/components/foods-section/cart/cart.component';
+import { DiningNotifyComponent } from './shared/components/notifications/dining-notify/dining-notify.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CartComponent } from './shared/components/foods-section/cart/cart.compo
     CategoryMenuComponent,
     CartComponent,
     DiningLoginComponent,
+    DiningNotifyComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { CartComponent } from './shared/components/foods-section/cart/cart.compo
       multi: true,
     },
   ],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule {}

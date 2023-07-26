@@ -44,7 +44,10 @@ export class InitialRegisterPageComponent {
     });
     this.Form = this.FormBuilder.group({
       name: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required, Validators.email]),
+      email: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^[a-zA-Z]+$"),
+      ]),
     });
   }
 

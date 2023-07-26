@@ -5,23 +5,11 @@
 <div *ngIf="!isLoader">
   <div *ngIf="staffsData$ as staff">
     <div class="jumbotron text-center">
-      <h1></h1>
-      <p>Welcome {{ staffsData$.username }} restaurant</p>
+     
     </div>
 
     <div class="container">
       <div class="main-body w-75">
-        <!-- Breadcrumb -->
-        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-          <li class="breadcrumb-item active" aria-current="page">
-            User Profile
-          </li>
-        </ol>
-      </nav> -->
-        <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
           <div class="col-md-4 mb-3">
@@ -113,12 +101,8 @@
                       {{ staffsData$.email }}
                     </div>
                     <div class="col-sm-9 text-secondary" *ngIf="isEdit">
-                      <input
-                        type="text"
-                        formControlName="employeeEmail"
-                        class="form-control form-control-sm"
-                        [(ngModel)]="staffsData$.email"
-                      />
+                      {{ staffsData$.email }}
+                     
                     </div>
                   </div>
                   <hr />

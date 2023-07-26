@@ -40,7 +40,6 @@ export class ViewFullDetailsComponent implements OnInit {
     this.StaffsForm = this.formBuilder.group({
       employeeName: '',
       employeePlace: '',
-      employeeEmail: '',
       employeeAge: '',
       employeeNumber: '',
       employeeDataOFBirth: '',

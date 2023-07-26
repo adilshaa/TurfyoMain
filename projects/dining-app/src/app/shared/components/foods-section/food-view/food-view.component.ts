@@ -8,6 +8,7 @@ import { DiningServicesService } from 'projects/dining-app/src/app/core/services
 import { Observable, fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
 import { foodArrivalFadein } from '../../../animations/angular';
+import { DiningNotifyComponent } from '../../notifications/dining-notify/dining-notify.component';
 
 @Component({
   selector: 'app-food-view',
@@ -46,7 +47,8 @@ export class FoodViewComponent implements OnInit {
     private tostr: ToastrService,
     private diningStore: Store<{ foodsData: foodsStructure[] }>,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notifications: DiningNotifyComponent
   ) {}
   ngOnInit(): void {
     this.loadFood();
@@ -62,10 +64,9 @@ export class FoodViewComponent implements OnInit {
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
       (data) => {
-        const Foodadded = this.socket.on('foodAddes', () => { });
+        const Foodadded = this.socket.on('foodAddes', () => {});
         if (Foodadded) {
-          this.tostr.info('Foods is updated 🍔');
-          // this.audio();
+          this.notifications.addNotification();
         }
         this.foodData = data;
         if (this.foodData[0] == null) {
@@ -73,9 +74,7 @@ export class FoodViewComponent implements OnInit {
         } else {
           this.empty = false;
         }
-        setTimeout(() => {
-          this.tostr.clear();
-        }, 2000);
+        this.notifications.clearNotifications();
       },
       (error) => {
         console.error('An error occurred:', error);
@@ -126,32 +125,38 @@ export class FoodViewComponent implements OnInit {
   addTocart(id: any) {
     let order = this.orderForm.getRawValue();
     console.log(order);
-
-    let duplicateFood;
-    this.foodData.map((item) => {
-      duplicateFood = this.cartItems.find((item) => item.foodId == id);
-      if (!duplicateFood)
-        if (item._id == id) {
-          const orderData = {
-            foodImage: item.image,
-            foodName: item.name,
-            foodId: item._id,
-            foodPrice: item.price,
-            foodQuantity: order.quantity,
-            foodNote: order.note,
-            tableId: order.table,
-          };
-          this.cartItems.push(orderData);
-          this.cheakCartIsEmpty();
-          // console.log(this.cartItems);
-        }
-      this.closeModal();
-      this.foodFade = false;
-      setTimeout(() => {
-        this.foodFade = true;
-      }, 500);
-    });
+    if (order.quantity.trim() == '') {
+      this.notifications.normalNotification('please select quantity');
+    } else if (order.table.trim() == '') {
+      this.notifications.normalNotification('please select table');
+    } else {
+    
+      let duplicateFood;
+      this.foodData.map((item) => {
+        duplicateFood = this.cartItems.find((item) => item.foodId == id);
+        if (!duplicateFood)
+          if (item._id == id) {
+            const orderData = {
+              foodImage: item.image,
+              foodName: item.name,
+              foodId: item._id,
+              foodPrice: item.price,
+              foodQuantity: order.quantity,
+              foodNote: order.note,
+              tableId: order.table,
+            };
+            this.cartItems.push(orderData);
+            this.cheakCartIsEmpty();
+          }
+        this.closeModal();
+        this.foodFade = false;
+        setTimeout(() => {
+          this.foodFade = true;
+        }, 500);
+      });
+    }
   }
+
   removeFromCart(id: any) {
     let index = this.cartItems.findIndex((items: any) => items.foodId == id);
     if (index > -1) {
