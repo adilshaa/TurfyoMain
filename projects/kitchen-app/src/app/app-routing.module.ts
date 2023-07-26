@@ -4,6 +4,7 @@ import { ListFoodsComponent } from './shared/components/foods-section/list-foods
 import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
 import { ListStocksComponent } from './shared/components/stock-section/list-stocks/list-stocks.component';
 import { KitchenLoginComponent } from './shared/components/login/kitchen-login/kitchen-login.component';
+import { KitchenOrdersComponent } from './shared/components/order-section/kitchen-orders/kitchen-orders.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'stocks',
         component: ListStocksComponent,
+      },
+      {
+        path: 'orders',
+        component: KitchenOrdersComponent,
       },
     ],
   },

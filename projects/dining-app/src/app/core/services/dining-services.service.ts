@@ -41,7 +41,25 @@ export class DiningServicesService {
       withCredentials: true,
     });
   }
-  proceedOrder(cartitems:any) {
-    return this.http.post(`${this.mainUrl}${this.backRouterUrl}orderFoods`,cartitems,{withCredentials:true});
+  proceedOrder(cartitems: any) {
+    return this.http.post(
+      `${this.mainUrl}${this.backRouterUrl}orderFoods`,
+      cartitems,
+      { withCredentials: true }
+    );
+  }
+  getAllOrders(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.mainUrl}${this.backRouterUrl}allOrder`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  loadOrders(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.mainUrl}${this.backRouterUrl}allOrder`,
+      { withCredentials: true }
+    );
   }
 }

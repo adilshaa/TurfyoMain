@@ -22,7 +22,6 @@ export class ListFoodsComponent implements OnInit {
   socket = io('http://localhost:5000');
   foodData: any;
   empty:boolean=false
-  // foodsData = this.resStore.pipe(select(FoodsDatas));
 
   constructor(
     private resService: ResturantControlServiceService,

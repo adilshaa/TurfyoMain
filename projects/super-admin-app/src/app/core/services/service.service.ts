@@ -3,7 +3,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { SuperAdminEmitter } from '../../shared/emitters/emitters';
 import { Router } from '@angular/router';
 import { DetailsRestaurantsComponent } from '../../shared/components/details-restaurants/details-restaurants.component';
-import { CookieService } from 'ngx-cookie-service';
 import { FullRestaurantDetails } from '../models/restaurant.model';
 import { Store } from '@ngrx/store';
 import { retriveResFullDetails } from '../store/super-admin.actions';
@@ -15,7 +14,6 @@ export class ServiceService implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private cookieService: CookieService,
     private resDataStore: Store<{ allRestaurantData: FullRestaurantDetails }>
   ) {}
 

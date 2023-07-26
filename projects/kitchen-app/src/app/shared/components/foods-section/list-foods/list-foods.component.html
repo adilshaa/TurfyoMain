@@ -15,28 +15,30 @@
       <div class="product-info">
         <h2>{{ foodsData.name }}</h2>
         <div class="price">₹ {{ foodsData.price }}</div>
+        <p>{{foodsData.stock}}</p>
       </div>
       <div class="btn">
-        <button
-          style="background-color: red; border-radius: 10px; color: #fff"
-          class="buy-btn mx-auto"
-          *ngIf="foodsData.status === true"
-          (click)="listFood(foodsData._id, foodsData.status)"
-        >
-          Unlist
-        </button>
-        <button
+         <button
           style="
             background-color: rgb(33, 183, 3);
             border-radius: 10px;
             color: #fff;
           "
           class="buy-btn mx-auto"
-          *ngIf="foodsData.status === false"
-          (click)="listFood(foodsData._id, foodsData.status)"
+          
+          (click)="updateStock(foodsData._id,0)"
         >
-          List
+          -
         </button>
+        <button
+          style="background-color: red; border-radius: 10px; color: #fff"
+          class="buy-btn mx-auto"
+          
+          (click)="updateStock(foodsData._id,1)"
+        >
+          +
+        </button>
+       
       </div>
     </section>
 

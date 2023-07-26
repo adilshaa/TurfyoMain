@@ -13,7 +13,7 @@ import { io } from 'socket.io-client';
 })
 export class ListFoodsComponent implements OnInit {
   foodsData$ = this.kitchenStore.pipe(select(FoodsDatas));
-  foodData!:any
+  foodData!: any;
   socket = io('http://localhost:5000');
 
   constructor(
@@ -23,20 +23,30 @@ export class ListFoodsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.kitchenStore.dispatch(fetchFoodsData());
-
   }
-  listFood(id: any, status: boolean) {
-    this.kitchenService.listFoods(id, status).subscribe(
-      (result) => {
-        let resId=localStorage.getItem("resId")
+  // listFood(id: any, status: boolean) {
+  //   this.kitchenService.listFoods(id, status).subscribe(
+  //     (result) => {
+  //       let resId = localStorage.getItem('resId');
+  //       this.socket.emit('listFoods', resId);
+  //       this.kitchenStore.dispatch(fetchFoodsData());
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+  updateStock(id: any, key: number) {
+    this.kitchenService.updateStock(id, key).subscribe(
+      (res) => {
+        let resId = localStorage.getItem('resId');
         this.socket.emit('listFoods', resId);
+        this.socket.emit('notification');
         this.kitchenStore.dispatch(fetchFoodsData());
-
-        console.log(result);
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => console.log(err)
     );
+
+    console.log(id, key);
   }
 }

@@ -4,5 +4,6 @@ export interface Foodsstructure {
   image: string;
   price: number;
   status: boolean;
+  stock:Number;
   _id: string;
 }

@@ -17,10 +17,10 @@ import { DashboardComponent } from './shared/components/dashboard/dashboard.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { KitchenLoginComponent } from './shared/components/login/kitchen-login/kitchen-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule } from 'primeng/toast';
 import { KitchenInterceptorInterceptor } from './core/auth/interceptor/kitchen-interceptor.interceptor';
 import { KitchenServiceService } from './core/services/kitchen-service.service';
 import { ToastrModule } from 'ngx-toastr';
+import { KitchenOrdersComponent } from './shared/components/order-section/kitchen-orders/kitchen-orders.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarComponent,
     DashboardComponent,
     KitchenLoginComponent,
+    KitchenOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +40,10 @@ import { ToastrModule } from 'ngx-toastr';
     RouterModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ToastModule,
-    ToastrModule.forRoot(),
+   ToastrModule.forRoot({
+      positionClass: 'toast-top-center', // Adjust the notification position as per your preference
+      preventDuplicates: true,
+    }),
     StoreModule.forRoot({ foodsData: foodDetails }),
     EffectsModule.forRoot([Foodseffect]),
   ],

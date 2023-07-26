@@ -373,8 +373,9 @@ option {
 }
 .action-btn {
   margin: 1rem;
-  justify-content: end;
   display: flex;
+  justify-content: right;
+
 }
 .confirm-btn button {
   color: #f1f1f1;

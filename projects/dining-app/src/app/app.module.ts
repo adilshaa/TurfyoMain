@@ -47,7 +47,10 @@ import { CartComponent } from './shared/components/foods-section/cart/cart.compo
     FormsModule,
     StoreModule.forRoot({ foodsData: fooodDataReducer }),
     EffectsModule.forRoot([FoodsData]),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center', // Adjust the notification position as per your preference
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     DiningServicesService,

@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
+import { KitchenServiceService } from 'projects/kitchen-app/src/app/core/services/kitchen-service.service';
+import { fromEvent } from 'rxjs';
+import { io } from 'socket.io-client';
 import { fadeInAnimation, fadeOutAnimation } from '../../../animations/angular';
 
 @Component({
-  selector: 'app-table-view',
-  templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.css'],
+  selector: 'app-kitchen-orders',
+  templateUrl: './kitchen-orders.component.html',
+  styleUrls: ['./kitchen-orders.component.css'],
   animations: [fadeOutAnimation, fadeInAnimation],
 })
-export class TableViewComponent implements OnInit {
-  tables: any;
+export class KitchenOrdersComponent implements OnInit {
+  socket = io('http://localhost:5000');
+  resId = localStorage.getItem('resId');
   Orders!: any[];
-  currentOrder!: any;
-  allFoods!: any[];
-  total_amount!: number;
+  allFoods: any;
   total_Foods_Count!: Number;
+  total_amount!: Number;
   CloseDiv: boolean = true;
   openDIv: boolean = true;
 
   openState: string = 'hidden';
   closeState: string = 'visible';
-
-  constructor(private dinigService: DiningServicesService) {}
+  constructor(private _kitchenService: KitchenServiceService) {}
   ngOnInit(): void {
-    this.getAllTables();
-    this.getAllOrders();
+    this.loadOrders();
   }
   closeDiv() {
     this.closeState = 'hidden';
@@ -34,30 +34,32 @@ export class TableViewComponent implements OnInit {
       this.openDIv = false;
     }, 300);
   }
+
   openDiv() {
     this.closeState = 'visible';
-
     this.openState = 'visible';
     setTimeout(() => {
       this.openDIv = true;
       this.CloseDiv = false;
     }, 300);
   }
-  getAllTables() {
-    this.dinigService.leadTables().subscribe((res: any) => {
-      this.tables = res.tables;
-    });
-  }
-  getAllOrders() {
-    this.dinigService.getAllOrders().subscribe((res: any) => {
-      this.Orders = res.orders;
-      console.log(this.Orders[0].tableId._id);
-    });
+  loadOrders() {
+    this.socket.emit('loadOrders', this.resId);
+    const ListOrders$ = fromEvent(this.socket, 'listOrder');
+    ListOrders$.subscribe(
+      (data) => {
+        console.log(data);
+        this.Orders = data;
+        console.log(this.Orders);
+      },
+      (error) => {
+        console.error('An error occurred:', error);
+      }
+    );
   }
   takeCurrentOrder(id: any) {
-    let orderDetails: any = this.Orders.filter(
-      (item: any) => item.tableId._id == id
-    );
+    let orderDetails: any = this.Orders.filter((item: any) => item._id == id);
+    console.log(orderDetails);
 
     this.allFoods = orderDetails[0].foods;
     console.log(this.allFoods);

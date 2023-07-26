@@ -1,22 +1,24 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { foodsStructure } from 'projects/dining-app/src/app/core/models/foods';
 import { DiningServicesService } from 'projects/dining-app/src/app/core/services/dining-services.service';
-import { getAllFoods } from 'projects/dining-app/src/app/core/store/dining.actions';
-import { foodsDatas } from 'projects/dining-app/src/app/core/store/dining.selectosr';
 import { Observable, fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
+import { foodArrivalFadein } from '../../../animations/angular';
 
 @Component({
   selector: 'app-food-view',
   templateUrl: './food-view.component.html',
   styleUrls: ['./food-view.component.css'],
+  animations: [foodArrivalFadein],
 })
 export class FoodViewComponent implements OnInit {
   searchFoods: string = '';
+  resId = localStorage.getItem('resId');
+
   socket = io('http://localhost:5000');
   @ViewChild('myModal') myModal!: ElementRef;
   @ViewChild('myModal_1') myModal_1!: ElementRef;
@@ -36,6 +38,8 @@ export class FoodViewComponent implements OnInit {
   food_id!: any;
   t_id!: string;
   orderForm!: FormGroup;
+  foodFade = false;
+
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
@@ -45,13 +49,24 @@ export class FoodViewComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
   ngOnInit(): void {
-    let resId = localStorage.getItem('resId');
-
-    this.socket.emit('listFoods', resId);
+    this.loadFood();
+    this.loadTablesToLobby();
+    this.foodEmitting();
+    this.orderForm = this.formBuilder.group({
+      quantity: '',
+      table: '',
+      note: '',
+    });
+  }
+  loadFood() {
     const showFoods$ = fromEvent(this.socket, 'showFoods');
     const subscription = showFoods$.subscribe(
       (data) => {
-        this.tostr.info('Foods is updated 🍔');
+        const Foodadded = this.socket.on('foodAddes', () => { });
+        if (Foodadded) {
+          this.tostr.info('Foods is updated 🍔');
+          // this.audio();
+        }
         this.foodData = data;
         if (this.foodData[0] == null) {
           this.empty = true;
@@ -66,7 +81,18 @@ export class FoodViewComponent implements OnInit {
         console.error('An error occurred:', error);
       }
     );
+  }
 
+  audio() {
+    const audio = new Audio();
+    audio.src = '/../../../../assets/audios/mixkit-alert-quick-chime-766.wav';
+    audio.load();
+    audio.play();
+  }
+  foodEmitting() {
+    this.socket.emit('listFoods', this.resId);
+  }
+  loadTablesToLobby() {
     this.diningService.leadTables().subscribe((res: any) => {
       console.log(res.tables);
 
@@ -80,12 +106,6 @@ export class FoodViewComponent implements OnInit {
       } else {
         this.emptyTables = false;
       }
-    });
-
-    this.orderForm = this.formBuilder.group({
-      quantity: '',
-      table:'',
-      note: '',
     });
   }
 
@@ -119,13 +139,17 @@ export class FoodViewComponent implements OnInit {
             foodPrice: item.price,
             foodQuantity: order.quantity,
             foodNote: order.note,
-            tableId:order.table
+            tableId: order.table,
           };
           this.cartItems.push(orderData);
           this.cheakCartIsEmpty();
           // console.log(this.cartItems);
         }
       this.closeModal();
+      this.foodFade = false;
+      setTimeout(() => {
+        this.foodFade = true;
+      }, 500);
     });
   }
   removeFromCart(id: any) {
@@ -147,8 +171,10 @@ export class FoodViewComponent implements OnInit {
     }
     this.diningService.proceedOrder(this.cartItems).subscribe(
       (res) => {
-        this.closeModal();
+        this.socket.emit('loadOrders', this.resId);
+        this.socket.emit('listFoods', this.resId);
 
+        this.closeModal();
         this.cartItems.splice(0, this.cartItems.length);
         this.cheakCartIsEmpty();
       },

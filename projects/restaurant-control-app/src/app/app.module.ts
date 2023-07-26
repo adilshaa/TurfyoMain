@@ -69,7 +69,11 @@ import { EditStocksComponent } from './components/stocks-section/edit-stocks/edi
     GoogleSigninButtonModule,
     StoreModule.forRoot({ staffsData: staffsDetails }),
     EffectsModule.forRoot([Saffseffect]),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center', // Adjust the notification position as per your preference
+      preventDuplicates: true,
+    }),
+    
   ],
   providers: [
     ResturantControlServiceService,
@@ -96,7 +100,6 @@ import { EditStocksComponent } from './components/stocks-section/edit-stocks/edi
         },
       } as SocialAuthServiceConfig,
     },
-    
   ],
   bootstrap: [AppComponent],
 })

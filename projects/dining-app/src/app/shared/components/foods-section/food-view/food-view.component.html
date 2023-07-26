@@ -18,6 +18,8 @@
         </div>
         <div class="product-info">
           <h2>{{ foodsData.name }}</h2>
+          <p>{{ foodsData.stock }}</p>
+
           <div class="price">₹ {{ foodsData.price }}</div>
         </div>
         <div class="btn">
@@ -44,7 +46,7 @@
       <div class="cart-header">
         <h3>Current Order</h3>
         <select class="tables" name="" id="" *ngIf="emptyTables">
-          <option value="T-1" *ngFor="let table of tables">
+          <option [value]="table" *ngFor="let table of tables">
             {{ table.table_Name }}-{{ table.table_No }}
           </option>
         </select>
@@ -56,7 +58,7 @@
         />
       </div>
       <div class="empty_cheaker" *ngIf="cartIsEmpty">
-        <div class="cart-info" *ngFor="let items of cartItems">
+        <div class="cart-info" *ngFor="let items of cartItems" [@showFood]="foodFade">
           <div class="items-img">
             <img
               [src]="'http://localhost:5000/foods-images/' + items.foodImage"
@@ -151,14 +153,15 @@
             <hr />
 
             <label class="choose_Quantity">Table-</label>
-            <select class="text-center"  formControlName="table" class="tables">
-              <option class="text-center"  *ngFor="let table of tables" [value]="table._id">
-                {{ table.table_Name }}-{{ table.table_No }}
-              </option>
-            </select>
+           <select class="tables"  formControlName="table" value="TABLES"> 
+
+          <option  class="text-center" selected [value]="table._id" *ngFor="let table of tables">
+            {{ table.table_Name }}-{{ table.table_No }}
+          </option>
+        </select>
             <label class="choose_Quantity">Quantity-</label>
-            <select class="text-center"  formControlName="quantity" class="tables">
-              <option class="text-center" *ngFor=" let Q of quantityValues" [value]="Q">
+            <select class="tables"  name="" id=""  formControlName="quantity">
+              <option value="" selected *ngFor=" let Q of quantityValues" [value]="Q">
                 {{Q}}
               </option>
             </select>
