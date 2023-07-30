@@ -13,7 +13,7 @@ import { DiningServicesService } from 'projects/dining-app/src/app/core/services
 export class DiningNotifyComponent implements OnInit {
   notifications: string[] = [];
 
-  constructor(private tostr:ToastrService) {}
+  constructor(private tostr: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -21,14 +21,31 @@ export class DiningNotifyComponent implements OnInit {
     this.tostr.info('Foods is updated 🍔');
     // this.audio();
   }
-  normalNotification(tosterMsg:string) {
-    this.tostr.warning(tosterMsg)
+  normalNotification(tosterMsg: string) {
+    this.tostr.warning(tosterMsg, 'Alert', {
+      timeOut: 1500,
+      progressBar: true,
+      positionClass: 'toast-top-center',
+      tapToDismiss: false,
+    });
   }
-
+  normalErrorNotify(tosterMsg: any) {
+    this.tostr.error(tosterMsg, 'Alert', {
+      timeOut: 1500,
+      progressBar: true,
+      positionClass: 'toast-top-center',
+      tapToDismiss: false,
+    });
+  }
+  audio() {
+    const audio = new Audio();
+    audio.src = '/../../../../assets/audios/mixkit-alert-quick-chime-766.wav';
+    audio.load();
+    audio.play();
+  }
   clearNotifications() {
     setTimeout(() => {
       this.tostr.clear();
     }, 2000);
   }
-  
 }

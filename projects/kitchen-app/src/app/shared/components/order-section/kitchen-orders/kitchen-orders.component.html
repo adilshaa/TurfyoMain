@@ -70,6 +70,16 @@
         <div class="total-amount" *ngIf="total_amount" ng>
           <span>Total : </span>₹{{ total_amount }}
         </div>
+        
+      </div>
+      <div class="proceed-btn">
+        <div class="total-amount" *ngIf="total_Foods_Count">
+          <button (dblclick)="foodIsReady(orderDetails._id)">  Ready </button>
+        </div>
+        <div class="total-amount" *ngIf="total_amount" ng>
+          <span>Total : </span>₹{{ total_amount }}
+        </div>
+        
       </div>
     </div>
   </div>

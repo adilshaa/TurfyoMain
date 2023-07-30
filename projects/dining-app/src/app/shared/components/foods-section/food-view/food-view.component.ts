@@ -40,7 +40,7 @@ export class FoodViewComponent implements OnInit {
   t_id!: string;
   orderForm!: FormGroup;
   foodFade = false;
-
+  category!: any[];
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
@@ -68,12 +68,13 @@ export class FoodViewComponent implements OnInit {
         if (Foodadded) {
           this.notifications.addNotification();
         }
-        this.foodData = data;
+        this.foodData = data.fooddata;
         if (this.foodData[0] == null) {
           this.empty = true;
         } else {
           this.empty = false;
         }
+        this.category = data.category;
         this.notifications.clearNotifications();
       },
       (error) => {
@@ -81,13 +82,22 @@ export class FoodViewComponent implements OnInit {
       }
     );
   }
+  filterFood(id: string) {
+    console.log(id);
+    
+    this.diningService.filterFood(id).subscribe((res: any) => {
 
-  audio() {
-    const audio = new Audio();
-    audio.src = '/../../../../assets/audios/mixkit-alert-quick-chime-766.wav';
-    audio.load();
-    audio.play();
+      this.foodData = res.food;
+      console.log(this.foodData);
+       if (this.foodData[0] == null) {
+         this.empty = true;
+       } else {
+         this.empty = false;
+       }
+    },(err=>console.log(err))
+    );
   }
+
   foodEmitting() {
     this.socket.emit('listFoods', this.resId);
   }
@@ -130,7 +140,6 @@ export class FoodViewComponent implements OnInit {
     } else if (order.table.trim() == '') {
       this.notifications.normalNotification('please select table');
     } else {
-    
       let duplicateFood;
       this.foodData.map((item) => {
         duplicateFood = this.cartItems.find((item) => item.foodId == id);
@@ -183,7 +192,7 @@ export class FoodViewComponent implements OnInit {
         this.cartItems.splice(0, this.cartItems.length);
         this.cheakCartIsEmpty();
       },
-      (err) => console.log(err)
+      (err) => this.notifications.normalErrorNotify(err.error.message)
     );
   }
 }

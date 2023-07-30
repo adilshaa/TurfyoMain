@@ -1,13 +1,14 @@
-<div class="container" *ngIf="empty == true">
-  <img
-    class="empty-img"
-    src="../../../../../assets/farmers-food-design-image-file.jpg"
-    alt=""
-  />
-</div>
 <div class="container">
-  <div class="foods__Section " *ngIf="empty == false">
-    <div class="foods_container grid">
+  <div class="foods__Section">
+    <div class="foods__category">
+      <button
+        *ngFor="let category of category"
+        (click)="filterFood(category._id)"
+      >
+        {{ category.name }}
+      </button>
+    </div>
+    <div class="foods_container grid" *ngIf="!empty == true">
       <section class="card" *ngFor="let foodsData of foodData">
         <div class="product-image">
           <img
@@ -39,10 +40,17 @@
         </div>
       </section>
     </div>
+    <div class="container" *ngIf="empty == true">
+      <img
+        class="empty-img"
+        src="../../../../../assets/farmers-food-design-image-file.jpg"
+        alt=""
+      />
+    </div>
   </div>
 
   <div class="order_section">
-    <section class="cart-card">
+    <section class="cart-card" *ngIf="empty == false">
       <div class="cart-header">
         <h3>Current Order</h3>
         <select class="tables" name="" id="" *ngIf="emptyTables">
@@ -58,7 +66,11 @@
         />
       </div>
       <div class="empty_cheaker" *ngIf="cartIsEmpty">
-        <div class="cart-info" *ngFor="let items of cartItems" [@showFood]="foodFade">
+        <div
+          class="cart-info"
+          *ngFor="let items of cartItems"
+          [@showFood]="foodFade"
+        >
           <div class="items-img">
             <img
               [src]="'http://localhost:5000/foods-images/' + items.foodImage"
@@ -153,16 +165,25 @@
             <hr />
 
             <label class="choose_Quantity">Table-</label>
-           <select class="tables"  formControlName="table" value="TABLES"> 
-
-          <option  class="text-center" selected [value]="table._id" *ngFor="let table of tables">
-            {{ table.table_Name }}-{{ table.table_No }}
-          </option>
-        </select>
+            <select class="tables" formControlName="table" value="TABLES">
+              <option
+                class="text-center"
+                selected
+                [value]="table._id"
+                *ngFor="let table of tables"
+              >
+                {{ table.table_Name }}-{{ table.table_No }}
+              </option>
+            </select>
             <label class="choose_Quantity">Quantity-</label>
-            <select class="tables"  name="" id=""  formControlName="quantity">
-              <option value="" selected *ngFor=" let Q of quantityValues" [value]="Q">
-                {{Q}}
+            <select class="tables" name="" id="" formControlName="quantity">
+              <option
+                value=""
+                selected
+                *ngFor="let Q of quantityValues"
+                [value]="Q"
+              >
+                {{ Q }}
               </option>
             </select>
           </div>

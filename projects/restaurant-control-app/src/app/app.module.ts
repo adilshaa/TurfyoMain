@@ -36,6 +36,7 @@ import {
 import { ResLoaderComponent } from './components/loader/res-loader/res-loader.component';
 import { TableViewComponent } from './components/table-side/table-view/table-view.component';
 import { EditStocksComponent } from './components/stocks-section/edit-stocks/edit-stocks.component';
+import { NotificationsComponent } from './shared/components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { EditStocksComponent } from './components/stocks-section/edit-stocks/edi
     ResLoaderComponent,
     TableViewComponent,
     EditStocksComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,11 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'Foods',
+      },
+      {
         path: 'staffs',
         component: StaffsComponent,
       },

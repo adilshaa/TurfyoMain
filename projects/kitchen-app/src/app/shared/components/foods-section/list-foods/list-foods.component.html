@@ -1,80 +1,31 @@
-<!-- <div class="col-md-8"> -->
 <div class="container">
-  <div
-    class="row mt-5 justify-content-center"
-    *ngIf="foodsData$ | async as foods"
-  >
-    <section class="card" *ngFor="let foodsData of foods">
-      <div class="product-image">
-        <img
-          [src]="'http://localhost:5000/foods-images/' + foodsData.image"
-          alt="OFF-white Red Edition"
-          draggable="false"
-        />
-      </div>
-      <div class="product-info">
-        <h2>{{ foodsData.name }}</h2>
-        <div class="price">₹ {{ foodsData.price }}</div>
-        <p>{{foodsData.stock}}</p>
-      </div>
-      <div class="btn">
-         <button
-          style="
-            background-color: rgb(33, 183, 3);
-            border-radius: 10px;
-            color: #fff;
-          "
-          class="buy-btn mx-auto"
-          
-          (click)="updateStock(foodsData._id,0)"
-        >
-          -
-        </button>
-        <button
-          style="background-color: red; border-radius: 10px; color: #fff"
-          class="buy-btn mx-auto"
-          
-          (click)="updateStock(foodsData._id,1)"
-        >
-          +
-        </button>
-       
-      </div>
-    </section>
+  <div class="foods__Section">
+    <div class="foods_container grid" *ngIf="foodsData$ | async as foods">
+      <section class="card" *ngFor="let foodsData of foods">
+        <div class="product-image">
+          <img
+            [src]="'http://localhost:5000/foods-images/' + foodsData.image"
+            alt="OFF-white Red Edition"
+            draggable="false"
+          />
+        </div>
+        <div class="product-info">
+          <h2>{{ foodsData.name }}</h2>
+          <p>{{ foodsData.stock }}</p>
 
-    <article class="col-md-10">
-      <!-- Modern - Bootstrap Cards -->
-
-      <!-- <div class="cards-1 section-white">
-    <div class="">
-      <div class="row  justify-content-center ">
-        <div class="col-lg-3 col-sm-6 col-7 "  >
-          <div class="card card-blog" >
-            <div class="card-image">
-              <a href="#">
-                <img
-                  class="img"
-                 
-                />
-                <div class="card-caption">{{ foodsData.name }}</div>
-              </a>
-              <div class="ripple-cont"></div>
-            </div>
-            <div class="table">
-              <h3 class="category text-info">{{ foodsData.name }}</h3>
-            </div>
-            <div class="table row mx-auto">
-              <div class="table">
-              
-              </div>
-            </div>
+          <div class="price">₹ {{ foodsData.price }}</div>
+        </div>
+        <div class="btn">
+          <div class="type-btn">
+            <button (click)="updateStock(foodsData._id, 1)">+</button>
+          </div>
+          <div class="add-btn">
+            <button (click)="updateStock(foodsData._id, 0)" type="button">
+              -
+            </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </div>
- PLAIN CARDS -->
-    </article>
-  </div>
-  <!-- </div> -->
 </div>

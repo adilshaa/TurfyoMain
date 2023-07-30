@@ -21,6 +21,7 @@ import { KitchenInterceptorInterceptor } from './core/auth/interceptor/kitchen-i
 import { KitchenServiceService } from './core/services/kitchen-service.service';
 import { ToastrModule } from 'ngx-toastr';
 import { KitchenOrdersComponent } from './shared/components/order-section/kitchen-orders/kitchen-orders.component';
+import { KitchenNotificationComponent } from './shared/components/kitchen-notification/kitchen-notification.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { KitchenOrdersComponent } from './shared/components/order-section/kitche
     DashboardComponent,
     KitchenLoginComponent,
     KitchenOrdersComponent,
+    KitchenNotificationComponent,
   ],
   imports: [
     BrowserModule,

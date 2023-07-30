@@ -82,7 +82,7 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
-  getCars(query:any) {
+  getCars(query: any) {
     return;
   }
 
@@ -119,6 +119,34 @@ export class ResturantControlServiceService {
       }
     );
   }
+  editFoodImage(id: string, image: File, name: string) {
+    console.log();
+
+    return this.http.post(
+      `${this.url}${this.backoRouter}editImage/${id}`,
+      image,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  editFoodsCnt(data: any, id: string) {
+    console.log(data, id);
+
+    return this.http.post(
+      `${this.url}${this.backoRouter}editFoodCnt/${id}`,
+      data,
+      { withCredentials: true }
+    );
+  }
+  addFoodCategory(data:any) {
+    return this.http.post(`${this.url}${this.backoRouter}addfoodCategory`,data,{withCredentials:true})
+  }
+  filterFood(id: string):Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.url}${this.backoRouter}filterFood/${id}`
+    );
+  };
   LogOutResAdmin() {
     return this.http.get(`${this.url}${this.backoRouter}logout`, {
       withCredentials: true,

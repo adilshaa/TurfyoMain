@@ -19,7 +19,7 @@ export class KitchenOrdersComponent implements OnInit {
   total_amount!: Number;
   CloseDiv: boolean = true;
   openDIv: boolean = true;
-
+  orderDetails!: any;
   openState: string = 'hidden';
   closeState: string = 'visible';
   constructor(private _kitchenService: KitchenServiceService) {}
@@ -34,7 +34,7 @@ export class KitchenOrdersComponent implements OnInit {
       this.openDIv = false;
     }, 300);
   }
-
+  
   openDiv() {
     this.closeState = 'visible';
     this.openState = 'visible';
@@ -58,15 +58,18 @@ export class KitchenOrdersComponent implements OnInit {
     );
   }
   takeCurrentOrder(id: any) {
-    let orderDetails: any = this.Orders.filter((item: any) => item._id == id);
-    console.log(orderDetails);
+    this.orderDetails = this.Orders.find((item: any) => item._id == id);
+    console.log(this.orderDetails);
 
-    this.allFoods = orderDetails[0].foods;
-    console.log(this.allFoods);
-    this.total_Foods_Count = orderDetails[0].foods.length;
-    this.total_amount = orderDetails[0].total_price;
-
+    this.allFoods = this.orderDetails.foods;
+    this.total_Foods_Count = this.orderDetails.foods.length;
+    this.total_amount = this.orderDetails.total_price;
+    
     // this.currentOrder = orderDetails.foods.map((item:any)=> console.log(item)
     // )
   }
+  foodIsReady(id: any) {
+    console.log(id);
+    this._kitchenService.Foodiready(id)
+  };
 }

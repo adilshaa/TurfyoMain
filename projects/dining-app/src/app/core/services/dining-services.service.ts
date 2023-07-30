@@ -62,4 +62,10 @@ export class DiningServicesService {
       { withCredentials: true }
     );
   }
+  filterFood(id: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.mainUrl}${this.backRouterUrl}filterFood/${id}`,
+      { withCredentials: true }
+    );
+  }
 }

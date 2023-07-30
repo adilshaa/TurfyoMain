@@ -18,7 +18,6 @@ export class KitchenServiceService {
   listFoods(id: string, status: boolean) {
     console.log(status, id);
 
-
     // return this.http.post(
     //   `${this.url}${this.backoRouter}listFoods/${id}`,
     //   { status: status },
@@ -46,10 +45,15 @@ export class KitchenServiceService {
     });
   }
   updateStock(id: any, key: number) {
-    console.log(id,key);
-    
-     return this.http.post(
-      `${this.url}${this.backoRouter}updateStock/${id}`,{key:key},
-      { withCredentials: true })
+    console.log(id, key);
+
+    return this.http.post(
+      `${this.url}${this.backoRouter}updateStock/${id}`,
+      { key: key },
+      { withCredentials: true }
+    );
+  }
+  Foodiready(id: string) {
+   return this.http.get(`${this.url}${this.backoRouter}readyFood/${id}`);
   };
 }

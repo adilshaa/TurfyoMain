@@ -1,14 +1,17 @@
+<!-- food adding modal start  -->
+
 <div
   class="modal fade"
   id="modalRegisterForm"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  #myModal
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title text-center">Sign up</h4>
+        <h4 class="modal-title text-center">Add Foods</h4>
         <button
           type="button"
           class="btn-close"
@@ -46,13 +49,16 @@
           </div>
           <div class="mb-3">
             <label for="orangeForm-pass" class="form-label">Category</label>
-            <input
-              type="text"
-              id="orangeForm-pass"
-              formControlName="dishCategory"
-              class="form-control"
-              required
-            />
+            <select class="tables" formControlName="dishCategory">
+              <option
+                class="text-center"
+                selected
+                [value]="Category._id"
+                *ngFor="let Category of FoodCategory"
+              >
+                {{ Category.name }}
+              </option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="orangeForm-pass" class="form-label">Price</label>
@@ -76,22 +82,47 @@
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button class="btn btn-deep-orange" type="submit">Sign up</button>
+          <button class="Save__Food" type="submit">Save Food</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<div class="text-center">
-  <a
-    href="#"
-    class="btn btn-danger btn-rounded w-25"
-    data-bs-toggle="modal"
-    data-bs-target="#modalRegisterForm"
-    >Add Foods</a
-  >
+<!-- food adding modal end  -->
+
+<!-- food menu ad category adding  -->
+
+<div class="menu__buttons">
+  <div class="add__foods">
+    <a
+      href="#"
+      class="btn btn-danger btn-rounded"
+      data-bs-toggle="modal"
+      data-bs-target="#modalRegisterForm"
+      >Add Foods
+    </a>
+    <a
+      href="#"
+      class="btn btn-danger btn-rounded"
+      data-bs-toggle="modal"
+      data-bs-target="#modalRegisterForm_1"
+      >Add Category
+    </a>
+  </div>
+
+  <div class="Cat_buttons">
+    <div class="add__food" *ngFor="let cat_btn of FoodCategory">
+      <a type="button" (click)="catFilter(cat_btn._id)">{{ cat_btn.name }}</a>
+    </div>
+  </div>
 </div>
+
+<!-- food menu ad category adding end  -->
+
+<hr />
+
+<!-- food showing componenet empty image start-->
 
 <div class="container" *ngIf="empty == true">
   <img
@@ -100,26 +131,175 @@
     alt=""
   />
 </div>
+<!-- food showing componenet empty image end-->
 
-<div class="col-md-8" *ngIf="empty == false">
-  <!-- <div class="col-md-12"> -->
-  <div class="container">
-    <div class="row mt-2 justify-content-center">
-      <section class="card" *ngFor="let foodsData of foodData">
-        <div class="product-image">
-          <img
-            [src]="'http://localhost:5000/foods-images/' + foodsData.image"
-            alt="OFF-white Red Edition"
-            draggable="false"
-          />
+<!-- food showing componenet start-->
+<div class="foodscount" *ngIf="foodCount && categoryName">
+  Explore the <span> {{ foodCount }} {{ categoryName }} </span>
+</div>
+<div class="foodscount" *ngIf="!foodCount && !categoryName">
+  Explore the <span> {{ foodData.length }} food </span>
+</div>
+<div class="container">
+  <div class="foods_container grid">
+    <section class="card" *ngFor="let foodsData of foodData">
+      <div class="product-image">
+        <img
+          [src]="'http://localhost:5000/foods-images/' + foodsData.image"
+          alt="OFF-white Red Edition"
+          draggable="false"
+        />
+      </div>
+      <div class="product-info">
+        <h2>{{ foodsData.name }}</h2>
+        <p>{{ foodsData.stock }}</p>
+
+        <div class="price">₹ {{ foodsData.price }}</div>
+      </div>
+      <div class="btn">
+        <div class="add-btn">
+          <button (click)="editFood(foodsData._id)" type="button">Edit</button>
         </div>
-        <div class="product-info">
-          <h2>{{ foodsData.name }}</h2>
-          <div class="price">₹ {{ foodsData.price }}</div>
+      </div>
+    </section>
+  </div>
+  <div class="order_section" *ngIf="emptyCart">
+    <section class="cart-card">
+      <div class="cart-header">
+        <h3>Current Order</h3>
+        <select class="tables">
+          <option [value]=""></option>
+        </select>
+      </div>
+      <!-- <div class="empty_img" 
+        <img
+          src="../../../../../assets/farmers-food-design-image-file.jpg"
+          alt=""
+        />
+      </div> -->
+      <div class="empty_cheaker" *ngIf="currentFood">
+        <div class="item__image">
+          <div class="items__img">
+            <img
+              [src]="'http://localhost:5000/foods-images/' + currentFood.image"
+              alt="OFF-white Red Edition"
+              draggable="false"
+            />
+            <div class="image___Edit">
+              <input
+                type="file"
+                (change)="onFileSelectedForEdit($event, currentFood._id)"
+                #fileInput
+                name="image"
+                style="display: none"
+              />
+              <a type="button" (click)="fileInput.click()">edit</a>
+            </div>
+          </div>
         </div>
-        <div class="btn"></div>
-      </section>
+        <form
+          [formGroup]="editFoodForm"
+          (ngSubmit)="editFoodData(currentFood._id)"
+        >
+          <div class="updation_card">
+            <a type="button" (dblclick)="openEdit()">
+              <div class="food_cnt_edit">
+                <div class="items_name">
+                  <div class="food_name" *ngIf="!submition">
+                    {{ currentFood.name }}
+                  </div>
+                  <div class="change_food" *ngIf="submition">
+                    <input
+                      type="text"
+                      formControlName="name"
+                      [(ngModel)]="currentFood.name"
+                    />
+                  </div>
+                </div>
+
+                <div class="items_name">
+                  <div class="food_name" *ngIf="!submition">
+                    ₹{{ currentFood.price }}
+                  </div>
+
+                  <div class="change_food" *ngIf="submition">
+                    <input
+                      type="text"
+                      formControlName="price"
+                      [(ngModel)]="currentFood.price"
+                    />
+                  </div>
+                </div>
+                <div class="items_name">
+                  <div class="food_name" *ngIf="!submition">full</div>
+                  <div class="add-btn">
+                    <button type="submit" *ngIf="submition">Edit</button>
+                  </div>
+                </div>
+                <!-- <button class="item-delete" (click)="removeFromCart(items.foodId)">
+            D
+          </button> -->
+              </div>
+            </a>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- <div class="proceed-btn" >
+      <button
+        type="button"
+        data-toggle="modal"
+        data-target=".bd-example-modal-sm"
+      >
+        Proseed Order
+      </button>
+    </div> -->
+  </div>
+</div>
+
+<!-- food showing componenet end -->
+
+<!-- Food category adding compoenent modal start  -->
+
+<div
+  class="modal fade"
+  id="modalRegisterForm_1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  #myModal
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Add Food Category</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #myModal1
+        ></button>
+      </div>
+      <form [formGroup]="editFoodForm" (ngSubmit)="addCategory()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="orangeForm-pass" class="form-label">Category</label>
+            <input
+              type="text"
+              formControlName="name"
+              id="orangeForm-name"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="Save__Food" type="submit">Save Category</button>
+        </div>
+      </form>
     </div>
   </div>
-  <!-- </div> -->
 </div>
+
+<!-- Food category adding compoenent modal end  -->

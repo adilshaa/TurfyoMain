@@ -1,0 +1,14 @@
+.scroll__content{
+    width: 28%;
+
+}
+.main__content{
+    width: 72%;
+}
+
+@media screen and (max-width:817px) {
+    .main__content{
+    width: 100%;
+}
+
+}
