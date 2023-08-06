@@ -1,8 +1,8 @@
 <div class="container">
   <div class="col-md-8">
-    <div class="orders">
+    <div class="orders ">
       <div
-        class="order-card"
+        class="order-card "
         *ngFor="let order of Orders"
         (click)="takeCurrentOrder(order._id)"
         (click)="openDiv()"
@@ -19,8 +19,9 @@
         </div>
         <div class="order-clear"></div>
         <div class="order-status">
-          <div class="status">pending</div>
-          <div class="time">10:15 s</div>
+          <div class="status" *ngIf="order.cooking_Status==true">pendding</div>
+          <div class="ready__status" *ngIf="order.cooking_Status==false">Ready</div>
+
           <div class="foods">4- Foods</div>
         </div>
       </div>

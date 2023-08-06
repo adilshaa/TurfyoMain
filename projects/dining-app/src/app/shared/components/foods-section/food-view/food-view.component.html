@@ -8,7 +8,7 @@
         {{ category.name }}
       </button>
     </div>
-    <div class="foods_container grid" *ngIf="!empty == true">
+    <div class="foods_container grid col-md-12" *ngIf="!empty == true">
       <section class="card" *ngFor="let foodsData of foodData">
         <div class="product-image">
           <img
@@ -53,8 +53,8 @@
     <section class="cart-card" *ngIf="empty == false">
       <div class="cart-header">
         <h3>Current Order</h3>
-        <select class="tables" name="" id="" *ngIf="emptyTables">
-          <option [value]="table" *ngFor="let table of tables">
+        <select class="tables"  [(ngModel)]="table_id" *ngIf="emptyTables">
+          <option [value]="table._id" *ngFor="let table of tables">
             {{ table.table_Name }}-{{ table.table_No }}
           </option>
         </select>
@@ -164,28 +164,15 @@
             />
             <hr />
 
-            <label class="choose_Quantity">Table-</label>
-            <select class="tables" formControlName="table" value="TABLES">
-              <option
-                class="text-center"
-                selected
-                [value]="table._id"
-                *ngFor="let table of tables"
-              >
-                {{ table.table_Name }}-{{ table.table_No }}
-              </option>
-            </select>
-            <label class="choose_Quantity">Quantity-</label>
-            <select class="tables" name="" id="" formControlName="quantity">
-              <option
-                value=""
-                selected
-                *ngFor="let Q of quantityValues"
-                [value]="Q"
-              >
-                {{ Q }}
-              </option>
-            </select>
+            <div class="btn">
+              <label class="choose_Quantity">Quantity - {{ quantity }}</label>
+              <div class="type-btn">
+                <button (click)="incQnty('+')">+</button>
+              </div>
+              <div class="add-btn">
+                <button (click)="incQnty('-')" type="button">-</button>
+              </div>
+            </div>
           </div>
           <div class="action-btn">
             <div class="confirm-btn">

@@ -3,6 +3,7 @@ import { KitchenServiceService } from 'projects/kitchen-app/src/app/core/service
 import { fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
 import { fadeInAnimation, fadeOutAnimation } from '../../../animations/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-kitchen-orders',
@@ -22,7 +23,11 @@ export class KitchenOrdersComponent implements OnInit {
   orderDetails!: any;
   openState: string = 'hidden';
   closeState: string = 'visible';
-  constructor(private _kitchenService: KitchenServiceService) {}
+  constructor(
+    private _kitchenService: KitchenServiceService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.loadOrders();
   }
@@ -34,7 +39,7 @@ export class KitchenOrdersComponent implements OnInit {
       this.openDIv = false;
     }, 300);
   }
-  
+
   openDiv() {
     this.closeState = 'visible';
     this.openState = 'visible';
@@ -43,9 +48,10 @@ export class KitchenOrdersComponent implements OnInit {
       this.CloseDiv = false;
     }, 300);
   }
+
   loadOrders() {
     this.socket.emit('loadOrders', this.resId);
-    const ListOrders$ = fromEvent(this.socket, 'listOrder');
+    const ListOrders$ = fromEvent(this.socket, 'loadOrdersOnKitchen');
     ListOrders$.subscribe(
       (data) => {
         console.log(data);
@@ -57,6 +63,7 @@ export class KitchenOrdersComponent implements OnInit {
       }
     );
   }
+
   takeCurrentOrder(id: any) {
     this.orderDetails = this.Orders.find((item: any) => item._id == id);
     console.log(this.orderDetails);
@@ -64,12 +71,20 @@ export class KitchenOrdersComponent implements OnInit {
     this.allFoods = this.orderDetails.foods;
     this.total_Foods_Count = this.orderDetails.foods.length;
     this.total_amount = this.orderDetails.total_price;
-    
+
     // this.currentOrder = orderDetails.foods.map((item:any)=> console.log(item)
     // )
   }
+
   foodIsReady(id: any) {
     console.log(id);
-    this._kitchenService.Foodiready(id)
-  };
+    this._kitchenService.Foodiready(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.loadOrders();
+        this.closeDiv();
+      },
+      (err) => console.log(err)
+    );
+  }
 }

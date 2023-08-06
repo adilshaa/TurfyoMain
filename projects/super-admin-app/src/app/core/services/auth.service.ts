@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { SuperAdminEmitter } from '../../shared/emitters/emitters';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
-  constructor(private router: Router) {}
+  isAuthenticate!: Boolean;
+  constructor(private router: Router) { }
 
-  isSuperADminLoggedIn() {
-    console.log(!!localStorage.getItem('isLoggedIN'));
+  isSuperADminLoggedIn(): any {
+    console.log(!!localStorage.getItem("isLoggedIN"));
     SuperAdminEmitter.Emitter.emit(true);
-    return !!localStorage.getItem('isLoggedIN');
+    let token = localStorage.getItem("isLoggedIN");
+    //    
   }
 }

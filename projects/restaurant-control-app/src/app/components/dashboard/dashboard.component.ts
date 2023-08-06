@@ -17,9 +17,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoader = false;
-    }, 500);
+
     this.http
       .get('http://localhost:5000/resadmin/verifyresadmin', {
         withCredentials: true,
@@ -27,19 +25,15 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (result: any) => {
           RestaurantControlEmitter.resEmitter.emit(true);
+          // this.router.navigate(['/'])
         },
         (err) => {
           console.log(err);
-          
+
           localStorage.removeItem('ResadminisLoggedIN');
           this.router.navigate(['/controllersLogin']);
           RestaurantControlEmitter.resEmitter.emit(false);
         }
       );
-    const isSuperAdmin = localStorage.getItem('ResadminisLoggedIN');
-    if (isSuperAdmin) {
-    } else {
-      this.router.navigate(['/controllersLogin']);
-    }
   }
 }

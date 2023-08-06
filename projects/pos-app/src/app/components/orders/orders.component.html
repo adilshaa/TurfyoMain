@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="col-md-8">
+    <div class="orders ">
+      <div
+        class="order-card "
+        *ngFor="let order of Orders"
+        (click)="takeCurrentOrder(order._id)"
+        (click)="openDiv()"
+      >
+        <div class="order-table">
+          <div class="order-id">
+            <h4>{{ order.resId.name }}</h4>
+          </div>
+          <div class="table">
+            <section class="card-free-table custom-style-false">
+              <span>{{order.tableId.table_Name}}-{{order.tableId.table_No}}</span>
+            </section>
+          </div>
+        </div>
+        <div class="order-clear"></div>
+        <div class="order-status">
+          <div class="status" *ngIf="order.cooking_Status==true">pendding</div>
+          <div class="ready__status" *ngIf="order.cooking_Status==false">Ready</div>
+
+          <div class="foods">  {{ order.foods.length }} {{ order.foods.length === 1 ? 'Food' : 'Foods' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div
+      [@fadeOut]="closeState"
+      [@fadeIn]="openState"
+      *ngIf="openDIv || CloseDiv"
+    >
+      <section class="cart-card">
+        <div class="cart-header">
+          <h3>Current Order</h3>
+          <button class="btn btn-warning" (click)="closeDiv()">close</button>
+        </div>
+        <div class="empty_img" *ngIf="">
+          <img
+            src="../../../../../assets/farmers-food-design-image-file.jpg"
+            alt=""
+          />
+        </div>
+        <div class="empty_cheaker">
+          <div class="cart-info" *ngFor="let food of allFoods">
+            <div class="items-img">
+              <img
+                alt=""
+                [src]="
+                  'http://localhost:5000/foods-images/' + food.food_id.image
+                "
+              />
+            </div>
+            <div class="items-name">{{ food.food_id.name }}</div>
+            <div class="items-type">full</div>
+            <div class="items-price">{{ food.food_quantity }}</div>
+            <div class="items-x">X</div>
+
+            <div class="items-price">{{ food.food_id.price }}</div>
+            <div class="items-total-price">₹ {{ food.food_totalprice }}</div>
+          </div>
+        </div>
+      </section>
+      <div class="proceed-btn">
+        <div class="total-amount" *ngIf="total_Foods_Count">
+          <span> Food Count :</span> {{ total_Foods_Count }}
+        </div>
+        <div class="total-amount" *ngIf="total_amount" ng>
+          <span>Total : </span>₹{{ total_amount }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

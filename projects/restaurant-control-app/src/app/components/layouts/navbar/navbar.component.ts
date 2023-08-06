@@ -18,13 +18,19 @@ export class NavbarComponent implements OnInit {
     });
   }
   logoutResAdmin() {
+     localStorage.removeItem('ResadminisLoggedIN');
+     localStorage.removeItem('resId');
+
     this.resService.LogOutResAdmin().subscribe((res) => {
       console.log('here');
+      console.log(res);
+     
+     localStorage.removeItem('resadmin');
 
-      localStorage.removeItem('ResadminisLoggedIN');
-      
-      localStorage.removeItem('resadmin');
-      this.router.navigate(['/ControllerLogin']);
+     this.router.navigate(['/ControllerLogin']);
+    
     });
+  
   }
+  
 }

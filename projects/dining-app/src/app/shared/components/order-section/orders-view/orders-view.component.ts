@@ -49,9 +49,12 @@ export class OrdersViewComponent implements OnInit {
     const ListOrders$ = fromEvent(this.socket, 'listOrder');
     ListOrders$.subscribe(
       (data) => {
-        console.log(data);
         this.Orders = data;
-        console.log(this.Orders);
+        this.Orders.forEach((order) => {
+          const expirationTime = new Date(order.duration).getTime();
+          order.expirationTimeInMillis = expirationTime;
+        });
+
       },
       (error) => {
         console.error('An error occurred:', error);
@@ -62,14 +65,12 @@ export class OrdersViewComponent implements OnInit {
     let orderDetails: any = this.Orders.filter(
       (item: any) => item._id == id
     );
-    console.log(orderDetails);
-
     this.allFoods = orderDetails[0].foods;
-    console.log(this.allFoods);
     this.total_Foods_Count = orderDetails[0].foods.length;
     this.total_amount = orderDetails[0].total_price;
 
     // this.currentOrder = orderDetails.foods.map((item:any)=> console.log(item)
     // )
   }
+  
 }

@@ -76,23 +76,26 @@ img {
   max-width: 1080px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+  transition: max-width 0.3s ease-in-out;
+  
 }
 .grid {
   display: grid;
 }
 .foods__Section {
+  
   width: 70%;
   margin-top: 2rem;
 }
 .foods_container {
-  display: grid;
-  grid-template-columns: repeat(3, 200px);
+    display: grid;
+  /* grid-template-columns:repeat(5,200px); */
   row-gap: 20px;
+  scroll-behavior: smooth;
+
+  transition: max-width 0.3s ease-in-out;
   overflow-y: auto;
-  height: 500px;
-  transition: 0.5s;
+  height: 550px;
 }
 .foods__category {
   width: auto;
@@ -154,11 +157,16 @@ img {
   .order_section {
     display: none; /* Hide order_section on screens less than 560px */
   }
+.foods__category{
+    display: none; /* Hide order_section on screens less than 560px */
+
+}
 }
 
 @media screen and (min-width: 560px) {
   .container {
     justify-content: center;
+    
   }
   .foods_container {
     grid-template-columns: repeat(2, 200px);
@@ -175,7 +183,7 @@ img {
     gap: 3rem;
   }
   .foods_container {
-    grid-template-columns: repeat(3, 200px);
+    grid-template-columns: repeat(2, 200px);
     justify-content: center;
     align-items: center;
     column-gap: 1rem;
@@ -189,10 +197,10 @@ img {
     gap: 3rem;
   }
   .foods_container {
-    grid-template-columns: 200px 200px 200px;
+      grid-template-columns: repeat(3, 200px);
     justify-content: center;
     align-items: center;
-    column-gap: 1rem;
+    column-gap: 0.5rem;
   }
 }
 @media screen and (min-width: 960px) {
@@ -202,10 +210,13 @@ img {
     gap: 3rem;
   }
   .foods_container {
-    grid-template-columns: 200px 200px 200px;
+ display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    grid-template-columns: repeat(3, 200px);
     justify-content: center;
     align-items: center;
-    column-gap: 1rem;
+    column-gap: 1.5rem;
   }
 }
 .card {
@@ -588,3 +599,46 @@ option {
 }
 
 /* Rest of the existing CSS styles */
+
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  margin: auto;
+}
+.type-btn,
+.add-btn {
+  height: 100%;
+  width: 100%;
+}
+.type-btn button {
+  background-color: rgb(255, 149, 0);
+  height: 32px;
+  width: 4.5rem;
+  border-radius: 10px 1px 10px 1px;
+  transition: 0.2s;
+}
+.add-btn button {
+  background-color: rgb(247, 4, 4);
+  height: 32px;
+  width: 4.5rem;
+  border-radius: 10px 1px 10px 1px;
+  transition: 0.2s;
+}
+.type-btn button:hover {
+  background-color: rgb(222, 133, 9);
+  height: 32px;
+  width: 4.5rem;
+  border-radius: 1px 10px 1px 10px;
+  transform: rotate(-10deg);
+
+  /* transform: scale(2);   */
+}
+.add-btn button:hover {
+  background-color: rgb(191, 8, 8);
+  height: 32px;
+  width: 4.5rem;
+  border-radius: 1px 10px 1px 10px;
+  transform: rotate(10deg);
+}

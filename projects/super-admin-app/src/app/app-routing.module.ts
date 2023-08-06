@@ -1,46 +1,43 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './shared/components/login/login.component';
-import { DashbordComponent } from './shared/components/dashbord/dashbord.component';
-import { PartnerRegistrationComponent } from './shared/components/partner-registration/partner-registration.component';
-import { authGuards } from './core/services/auth.guard';
-import { DetailsRestaurantsComponent } from './shared/components/details-restaurants/details-restaurants.component';
-import { InitialRegisterPageComponent } from './shared/components/initial-register-page/initial-register-page.component';
-import { VerifyOtpComponent } from './shared/components/verify-otp/verify-otp.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./shared/components/login/login.component";
+import { DashbordComponent } from "./shared/components/dashbord/dashbord.component";
+import { PartnerRegistrationComponent } from "./shared/components/partner-registration/partner-registration.component";
+import { AuthGuard } from "./core/auth/auth.guard";
+import { DetailsRestaurantsComponent } from "./shared/components/details-restaurants/details-restaurants.component";
+import { InitialRegisterPageComponent } from "./shared/components/initial-register-page/initial-register-page.component";
+import { VerifyOtpComponent } from "./shared/components/verify-otp/verify-otp.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: DashbordComponent,
-    canActivate: [authGuards],
+    canActivate: [AuthGuard],
   },
   {
-    path: 'login',
+    path: "login",
     component: LoginComponent,
   },
 
   {
-    path: 'partner/:id',
+    path: "partner/:id",
     component: PartnerRegistrationComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'full_details/:id',
+    path: "full_details/:id",
     component: DetailsRestaurantsComponent,
+    canActivate: [AuthGuard],
   },
 
   {
-    path: 'initaillogin',
+    path: "initaillogin",
     component: InitialRegisterPageComponent,
-    // children: [
-    //     {
-    //     path: 'verifyotp',
-    //     component:VerifyOtpComponent
-    //   }
-    // ]
+    canActivate: [AuthGuard],
   },
   {
-    path: '**',
-    redirectTo: '/login',
+    path: "**",
+    redirectTo: "/login",
   },
 ];
 

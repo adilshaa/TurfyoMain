@@ -22,7 +22,7 @@ export class ListFoodsComponent implements OnInit {
   editFoodForm!: FormGroup;
   isLoader: Boolean = true;
   socket = io('http://localhost:5000');
-  foodData!: any[];
+  foodData: any[]=[];
   empty: boolean = false;
   emptyCart: boolean = false;
   currentFood: any;

@@ -54,6 +54,7 @@ export class KitchenServiceService {
     );
   }
   Foodiready(id: string) {
+    
    return this.http.get(`${this.url}${this.backoRouter}readyFood/${id}`);
   };
 }

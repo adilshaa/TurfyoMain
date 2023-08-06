@@ -41,10 +41,14 @@ export class DiningServicesService {
       withCredentials: true,
     });
   }
-  proceedOrder(cartitems: any) {
+  proceedOrder(cartitems: any, table: string) {
+    let orderData = {
+      orders: cartitems,
+      table:table
+    }
     return this.http.post(
       `${this.mainUrl}${this.backRouterUrl}orderFoods`,
-      cartitems,
+      orderData,
       { withCredentials: true }
     );
   }

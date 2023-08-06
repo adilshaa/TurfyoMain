@@ -14,6 +14,11 @@ const routes: Routes = [
     path: '',
     component: DiningDeskComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'viewFoods',
+      },
       { path: 'viewFoods', component: FoodViewComponent },
       { path: 'tables', component: TableViewComponent },
       { path: 'orders', component: OrdersViewComponent },

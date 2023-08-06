@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { DashbordComponent } from "./shared/components/dashbord/dashbord.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PartnerRegistrationComponent } from "./shared/components/partner-registration/partner-registration.component";
-import { authGuards } from "./core/services/auth.guard";
+import { AuthGuard } from "./core/auth/auth.guard";
 import {
   resFullDetails,
   restaurantsDataReducer,
@@ -63,7 +63,7 @@ import { AuthService } from "./core/services/auth.service";
   ],
   providers: [
     ServiceService,
-    authGuards,
+    AuthGuard,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -90,5 +90,4 @@ import { AuthService } from "./core/services/auth.service";
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

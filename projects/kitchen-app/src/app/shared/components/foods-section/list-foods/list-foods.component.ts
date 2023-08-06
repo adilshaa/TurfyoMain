@@ -24,18 +24,7 @@ export class ListFoodsComponent implements OnInit {
   ngOnInit(): void {
     this.kitchenStore.dispatch(fetchFoodsData());
   }
-  // listFood(id: any, status: boolean) {
-  //   this.kitchenService.listFoods(id, status).subscribe(
-  //     (result) => {
-  //       let resId = localStorage.getItem('resId');
-  //       this.socket.emit('listFoods', resId);
-  //       this.kitchenStore.dispatch(fetchFoodsData());
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
+
   updateStock(id: any, key: number) {
     this.kitchenService.updateStock(id, key).subscribe(
       (res) => {

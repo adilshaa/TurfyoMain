@@ -23,11 +23,7 @@ export class DiningDeskComponent implements OnInit {
         this.router.navigate(['/diningLogin']);
       }
     );
-    let key = localStorage.getItem('dining-staffs');
-    if (key) {
-    } else {
-      this.router.navigate(['/diningLogin']);
-    }
+   
   }
 }
 
