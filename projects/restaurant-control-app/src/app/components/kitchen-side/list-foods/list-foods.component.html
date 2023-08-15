@@ -134,12 +134,23 @@
 <!-- food showing componenet empty image end-->
 
 <!-- food showing componenet start-->
-<div class="foodscount" *ngIf="foodCount && categoryName">
-  Explore the <span> {{ foodCount }} {{ categoryName }} </span>
+<div class="food_status">
+  <div class="total_food">
+    <div class="foodscount" *ngIf="!foodCount && !categoryName">
+      Total<span> {{ foodData.length }} food </span>
+    </div>
+  </div>
+
+  <div class="av_unav">
+    <div class="available_foods" *ngIf="!foodCount && !categoryName">
+      Total<span> {{ foodData.length }} food </span>
+    </div>
+    <div class="unavailable_foods" *ngIf="!foodCount && !categoryName">
+      Total<span> {{ foodData.length }} food </span>
+    </div>
+  </div>
 </div>
-<div class="foodscount" *ngIf="!foodCount && !categoryName">
-  Explore the <span> {{ foodData.length}} food </span>
-</div>
+
 <div class="container">
   <div class="foods_container grid">
     <section class="card" *ngFor="let foodsData of foodData">

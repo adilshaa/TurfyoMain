@@ -12,7 +12,6 @@
   justify-content: space-between;
   display: flex;
   flex-direction: column;
-
 }
 
 .order-card {
@@ -102,7 +101,7 @@
   color: black;
 }
 
-@media  screen and (max-width: 550px) {
+@media screen and (max-width: 550px) {
   .container {
     margin: 0.6rem 0rem;
     justify-content: center;
@@ -291,13 +290,7 @@
   }
 }
 
-
-
-
-
-
 /* Order Details  */
-
 
 .cart-card {
   position: relative;
@@ -376,8 +369,7 @@ option {
   border-radius: 50px;
 }
 .items-name,
-.items-type
- {
+.items-type {
   font-size: large;
   font-weight: 600;
   color: rgb(77, 77, 77);
@@ -385,27 +377,24 @@ option {
 .items-price {
   color: rgb(53, 52, 52);
 }
-.cart_menu{
-
+.cart_menu {
   justify-content: center;
 }
-.cart_items{
+.cart_items {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
 }
-.items-x{
+.items-x {
   font-size: small;
 }
-.items-total-price{
+.items-total-price {
   font-size: large;
   font-weight: 600;
   color: #ff8800;
 }
 
-
-.proceed-btn {
+.proceed__btn {
   position: relative;
   /* margin: 1rem 1rem; */
   width: 351px;
@@ -419,20 +408,50 @@ option {
   align-items: center;
   display: flex;
 }
-.proceed-btn{
-  font-size: medium;
-  font-weight: 600;
-  color: #ff8800;
+
+._order_data {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: small;
+  font-weight: 500;
+  color: #000000;
 }
-.proceed-btn span{
-  font-size: large;
-  font-weight: 600;
-  color: #595656;
+
+
+.Ready__btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  background-color: #ff8800;
+  outline: none;
+  border-radius: 5px;
 }
-
-
-
-
-
-
-
+.Ready__btn:hover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  background-color: #ff8800;
+  outline: none;
+  border-radius: 5px; 
+  
+}
+.Ready__btn button{
+  outline: none;
+  border: none;
+  background-color: #ff8800;
+  color: #ffffff;
+  transition: .5s;
+  
+}
+.Ready__btn button:hover{
+  outline: none;
+  border: none;
+  background-color: #ff8800;
+  color: #ffffff;
+  transform: rotate(5deg);
+}

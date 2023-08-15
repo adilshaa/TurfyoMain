@@ -8,11 +8,15 @@ import { DiningLoginComponent } from './shared/components/login/dining-login/din
 import { TableViewComponent } from './shared/components/table-section/table-view/table-view.component';
 import { CartComponent } from './shared/components/foods-section/cart/cart.component';
 import { OrdersViewComponent } from './shared/components/order-section/orders-view/orders-view.component';
+import { diningGuardGuard } from './core/auth/gaurds/dining-guard.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [diningGuardGuard],
+
     component: DiningDeskComponent,
+
     children: [
       {
         path: '',
@@ -27,6 +31,7 @@ const routes: Routes = [
   {
     path: 'diningLogin',
     component: DiningLoginComponent,
+    canActivate: [diningGuardGuard],
   },
 ];
 

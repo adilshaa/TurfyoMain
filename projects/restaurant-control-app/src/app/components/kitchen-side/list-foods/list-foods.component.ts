@@ -1,37 +1,39 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { fromEvent } from 'rxjs';
+import { Subject, fromEvent, takeUntil } from 'rxjs';
 import { io } from 'socket.io-client';
 import { NotificationsComponent } from '../../../shared/components/notifications/notifications.component';
+import { SocketResAdminServiceService } from '../../../core/services/socket-res-admin-service.service';
 
 @Component({
   selector: 'app-list-foods',
   templateUrl: './list-foods.component.html',
   styleUrls: ['./list-foods.component.css'],
 })
-export class ListFoodsComponent implements OnInit {
+export class ListFoodsComponent implements OnInit,OnDestroy {
   @ViewChild('myModal') myModal!: ElementRef;
   @ViewChild('myModal1') myModal1!: ElementRef;
 
   AddFood!: FormGroup;
   selectedFile!: File;
   selectedFileEditngFood!: File;
+  private componentDestroyed$ = new Subject<void>();
   editFoodForm!: FormGroup;
   isLoader: Boolean = true;
-  socket = io('http://localhost:5000');
-  foodData: any[]=[];
+  foodData: any[] = [];
   empty: boolean = false;
   emptyCart: boolean = false;
   currentFood: any;
   submition: boolean = false;
   FoodCategory!: any[];
-  foodCount!: number 
-  categoryName!:string
+  foodCount!: number;
+  categoryName!: string;
   constructor(
     private resService: ResturantControlServiceService,
+    private _resSocketService: SocketResAdminServiceService,
     private router: Router,
     private formBuilder: FormBuilder,
     private http: HttpClient, // private resStore: Store<{ foodsData: Foodsstructure[] }>
@@ -39,10 +41,10 @@ export class ListFoodsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.formGroups();
     this.loadFoods();
+    this.updateFoods();
+    this.formGroups();
   }
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -67,31 +69,41 @@ export class ListFoodsComponent implements OnInit {
     }
   }
   loadFoods() {
-    let resId = localStorage.getItem('resId');
-    this.socket.emit('listFoods', resId);
-    const showFoods$ = fromEvent(this.socket, 'showFoods');
-    const subscription = showFoods$.subscribe(
-      (data) => {
-        this.foodData = data.fooddata;
-        if (this.foodData[0] == null) {
-          this.empty = true;
-        } else {
-          this.empty = false;
+    this._resSocketService.emit('listFoodsToKitchen', {});
+    this._resSocketService
+      .listen('showFoodsinKithen')
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe(
+        (res) => {
+          this.foodData = res.foodData;
+          if (this.foodData[0] == null) {
+            this.empty = true;
+          } else {
+            this.empty = false;
+          }
+          this.FoodCategory = res.categories;
+        },
+        (error) => {
+          console.error('An error occurred:', error);
         }
-
-        this.FoodCategory = data.category;
-        console.log(this.foodData);
-      },
-
-      (error) => {
-        console.error('An error occurred:', error);
-      }
-    );
-
+      );
     setTimeout(() => {
       this.isLoader = false;
     }, 500);
   }
+  updateFoods() {
+    this._resSocketService.listen('newDataAdded').subscribe((res) => {
+      const existingIndex = this.foodData.findIndex(
+        (items) => items._id == res._id
+      );
+      if (existingIndex !== -1) {
+        this.foodData[existingIndex] = res;
+
+        this.foodData.splice(existingIndex, 1);
+      }
+    });
+  }
+
   formGroups() {
     this.AddFood = this.formBuilder.group({
       dishName: '',
@@ -106,7 +118,6 @@ export class ListFoodsComponent implements OnInit {
   }
   addFoods() {
     let foodsData = this.AddFood.getRawValue();
-
     const formData: FormData = new FormData();
     formData.append('dishName', foodsData.dishName);
     formData.append('dishDescription', foodsData.dishDescription);
@@ -184,17 +195,16 @@ export class ListFoodsComponent implements OnInit {
     );
   }
   catFilter(id: string) {
-    this.resService.filterFood(id).subscribe((res:any) => {
-      this.foodData = res.food
-      this.foodCount = res.count
+    this.resService.filterFood(id).subscribe((res: any) => {
+      this.foodData = res.food;
+      this.foodCount = res.count;
       if (res.food[0]) {
-         this.categoryName = res.food[0].category.name;
+        this.categoryName = res.food[0].category.name;
       }
-     
     });
-    // this.foodData = this.foodData.filter((item) => {
-    //   return item.category === id;
-    // });
-    // console.log(this.foodData);
+  }
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 }

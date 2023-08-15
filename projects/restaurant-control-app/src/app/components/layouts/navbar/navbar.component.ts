@@ -11,26 +11,24 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   authonticated!: boolean;
-  constructor(private resService: ResturantControlServiceService, private router:Router) {}
+  constructor(
+    private resService: ResturantControlServiceService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     RestaurantControlEmitter.resEmitter.subscribe((res: boolean) => {
       this.authonticated = res;
     });
   }
   logoutResAdmin() {
-     localStorage.removeItem('ResadminisLoggedIN');
-     localStorage.removeItem('resId');
-
+    localStorage.removeItem('ResadminisLoggedIN');
+    localStorage.removeItem('resId');
     this.resService.LogOutResAdmin().subscribe((res) => {
-      console.log('here');
-      console.log(res);
-     
-     localStorage.removeItem('resadmin');
+      RestaurantControlEmitter.resEmitter.emit(false);
 
-     this.router.navigate(['/ControllerLogin']);
-    
+      localStorage.removeItem('resadmin');
+      location.href = 'http://localhost:3200/ControllerLogin';
+      // this.router.navigate(['/ControllerLogin']);
     });
-  
   }
-  
 }

@@ -9,6 +9,7 @@ import { Observable, fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
 import { foodArrivalFadein } from '../../../animations/angular';
 import { DiningNotifyComponent } from '../../notifications/dining-notify/dining-notify.component';
+import { DiningSocketServiceService } from 'projects/dining-app/src/app/core/services/dining-socket-service.service';
 
 @Component({
   selector: 'app-food-view',
@@ -25,7 +26,7 @@ export class FoodViewComponent implements OnInit {
   @ViewChild('myModal') myModal!: ElementRef;
   @ViewChild('myModal_1') myModal_1!: ElementRef;
 
-  foodData!: any[];
+  foodData: any[] = [];
   cartItems: any[] = [];
   tables!: any[];
   empty!: boolean;
@@ -44,6 +45,7 @@ export class FoodViewComponent implements OnInit {
   constructor(
     private router: Router,
     private diningService: DiningServicesService,
+    private _diningSocketService: DiningSocketServiceService,
     private tostr: ToastrService,
     private diningStore: Store<{ foodsData: foodsStructure[] }>,
     private route: ActivatedRoute,
@@ -52,28 +54,50 @@ export class FoodViewComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.loadFood();
+    this.updateFoods();
     this.loadTablesToLobby();
-    this.foodEmitting();
     this.orderForm = this.formBuilder.group({
       table: '',
       note: '',
     });
   }
+
+  updateFoods() {
+    this._diningSocketService.listen('newDataAdded').subscribe((res) => {
+      // this.notifications.handleNewOrderNotification(` ${res.name} is upgraded`);
+      const existingIndex = this.foodData.findIndex(
+        (items) => items._id == res._id
+      );
+      if (existingIndex !== -1) {
+        if (res.stock > 0) {
+          this.foodData[existingIndex] = res;
+        } else {
+          this.foodData.splice(existingIndex, 1);
+          this.loadFood();
+        }
+      } else {
+        if (res.stock > 0) {
+          this.foodData.push(res);
+          this.loadFood();
+        } else {
+        }
+      }
+    });
+  }
   loadFood() {
-    const showFoods$ = fromEvent(this.socket, 'showFoods');
-    const subscription = showFoods$.subscribe(
+    this._diningSocketService.emit('listFoods', {});
+    this._diningSocketService.listen('showFoods').subscribe(
       (data) => {
         const Foodadded = this.socket.on('foodAddes', () => {});
         if (Foodadded) {
-          this.notifications.addNotification();
         }
-        this.foodData = data.fooddata;
+        this.foodData = data.foodData;
         if (this.foodData[0] == null) {
           this.empty = true;
         } else {
           this.empty = false;
         }
-        this.category = data.category;
+        this.category = data.categories;
         this.notifications.clearNotifications();
       },
       (error) => {
@@ -82,7 +106,6 @@ export class FoodViewComponent implements OnInit {
     );
   }
   filterFood(id: string) {
-
     this.diningService.filterFood(id).subscribe(
       (res: any) => {
         this.foodData = res.food;
@@ -96,15 +119,12 @@ export class FoodViewComponent implements OnInit {
     );
   }
 
-  foodEmitting() {
-    this.socket.emit('listFoods', this.resId);
-  }
   loadTablesToLobby() {
     this.diningService.leadTables().subscribe((res: any) => {
-
       let freeTables = res.tables.filter(
         (table: { table_status: boolean }) => table.table_status == false
       );
+      console.log(freeTables);
 
       if (freeTables[0]) {
         this.tables = freeTables;
@@ -123,7 +143,6 @@ export class FoodViewComponent implements OnInit {
     }
   }
   loadEacheFood(id: any) {
-
     let foodData = this.foodData.find((item: any) => item._id == id);
     this.food_image = foodData.image;
     this.food_name = foodData.name;
@@ -169,6 +188,7 @@ export class FoodViewComponent implements OnInit {
               foodNote: order.note,
             };
             this.cartItems.push(orderData);
+            this.quantity = 0;
             this.cheakCartIsEmpty();
           }
         this.closeModal();
@@ -202,9 +222,10 @@ export class FoodViewComponent implements OnInit {
     }
     this.diningService.proceedOrder(this.cartItems, this.table_id).subscribe(
       (res) => {
-        this.socket.emit('loadOrders', this.resId);
-        this.socket.emit('listFoods', this.resId);
-
+        this._diningSocketService.emit('listFoods', {});
+        this._diningSocketService.emit('NewOrders', {});
+        this._diningSocketService.emit('changeTables', {});
+        // this._diningSocketService.emit('loadOrders', {});
         this.closeModal();
         this.cartItems.splice(0, this.cartItems.length);
         this.cheakCartIsEmpty();

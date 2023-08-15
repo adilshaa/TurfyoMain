@@ -17,6 +17,22 @@ export class DiningNotifyComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  handleNewOrderNotification(notifyMsg: string) {
+    if (Notification.permission === 'granted') {
+      new Notification(notifyMsg, {
+        icon: '../../../../assets/images/20230617_002438.png',
+        badge: '../../../../assets/images/20230617_002438.png',
+        image: '../../../../assets/images/order_notify_imge.jpeg',
+        vibrate: [200, 100, 200],
+      });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          new Notification('New Order');
+        }
+      });
+    }
+  }
   addNotification() {
     this.tostr.info('Foods is updated 🍔');
     // this.audio();
@@ -29,11 +45,19 @@ export class DiningNotifyComponent implements OnInit {
       tapToDismiss: false,
     });
   }
-  normalErrorNotify(tosterMsg: any) {
+  normalErrorNotify(tosterMsg: string) {
     this.tostr.error(tosterMsg, 'Alert', {
       timeOut: 1500,
       progressBar: true,
       positionClass: 'toast-top-center',
+      tapToDismiss: false,
+    });
+  }
+  NewOrderNotify(tosterMsg: string) {
+    this.tostr.warning(tosterMsg, 'New Order', {
+      timeOut: 1500,
+      progressBar: true,
+      positionClass: 'toast-top-left', // Change this to 'toast-top-left'
       tapToDismiss: false,
     });
   }

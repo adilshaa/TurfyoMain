@@ -16,6 +16,8 @@ import { ResAdminAuthGuard } from './core/auth/res-admin-auth-guards.guard';
 const routes: Routes = [
   {
     path: 'controllersLogin',
+    canActivate: [ResAdminAuthGuard],
+
     component: ResControlLoginComponent,
   },
   {
@@ -67,14 +69,14 @@ const routes: Routes = [
       {
         path: 'tables',
         component: TableViewComponent,
-    canActivate: [ResAdminAuthGuard],
-        
+        canActivate: [ResAdminAuthGuard],
       },
     ],
   },
   {
     path: 'login',
     component: LoginComponent,
+    
   },
 
   {

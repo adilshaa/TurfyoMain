@@ -21,6 +21,11 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
+  validateRestaurant() {
+    return this.http.get(`${this.url}${this.backoRouter}verifyresadmin`, {
+      withCredentials: true,
+    });
+  };
 
   fetcheStaffData() {
     console.log('reched service');
@@ -102,6 +107,10 @@ export class ResturantControlServiceService {
       withCredentials: true,
     });
   }
+  delteTable(id: string) {
+    console.log(id);
+    return this.http.delete(`${this.url}${this.backoRouter}deletetable/${id}`);
+  }
   loadEditStock(id: any) {
     return this.http.get(
       `${this.url}${this.backoRouter}loadEditableStock/${id}`,
@@ -139,14 +148,18 @@ export class ResturantControlServiceService {
       { withCredentials: true }
     );
   }
-  addFoodCategory(data:any) {
-    return this.http.post(`${this.url}${this.backoRouter}addfoodCategory`,data,{withCredentials:true})
+  addFoodCategory(data: any) {
+    return this.http.post(
+      `${this.url}${this.backoRouter}addfoodCategory`,
+      data,
+      { withCredentials: true }
+    );
   }
-  filterFood(id: string):Observable<any[]> {
+  filterFood(id: string): Observable<any[]> {
     return this.http.get<any[]>(
       `${this.url}${this.backoRouter}filterFood/${id}`
     );
-  };
+  }
   LogOutResAdmin() {
     return this.http.get(`${this.url}${this.backoRouter}logout`, {
       withCredentials: true,

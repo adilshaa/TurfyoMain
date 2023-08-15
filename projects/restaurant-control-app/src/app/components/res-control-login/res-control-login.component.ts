@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -14,18 +14,21 @@ import { Router } from '@angular/router';
 import { ResturantControlServiceService } from '../../core/services/resturant-control-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { RestaurantControlEmitter } from '../../shared/emmiter/res-control-emmitter';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-res-control-login',
   templateUrl: './res-control-login.component.html',
   styleUrls: ['./res-control-login.component.css'],
 })
-export class ResControlLoginComponent implements OnInit {
+export class ResControlLoginComponent implements OnInit, OnDestroy {
   Form!: FormGroup;
+  private componentDestroyed$ = new Subject<void>();
+
   resadmin!: SocialUser;
   submitted!: boolean;
   isLoader: Boolean = true;
-
+  loginDistroy!: Subscription;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -34,18 +37,21 @@ export class ResControlLoginComponent implements OnInit {
     private authService: SocialAuthService
   ) {}
   ngOnInit(): void {
+    let resId = localStorage.getItem('resadmin');
     setTimeout(() => {
       this.isLoader = false;
     }, 500);
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
-      this.resadmin = user;
-      console.log(user);
-      if (this.resadmin) {
-        this.readminLoginWithGoogle(user);
-      }
-    });
-
+    
+    if (!resId) {
+      this.loginDistroy = this.authService.authState
+        .pipe(takeUntil(this.componentDestroyed$))
+        .subscribe((user) => {
+          this.resadmin = user;
+          if (this.resadmin) {
+            this.readminLoginWithGoogle(user);
+          }
+        });
+    }
     this.Form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -55,14 +61,12 @@ export class ResControlLoginComponent implements OnInit {
   readminLoginWithGoogle(resadmin: any) {
     this.resService.resAdminLoginWothGoogle(resadmin).subscribe(
       (res: any) => {
+        this.router.navigate(['/']);
         let token = res.token;
-        this.tostr.success('Success Fully Loggined');
         localStorage.setItem('ResadminisLoggedIN', 'res_adminis_login_true');
         localStorage.setItem('resadmin', token);
         localStorage.setItem('resId', res.resId);
-
         RestaurantControlEmitter.resEmitter.emit(true);
-        this.router.navigate(['/']);
       },
       (err) => {
         console.log('error');
@@ -83,16 +87,20 @@ export class ResControlLoginComponent implements OnInit {
           let token = res.token;
           this.tostr.success('Success Fully Loggined');
           localStorage.setItem('ResadminisLoggedIN', 'res_admin_is_login_true');
-          localStorage.setItem('resadmin', token);          
-        localStorage.setItem('resId', res.resId);
+          localStorage.setItem('resadmin', token);
+          localStorage.setItem('resId', res.resId);
 
           RestaurantControlEmitter.resEmitter.emit(true);
         },
         (err) => {
           this.tostr.error(err.error.message);
-           localStorage.removeItem('resadmin');
+          localStorage.removeItem('resadmin');
         }
       );
     }
+  }
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 }

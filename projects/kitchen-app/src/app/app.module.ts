@@ -8,9 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { ListFoodsComponent } from './shared/components/foods-section/list-foods/list-foods.component';
-import { ListStocksComponent } from './shared/components/stock-section/list-stocks/list-stocks.component';
-import { NavbarComponent } from './shared/components/layouts/navbar/navbar.component';
-import { SidebarComponent } from './shared/components/layouts/sidebar/sidebar.component';
+import { NavbarComponent } from './shared/layouts/navbar/navbar.component';
+import { SidebarComponent } from './shared/layouts/sidebar/sidebar.component';
 import { foodDetails } from './core/store/kitchen-reducer';
 import { Foodseffect } from './core/store/kitchen.effects';
 import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
@@ -21,19 +20,19 @@ import { KitchenInterceptorInterceptor } from './core/auth/interceptor/kitchen-i
 import { KitchenServiceService } from './core/services/kitchen-service.service';
 import { ToastrModule } from 'ngx-toastr';
 import { KitchenOrdersComponent } from './shared/components/order-section/kitchen-orders/kitchen-orders.component';
-import { KitchenNotificationComponent } from './shared/components/kitchen-notification/kitchen-notification.component';
+import { KitchenNotifyComponent } from './shared/notificatinos/kitchen-notify/kitchen-notify.component';
+import { SocketKitchenServiceService } from './core/services/socket-kitchen-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListFoodsComponent,
-    ListStocksComponent,
     NavbarComponent,
     SidebarComponent,
     DashboardComponent,
     KitchenLoginComponent,
     KitchenOrdersComponent,
-    KitchenNotificationComponent,
+    KitchenNotifyComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +41,7 @@ import { KitchenNotificationComponent } from './shared/components/kitchen-notifi
     RouterModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-   ToastrModule.forRoot({
+    ToastrModule.forRoot({
       positionClass: 'toast-top-center', // Adjust the notification position as per your preference
       preventDuplicates: true,
     }),
@@ -51,6 +50,8 @@ import { KitchenNotificationComponent } from './shared/components/kitchen-notifi
   ],
   providers: [
     KitchenServiceService,
+    KitchenNotifyComponent,
+    SocketKitchenServiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: KitchenInterceptorInterceptor,

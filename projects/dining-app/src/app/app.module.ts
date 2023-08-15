@@ -21,9 +21,11 @@ import { FoodsData } from './core/store/dining.effects';
 import { DiningLoginComponent } from './shared/components/login/dining-login/dining-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { DiningInterceptorInterceptor } from './core/auth/interceptor/dining-interceptor.interceptor';
+import { DiningInterceptorInterceptor } from './core/interceptor/dining-interceptor.interceptor';
 import { CartComponent } from './shared/components/foods-section/cart/cart.component';
 import { DiningNotifyComponent } from './shared/components/notifications/dining-notify/dining-notify.component';
+import { diningGuardGuard } from './core/auth/gaurds/dining-guard.guard';
+import { DiningSocketServiceService } from './core/services/dining-socket-service.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { DiningNotifyComponent } from './shared/components/notifications/dining-
   ],
   providers: [
     DiningServicesService,
+    diningGuardGuard,
+    DiningSocketServiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: DiningInterceptorInterceptor,

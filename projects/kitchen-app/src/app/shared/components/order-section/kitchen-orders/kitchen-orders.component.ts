@@ -4,6 +4,8 @@ import { fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
 import { fadeInAnimation, fadeOutAnimation } from '../../../animations/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { KitchenNotifyComponent } from '../../../notificatinos/kitchen-notify/kitchen-notify.component';
+import { SocketKitchenServiceService } from 'projects/kitchen-app/src/app/core/services/socket-kitchen-service.service';
 
 @Component({
   selector: 'app-kitchen-orders',
@@ -26,10 +28,13 @@ export class KitchenOrdersComponent implements OnInit {
   constructor(
     private _kitchenService: KitchenServiceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private notifications: KitchenNotifyComponent,
+    private _KitchenSocketService: SocketKitchenServiceService
   ) {}
   ngOnInit(): void {
     this.loadOrders();
+    this.NewOrders();
   }
   closeDiv() {
     this.closeState = 'hidden';
@@ -50,24 +55,27 @@ export class KitchenOrdersComponent implements OnInit {
   }
 
   loadOrders() {
-    this.socket.emit('loadOrders', this.resId);
-    const ListOrders$ = fromEvent(this.socket, 'loadOrdersOnKitchen');
-    ListOrders$.subscribe(
-      (data) => {
-        console.log(data);
-        this.Orders = data;
-        console.log(this.Orders);
+    this._KitchenSocketService.emit('loadOrderskitchenside', {});
+    this._KitchenSocketService.listen('listOrdersKitchen').subscribe(
+      (res) => {
+        this.Orders = res;
       },
       (error) => {
         console.error('An error occurred:', error);
       }
     );
   }
+  NewOrders() {
+    this._KitchenSocketService.listen('pushNewOrder').subscribe((newOrder) => {
+      console.log(newOrder);
+      this.notifications.handleNewOrderNotification('New Orders');
+      this.Orders.push(newOrder);
+    });
+  }
 
   takeCurrentOrder(id: any) {
     this.orderDetails = this.Orders.find((item: any) => item._id == id);
     console.log(this.orderDetails);
-
     this.allFoods = this.orderDetails.foods;
     this.total_Foods_Count = this.orderDetails.foods.length;
     this.total_amount = this.orderDetails.total_price;
@@ -80,6 +88,7 @@ export class KitchenOrdersComponent implements OnInit {
     console.log(id);
     this._kitchenService.Foodiready(id).subscribe(
       (res) => {
+        this._KitchenSocketService.emit('foodIsReady', { id: id });
         console.log(res);
         this.loadOrders();
         this.closeDiv();

@@ -358,15 +358,41 @@ img {
 }
 
 .foodscount{
+
   font-size: 20px;
   font-weight: 600;
   color: #585757;
 }
 .foodscount span{
-  font-size: 20px;
+  font-size: 10px;
   font-weight: 600;
   color: #e78104;
 } 
+.food_status{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+}
+.av_unav{
+width: 40%;
+  display: flex;
+  justify-content: right;
+}
+.available_foods{
+  font-size: 10px;
+  font-weight: 600;
+  color: #e78104;
+
+}
+.unavailable_foods{
+  font-size: 10px;
+  font-weight: 600;
+  color: #e78104;
+
+
+
+}
 /* cart  */
 
 .cart-card {

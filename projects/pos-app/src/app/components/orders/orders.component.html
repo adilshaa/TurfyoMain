@@ -1,8 +1,8 @@
 <div class="container">
   <div class="col-md-8">
-    <div class="orders ">
+    <div class="orders">
       <div
-        class="order-card "
+        class="order-card"
         *ngFor="let order of Orders"
         (click)="takeCurrentOrder(order._id)"
         (click)="openDiv()"
@@ -11,18 +11,31 @@
           <div class="order-id">
             <h4>{{ order.resId.name }}</h4>
           </div>
-          <div class="table">
+          <div class="table1">
             <section class="card-free-table custom-style-false">
-              <span>{{order.tableId.table_Name}}-{{order.tableId.table_No}}</span>
+              <span
+                >{{ order.tableId.table_Name }}-{{
+                  order.tableId.table_No
+                }}</span
+              >
             </section>
           </div>
         </div>
         <div class="order-clear"></div>
         <div class="order-status">
-          <div class="status" *ngIf="order.cooking_Status==true">pendding</div>
-          <div class="ready__status" *ngIf="order.cooking_Status==false">Ready</div>
-
-          <div class="foods">  {{ order.foods.length }} {{ order.foods.length === 1 ? 'Food' : 'Foods' }}</div>
+          <div class="status" *ngIf="order.order_status == 'pending'">
+            pendding
+          </div>
+          <div class="ready__status" *ngIf="order.order_status == 'ready'">
+            Ready
+          </div>
+          <div class="ready__status" *ngIf="order.order_status == 'served'">
+            Served
+          </div>
+          <div class="foods">
+            {{ order.foods.length }}
+            {{ order.foods.length === 1 ? "Food" : "Foods" }}
+          </div>
         </div>
       </div>
     </div>

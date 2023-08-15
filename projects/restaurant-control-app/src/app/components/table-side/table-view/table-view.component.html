@@ -1,34 +1,121 @@
-
-<div class="col-md-7 justify-content-center " >
-<div class="btn justify-content-center d-flex" >
+<div class="col-md-7 justify-content-center">
+  <div class="btn justify-content-center d-flex">
     <button class="btn btn-success" (dblclick)="createTable()">
       Create Table
     </button>
   </div>
+</div>
 <div class="container">
-  
-  <div class="tabels">
-    <div class="row">
-      <section
-        *ngFor="let Table of tables"
-        [ngClass]="{
-          'card-free-table': true,
-          ' custom-style-false': Table.table_status,
-          'custom-style-true': !Table.table_status
-        }"
-      >
-        <div class="product-table">
-          <h3 class="table-name">{{Table.table_Name}}-{{Table.table_No}}</h3>
-          <p *ngIf="!Table.table_status"> Free</p>
-          <p *ngIf="Table.table_status"> Reserved</p>
+  <div class="col-md-7">
+    <div class="tabels">
+      <div class="row">
+        <section
+          *ngFor="let Table of tables; let i = index"
+          [ngClass]="{
+            'card-free-table': true,
+            ' custom-style-false': Table.table_status,
+            'custom-style-true': !Table.table_status
+          }"
+        >
+          <div
+            class="product-table"
+            (click)="takeCurrentOrder(Table._id)"
+            (dblclick)="selectingTable(i, selectTablestatus)"
+          >
+            <h3 class="table-name">
+              {{ Table.table_Name }}-{{ Table.table_No }}
+            </h3>
+            <a
+              type="button"
+              *ngIf="selectTableindex == i && !selectTablestatus"
+              (click)="deleteTable(Table._id)"
+              ><img
+                class="dlt_img"
+                src="../../../../assets/images/delete.png"
+                alt=""
+            /></a>
+            <a
+              type="button"
+              *ngIf="selectTableindex == i && !selectTablestatus"
+              (click)="unselectTable()"
+              ><img
+                class="dlt_img"
+                src="../../../../assets/images/remove.png"
+                alt=""
+            /></a>
 
+            <p *ngIf="!Table.table_status">Free</p>
+            <p *ngIf="Table.table_status">Reserved</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mt-5">
+    <div
+      [@fadeOut]="closeState"
+      [@fadeIn]="openState"
+      *ngIf="openDIv || CloseDiv"
+    >
+      <section class="cart-card">
+        <div class="cart-header">
+          <h3>Current Order</h3>
+          <button class="btn btn-warning" (click)="closeDiv()">close</button>
+        </div>
+        <div class="empty_img" *ngIf="">
+          <img
+            src="../../../../../assets/farmers-food-design-image-file.jpg"
+            alt=""
+          />
+        </div>
+        <div class="empty_cheaker">
+          <div class="cart-info" *ngFor="let food of allFoods">
+            <div class="items-img">
+              <img
+                alt=""
+                [src]="
+                  'http://localhost:5000/foods-images/' + food.food_id.image
+                "
+              />
+            </div>
+            <div class="items-name">{{ food.food_id.name }}</div>
+            <div class="items-type">full</div>
+            <div class="items-price">{{ food.food_quantity }}</div>
+            <div class="items-x">X</div>
+
+            <div class="items-price">{{ food.food_id.price }}</div>
+            <div class="items-total-price">₹ {{ food.food_totalprice }}</div>
+          </div>
         </div>
       </section>
+      <div class="proceed-btn">
+        <div class="total-amount" *ngIf="total_Foods_Count">
+          <span> Food Count :</span> {{ total_Foods_Count }}
+        </div>
+        <div class="total-amount" *ngIf="total_amount" ng>
+          <span>Total : </span>₹{{ total_amount }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
-  <div class="col-md-3">
 
-    
+<a class="cd-popup-trigger" (click)="openPopup()">View Pop-up</a>
+<div
+  class="cd-popup"
+  role="alert"
+  [ngClass]="{ 'is-visible': isPopupVisible }"
+  (click)="closePopup($event)"
+>
+  <div class="cd-popup-container">
+    <p>Are you sure you want to delete this element?</p>
+    <ul class="cd-buttons">
+      <li><a (click)="confirmAction(true)">Yes</a></li>
+      <li><a (click)="confirmAction(false)">No</a></li>
+    </ul>
+    <a class="cd-popup-close img-replace">Close</a>
   </div>
+  <!-- cd-popup-container -->
 </div>
+<!-- cd-popup -->

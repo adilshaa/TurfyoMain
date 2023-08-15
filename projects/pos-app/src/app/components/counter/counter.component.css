@@ -131,7 +131,7 @@ thead th {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #d5d1defe;
+    background-color: rgb(244, 169, 31);
     cursor: pointer;
     text-transform: capitalize;
 }
@@ -180,13 +180,13 @@ tbody tr.hide td img {
 }
 
 .status.delivered {
-    background-color: #86e49d;
-    color: #006b21;
+    background-color: #6cf02979;
+    color: #1ec704;
 }
 
 .status.cancelled {
-    background-color: #d893a3;
-    color: #b30021;
+    background-color: #f91a1a51;
+    color: #ff0505;
 }
 
 .status.pending {

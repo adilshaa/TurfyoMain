@@ -54,7 +54,11 @@ export class KitchenServiceService {
     );
   }
   Foodiready(id: string) {
-    
-   return this.http.get(`${this.url}${this.backoRouter}readyFood/${id}`);
+    return this.http.get(`${this.url}${this.backoRouter}readyFood/${id}`);
+  }
+  listCategory():Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.url}${this.backoRouter}listCategory`
+    );
   };
 }

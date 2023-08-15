@@ -20,9 +20,8 @@ const routes: Routes = [
   },
 
   {
-    path: "partner/:id",
+    path: "partner",
     component: PartnerRegistrationComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: "full_details/:id",
@@ -33,7 +32,6 @@ const routes: Routes = [
   {
     path: "initaillogin",
     component: InitialRegisterPageComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: "**",

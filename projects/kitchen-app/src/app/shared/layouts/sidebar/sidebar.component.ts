@@ -16,7 +16,8 @@ export class SidebarComponent implements OnInit {
   logoutStaff() {
     this.kitchenService.logoutStaff().subscribe((res) => {
       localStorage.removeItem('token');
-      this.router.navigate(['/kitchenLogin']);
+      localStorage.removeItem('resId');
+      location.href = 'http://localhost:2200/kitchenLogin';
     });
   }
 }

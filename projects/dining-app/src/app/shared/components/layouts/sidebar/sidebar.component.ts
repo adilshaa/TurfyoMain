@@ -11,11 +11,10 @@ export class SidebarComponent implements OnInit {
   constructor(private diningService:DiningServicesService,private router:Router) {}
   ngOnInit(): void {}
   logoutStaff() {
-    
     this.diningService.logoutStaff().subscribe((res) => {
-      console.log(res);
+
       localStorage.removeItem("token")
-      this.router.navigate(['/diningLogin']);
+      location.href = 'http://localhost:1200/diningLogin';
     })
   }
 }

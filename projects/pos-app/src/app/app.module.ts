@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { PosInterceptorInterceptor } from './core/interceptor/pos-interceptor.interceptor';
+import { PosSocketServiceService } from './core/services/pos-socket-service.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PosInterceptorInterceptor } from './core/interceptor/pos-interceptor.in
 
   providers: [
     PosServiceService,
+    PosSocketServiceService,
     PosAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

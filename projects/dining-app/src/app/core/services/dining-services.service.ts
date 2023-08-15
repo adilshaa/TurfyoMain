@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'projects/dining-app/src/environment/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -31,6 +32,7 @@ export class DiningServicesService {
       { withCredentials: true }
     );
   }
+
   verifyStaffs() {
     return this.http.get(`${this.mainUrl}${this.backRouterUrl}verifyStaff`, {
       withCredentials: true,
@@ -44,8 +46,8 @@ export class DiningServicesService {
   proceedOrder(cartitems: any, table: string) {
     let orderData = {
       orders: cartitems,
-      table:table
-    }
+      table: table,
+    };
     return this.http.post(
       `${this.mainUrl}${this.backRouterUrl}orderFoods`,
       orderData,
@@ -70,6 +72,12 @@ export class DiningServicesService {
     return this.http.get<any[]>(
       `${this.mainUrl}${this.backRouterUrl}filterFood/${id}`,
       { withCredentials: true }
+    );
+  }
+
+  updateServingStatus(id: string) {
+    return this.http.get(
+      `${this.mainUrl}${this.backRouterUrl}updatingStatus/${id}`
     );
   }
 }

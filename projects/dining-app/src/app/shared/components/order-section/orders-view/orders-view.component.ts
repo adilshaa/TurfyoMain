@@ -3,6 +3,9 @@ import { DiningServicesService } from 'projects/dining-app/src/app/core/services
 import { fromEvent } from 'rxjs';
 import { io } from 'socket.io-client';
 import { fadeInAnimation, fadeOutAnimation } from '../../../animations/angular';
+import { DiningSocketServiceService } from 'projects/dining-app/src/app/core/services/dining-socket-service.service';
+import { DiningNotifyComponent } from '../../notifications/dining-notify/dining-notify.component';
+import { Order } from 'projects/dining-app/src/app/core/models/order';
 
 @Component({
   selector: 'app-orders-view',
@@ -13,18 +16,38 @@ import { fadeInAnimation, fadeOutAnimation } from '../../../animations/angular';
 export class OrdersViewComponent implements OnInit {
   socket = io('http://localhost:5000');
   resId = localStorage.getItem('resId');
-  Orders!: any[];
+  Orders!: Order[];
   allFoods: any;
-  total_Foods_Count!: Number;
-  total_amount!: Number;
+  total_Foods_Count!: number | undefined;
+  total_amount!: number | undefined;
   CloseDiv: boolean = true;
   openDIv: boolean = true;
-
+  current_order!: Order;
   openState: string = 'hidden';
   closeState: string = 'visible';
-  constructor(private _diningService: DiningServicesService) {}
+  constructor(
+    private _diningService: DiningServicesService,
+    private _diningSocketService: DiningSocketServiceService,
+    private _notifications: DiningNotifyComponent
+  ) {}
   ngOnInit(): void {
     this.loadOrder();
+    this.NewOrders();
+    this.servedOrder();
+     this._diningSocketService.listen('updateServedOrder').subscribe((res) => {
+       console.log('heloooo');
+       console.log(res, 'rached');
+
+       this._notifications.handleNewOrderNotification(
+         `Order to ${res.tableId.table_Name} - ${res.tableId.table_No} id Ready `
+       );
+       this.Orders = this.Orders.map((items) => {
+         if (items._id == res._id) {
+           return res;
+         }
+         return items;
+       });
+     });
   }
   closeDiv() {
     this.closeState = 'hidden';
@@ -45,32 +68,46 @@ export class OrdersViewComponent implements OnInit {
   }
 
   loadOrder() {
-    this.socket.emit('loadOrders', this.resId);
-    const ListOrders$ = fromEvent(this.socket, 'listOrder');
-    ListOrders$.subscribe(
+    this._diningSocketService.emit('loadOrders', {});
+    this._diningSocketService.listen('listOrders').subscribe(
       (data) => {
         this.Orders = data;
-        this.Orders.forEach((order) => {
-          const expirationTime = new Date(order.duration).getTime();
-          order.expirationTimeInMillis = expirationTime;
-        });
-
       },
       (error) => {
         console.error('An error occurred:', error);
       }
     );
   }
-  takeCurrentOrder(id: any) {
-    let orderDetails: any = this.Orders.filter(
-      (item: any) => item._id == id
-    );
-    this.allFoods = orderDetails[0].foods;
-    this.total_Foods_Count = orderDetails[0].foods.length;
-    this.total_amount = orderDetails[0].total_price;
+  NewOrders() {
+    this._diningSocketService.listen('pushNewOrder').subscribe((newOrder) => {
+      this._notifications.handleNewOrderNotification('New Orders');
+      this.Orders.push(newOrder);
+    });
+  }
+  servedOrder() {
+   
+  }
+  takeCurrentOrder(id: string) {
+    let currentOrder = this.Orders.find((item: any) => item._id == id);
+    if (currentOrder) {
+      this.current_order = currentOrder;
+      this.allFoods = this.current_order.foods;
+      this.total_Foods_Count = this.current_order.foods.length;
+      this.total_amount = this.current_order.total_price;
+    }
 
     // this.currentOrder = orderDetails.foods.map((item:any)=> console.log(item)
     // )
   }
-  
+  ServingFood(id: string) {
+    this._diningService.updateServingStatus(id).subscribe(
+      (res) => {
+      
+            this._diningSocketService.emit('loadOrdersToPOS', {});
+            
+        this.closeDiv();
+      },
+      (err) => console.log(err)
+    );
+  }
 }

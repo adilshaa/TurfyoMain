@@ -52,24 +52,16 @@ export class InitialRegisterPageComponent {
   }
 
   initailLoginWithGoogle(user: any) {
-    if (this.user) {
-      this.http
-        .post("http://localhost:5000/restaurants/initialLogin", user, {
-          withCredentials: true,
-        })
-        .subscribe(
-          (result: any) => {
-            console.log(result);
-            let id = result.resId;
-            this.router.navigate(["/partner", id]);
-          },
-
-          (err) => {
-            this.toastr.error(err.error.message);
-          }
-        );
+    if (user) {
+      console.log(user.email);
+      let partnerdata = {
+        email: user.email,
+        name:user.name
+      }
+      this.router.navigate(["/partner"], {
+        queryParams: { email: partnerdata.email ,usernamae:partnerdata.name},
+      });
     }
-    console.log(this.user);
     this.loggedIn = this.user != null;
   }
   InitailLogin() {

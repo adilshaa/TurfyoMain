@@ -15,15 +15,13 @@ export class DiningDeskComponent implements OnInit {
   ngOnInit(): void {
     this.diningService.verifyStaffs().subscribe(
       (res) => {
-        
       },
       (err) => {
         console.log(err);
-        localStorage.removeItem('dining-staffs');
+        localStorage.removeItem('token');
         this.router.navigate(['/diningLogin']);
       }
     );
-   
   }
 }
 

@@ -1,8 +1,8 @@
 <div class="container">
   <div class="col-md-8">
-    <div class="orders ">
+    <div class="orders">
       <div
-        class="order-card "
+        class="order-card"
         *ngFor="let order of Orders"
         (click)="takeCurrentOrder(order._id)"
         (click)="openDiv()"
@@ -19,8 +19,15 @@
         </div>
         <div class="order-clear"></div>
         <div class="order-status">
-          <div class="status" *ngIf="order.cooking_Status==true">pendding</div>
-          <div class="ready__status" *ngIf="order.cooking_Status==false">Ready</div>
+          <div class="status" *ngIf="order.order_status == 'pending'">
+            pendding
+          </div>
+          <div class="ready__status" *ngIf="order.order_status == 'ready'">
+            Ready
+          </div>
+            <div class="ready__status" *ngIf="order.order_status == 'served'">
+            Served
+          </div>
 
           <div class="foods">4- Foods</div>
         </div>
@@ -64,12 +71,17 @@
           </div>
         </div>
       </section>
-      <div class="proceed-btn">
+      <div class="proceed__btn">
         <div class="total-amount" *ngIf="total_Foods_Count">
-          <span> Food Count :</span> {{ total_Foods_Count }}
+          <div class="food__Count">
+            <span> Food Count :</span> {{ total_Foods_Count }}
+          </div>
+          <div class="total__cash">
+            <span>Total : </span>₹{{ total_amount }}
+          </div>
         </div>
-        <div class="total-amount" *ngIf="total_amount" ng>
-          <span>Total : </span>₹{{ total_amount }}
+        <div class="serving__btn" *ngIf="current_order&& current_order.order_status=='ready' ">
+          <button (click)="ServingFood(current_order._id)" >Served </button>
         </div>
       </div>
     </div>

@@ -23,6 +23,21 @@ export class PosServiceService {
     });
   }
   generteQR(id: string) {
-  return this.http.post(`${this.mainUrl}${this.backRouter}generateQr`,{},{withCredentials:true});
-  };
+    return this.http.post(
+      `${this.mainUrl}${this.backRouter}generateQr`,
+      {},
+      { withCredentials: true }
+    );
+  }
+  proceesOrder(id: string) {
+    console.log(id);
+
+    return this.http.get(
+      `${this.mainUrl}${this.backRouter}proceedOrder/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  
 }

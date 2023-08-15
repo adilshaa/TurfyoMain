@@ -6,6 +6,7 @@ import {
   fadeOutAnimation,
   fadeInAnimation,
 } from '../../shared/animations/angular';
+import { PosSocketServiceService } from '../../core/services/pos-socket-service.service';
 
 @Component({
   selector: 'app-orders',
@@ -25,7 +26,7 @@ export class OrdersComponent implements OnInit {
 
   openState: string = 'hidden';
   closeState: string = 'visible';
-  constructor(private _posService: PosServiceService) {}
+  constructor(private _posService: PosServiceService,private _posSocketService:PosSocketServiceService) {}
   ngOnInit(): void {
     this.loadOrder();
   }
@@ -48,14 +49,10 @@ export class OrdersComponent implements OnInit {
   }
 
   loadOrder() {
-    this.socket.emit('loadOrders', this.resId);
-    const ListOrders$ = fromEvent(this.socket, 'loadAllOrders');
-    ListOrders$.subscribe(
+    this._posSocketService.emit('loadOrdersToPOS', {});
+    this._posSocketService.listen('listOrdersToPOS').subscribe(
       (data) => {
         this.Orders = data;
-       console.log(this.Orders);
-
-
       },
       (error) => {
         console.error('An error occurred:', error);

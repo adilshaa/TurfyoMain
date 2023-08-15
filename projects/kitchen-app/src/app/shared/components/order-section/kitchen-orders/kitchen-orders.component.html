@@ -13,7 +13,11 @@
           </div>
           <div class="table">
             <section class="card-free-table custom-style-false">
-              <span>{{order.tableId.table_Name}}-{{order.tableId.table_No}}</span>
+              <span
+                >{{ order.tableId.table_Name }}-{{
+                  order.tableId.table_No
+                }}</span
+              >
             </section>
           </div>
         </div>
@@ -63,23 +67,18 @@
           </div>
         </div>
       </section>
-      <div class="proceed-btn">
-        <div class="total-amount" *ngIf="total_Foods_Count">
-          <span> Food Count :</span> {{ total_Foods_Count }}
+      <div class="proceed__btn">
+        <div class="order_data">
+          <div class="total-amount" *ngIf="total_Foods_Count">
+            <span> Food Count :</span> {{ total_Foods_Count }}
+          </div>
+          <div class="total-amount" *ngIf="total_amount" ng>
+            <span>Total : </span>₹{{ total_amount }}
+          </div>
         </div>
-        <div class="total-amount" *ngIf="total_amount" ng>
-          <span>Total : </span>₹{{ total_amount }}
+        <div class="Ready__btn">
+          <button (click)="foodIsReady(orderDetails._id)">Ready</button>
         </div>
-        
-      </div>
-      <div class="proceed-btn">
-        <div class="total-amount" *ngIf="total_Foods_Count">
-          <button (dblclick)="foodIsReady(orderDetails._id)">  Ready </button>
-        </div>
-        <div class="total-amount" *ngIf="total_amount" ng>
-          <span>Total : </span>₹{{ total_amount }}
-        </div>
-        
       </div>
     </div>
   </div>

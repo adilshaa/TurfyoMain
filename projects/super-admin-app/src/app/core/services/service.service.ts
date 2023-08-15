@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { SuperAdminEmitter } from '../../shared/emitters/emitters';
-import { Router } from '@angular/router';
-import { DetailsRestaurantsComponent } from '../../shared/components/details-restaurants/details-restaurants.component';
-import { FullRestaurantDetails } from '../models/restaurant.model';
-import { Store } from '@ngrx/store';
-import { retriveResFullDetails } from '../store/super-admin.actions';
+import { HttpClient } from "@angular/common/http";
+import { Injectable, OnInit } from "@angular/core";
+import { SuperAdminEmitter } from "../../shared/emitters/emitters";
+import { Router } from "@angular/router";
+import { DetailsRestaurantsComponent } from "../../shared/components/details-restaurants/details-restaurants.component";
+import { FullRestaurantDetails } from "../models/restaurant.model";
+import { Store } from "@ngrx/store";
+import { retriveResFullDetails } from "../store/super-admin.actions";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ServiceService implements OnInit {
   constructor(
@@ -21,53 +21,60 @@ export class ServiceService implements OnInit {
 
   // Login of super admin
   LoginSuperDamin(user: any) {
-    console.log('ahiii');
+    console.log("ahiii");
     console.log(user);
     this.http
-      .post('http://localhost:5000/superadmin/superadminlogin', user, {
+      .post("http://localhost:5000/superadmin/superadminlogin", user, {
         withCredentials: true,
       })
       .subscribe((response: any) => {
         const token = response.token;
-        localStorage.setItem('superadmin', token);
-        localStorage.setItem('isLoggedIN', 'true');
+        localStorage.setItem("superadmin", token);
+        localStorage.setItem("isLoggedIN", "true");
         SuperAdminEmitter.Emitter.emit(true);
-        this.router.navigate(['/']),
+        this.router.navigate(["/"]),
           (err: any) => {
-            console.log('error');
-            this.router.navigate(['/login']);
+            console.log("error");
+            this.router.navigate(["/login"]);
             console.log(err);
           };
       });
   }
   //Load restaurants Datas to store
-  ParnerRegistration(data: any ,resId:any) {
+  ParnerRegistration(data: any) {
     console.log(data);
-
     this.http
-      .post(`http://localhost:5000/restaurants/resgister/${resId}`, data, {
+      .post(`http://localhost:5000/restaurants/resgister`, data, {
         withCredentials: true,
       })
       .subscribe(
         () => {
-          window.location.href=`http://localhost:3200`
-          window.close()
+          window.location.href = `http://localhost:3200`;
+          window.close();
         },
-
-        (err: any) => console.log('error')
+        (err: any) => console.log(err)
       );
   }
   InitailLogin(data: any) {
     return this.http.post(
-      'http://localhost:5000/restaurants/initialLogin',
+      "http://localhost:5000/restaurants/initialLogin",
       data,
       { withCredentials: true }
+    );
+  }
+  initialLoginWithGoogle(data: any) {
+    return this.http.post(
+      `http://localhost:5000/restaurants/initialLogin`,
+      data,
+      {
+        withCredentials: true,
+      }
     );
   }
 
   getAllRestaurantsData() {
     return this.http.get(
-      'http://localhost:5000/restaurants/get_allRestaurant',
+      "http://localhost:5000/restaurants/get_allRestaurant",
       {
         withCredentials: true,
       }
@@ -88,7 +95,7 @@ export class ServiceService implements OnInit {
   //Delete restaurants by super admin
 
   listrestaurant(id: any, status: boolean) {
-    console.log('list');
+    console.log("list");
     if (status == true) {
       status = false;
     } else {
@@ -104,7 +111,7 @@ export class ServiceService implements OnInit {
       )
       .subscribe(
         (result: any) => {
-          console.log('listed');
+          console.log("listed");
           this.router.navigate([this.router.url]);
           this.resDataStore.dispatch(retriveResFullDetails({ id: id }));
         },

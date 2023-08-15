@@ -1,6 +1,11 @@
 <div class="container">
   <div class="foods__Section">
-    <div class="foods_container grid" *ngIf="foodsData$ | async as foods">
+    <div class="Category_section">
+      <div class="categories" *ngFor="let category of categories">
+        <button (click)="filterFood(category._id)">{{category.name}}</button>
+      </div>
+    </div>
+    <div class="foods_container grid" *ngIf="foodsData$ as foods">
       <section class="card" *ngFor="let foodsData of foods">
         <div class="product-image">
           <img

@@ -25,13 +25,6 @@ export class KitchenLoginComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    let key = localStorage.getItem('kitchen-staffs');
-    if (key) {
-      this.router.navigate(['/'])
-    } else {
-      this.router.navigate(['/diningLogin']);
-    }
-
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [

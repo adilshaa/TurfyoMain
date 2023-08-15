@@ -37,6 +37,7 @@ import { ResLoaderComponent } from './components/loader/res-loader/res-loader.co
 import { TableViewComponent } from './components/table-side/table-view/table-view.component';
 import { EditStocksComponent } from './components/stocks-section/edit-stocks/edit-stocks.component';
 import { NotificationsComponent } from './shared/components/notifications/notifications.component';
+import { SocketResAdminServiceService } from './core/services/socket-res-admin-service.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,6 @@ import { NotificationsComponent } from './shared/components/notifications/notifi
       positionClass: 'toast-top-center', // Adjust the notification position as per your preference
       preventDuplicates: true,
     }),
-    
   ],
   providers: [
     ResturantControlServiceService,
@@ -102,6 +102,7 @@ import { NotificationsComponent } from './shared/components/notifications/notifi
         },
       } as SocialAuthServiceConfig,
     },
+    SocketResAdminServiceService,
   ],
   bootstrap: [AppComponent],
 })
