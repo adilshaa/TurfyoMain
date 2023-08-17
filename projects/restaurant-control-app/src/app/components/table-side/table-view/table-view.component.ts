@@ -27,7 +27,6 @@ export class TableViewComponent implements OnInit {
   total_Foods_Count!: number;
   CloseDiv: boolean = true;
   openDIv: boolean = true;
-
   openState: string = 'hidden';
   closeState: string = 'visible';
   constructor(
@@ -43,7 +42,7 @@ export class TableViewComponent implements OnInit {
     this.resService.loadTables().subscribe(
       (res: any) => {
         this.tables = res;
-        console.log(res);
+       
       },
       (err) => console.log(err)
     );
@@ -67,8 +66,6 @@ export class TableViewComponent implements OnInit {
 
   selectingTable(index: number, status: boolean) {
     this.selectTableindex = index;
-    console.log(index);
-
   }
   unselectTable() {
     this.selectTableindex = -1;

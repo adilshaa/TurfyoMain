@@ -59,7 +59,7 @@
               Ready
             </p>
           </td>
-          <td>View</td>
+          <td> <a  type="button" (click)="moreView(order._id)"> View</a></td>
           <td><a  type="button" (click)="generateQr(order._id)"> Q</a></td>
           <td><a  type="button" (click)="ProceedOrder(order._id)" *ngIf="order.order_status=='served'"> Proceed</a></td>
 

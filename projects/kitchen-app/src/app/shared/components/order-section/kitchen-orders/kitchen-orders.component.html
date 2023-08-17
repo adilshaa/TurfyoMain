@@ -24,8 +24,7 @@
         <div class="order-clear"></div>
         <div class="order-status">
           <div class="status">pending</div>
-          <div class="time">10:15 s</div>
-          <div class="foods">4- Foods</div>
+          <div class="foods"> {{order.foods.length}} {{order.foods.length==1?'Food':'foods'}}</div>
         </div>
       </div>
     </div>
@@ -68,11 +67,11 @@
         </div>
       </section>
       <div class="proceed__btn">
-        <div class="order_data">
-          <div class="total-amount" *ngIf="total_Foods_Count">
+        <div class="total-amount" *ngIf="total_Foods_Count">
+          <div class="food__Count">
             <span> Food Count :</span> {{ total_Foods_Count }}
           </div>
-          <div class="total-amount" *ngIf="total_amount" ng>
+          <div class="total__cash">
             <span>Total : </span>₹{{ total_amount }}
           </div>
         </div>

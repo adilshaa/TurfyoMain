@@ -39,5 +39,15 @@ export class PosServiceService {
       }
     );
   }
-  
+  filterSales(start: string, end: string): Observable<any[]> {
+    let data = {
+      start: start,
+      end: end,
+    };
+    return this.http.post<any[]>(
+      `${this.mainUrl}${this.backRouter}filterSales`,
+      data,
+      { withCredentials: true }
+    );
+  }
 }

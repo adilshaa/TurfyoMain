@@ -236,7 +236,7 @@ img {
 }
 
 .product-info h2 {
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .product-info p {
@@ -337,7 +337,6 @@ img {
   right: 0;
   top: 10px;
   align-items: center;
-
 }
 
 .add__food {
@@ -349,7 +348,6 @@ img {
   background-color: red;
   border-radius: 10px;
   color: #f2f5ff;
-
 }
 .Save__Food {
   width: 130px;
@@ -357,41 +355,41 @@ img {
   border-radius: 10px;
 }
 
-.foodscount{
-
+.foodscount {
   font-size: 20px;
   font-weight: 600;
   color: #585757;
 }
-.foodscount span{
+.foodscount span {
   font-size: 10px;
   font-weight: 600;
   color: #e78104;
-} 
-.food_status{
+}
+.food_status {
   width: 100%;
   display: flex;
   flex-direction: row;
   margin: 2px;
 }
-.av_unav{
-width: 40%;
+.total_food {
+  width: 67%;
+
+}
+.av_unav {
+  width: 26%;
   display: flex;
-  justify-content: right;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.available_foods{
-  font-size: 10px;
+.available_foods {
+  font-size: 13px;
   font-weight: 600;
-  color: #e78104;
-
+  color: #0bd618;
 }
-.unavailable_foods{
-  font-size: 10px;
+.unavailable_foods {
+    font-size: 13px;
   font-weight: 600;
-  color: #e78104;
-
-
-
+  color: #e70404;
 }
 /* cart  */
 
@@ -537,10 +535,7 @@ option {
   box-shadow: rgb(138, 137, 137) 1px 2px 15px;
 }
 
-
-
 /* food category adding modal start  */
-
 
 /* .modal-dialog {
   max-width: 350px;
@@ -548,7 +543,6 @@ option {
   border-radius: 25px;
   background: #ff7700;
 } */
-
 
 .dialog-cnt {
   display: flex;
@@ -572,7 +566,7 @@ option {
   background-color: rgb(255, 149, 0);
   height: 32px;
   width: 5.5rem;
-  border-radius: 10px 10px 10px 10px; 
+  border-radius: 10px 10px 10px 10px;
   /* transform: rotate(-10deg); */
 }
 
@@ -624,6 +618,5 @@ option {
   flex-direction: column;
   justify-content: center;
 }
-
 
 /* end  */

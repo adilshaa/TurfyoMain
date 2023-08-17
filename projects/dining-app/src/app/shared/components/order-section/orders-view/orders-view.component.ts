@@ -68,8 +68,8 @@ export class OrdersViewComponent implements OnInit {
   }
 
   loadOrder() {
-    this._diningSocketService.emit('loadOrders', {});
-    this._diningSocketService.listen('listOrders').subscribe(
+    this._diningSocketService.emit('loadOrdersToPOS', {});
+    this._diningSocketService.listen('listOrdersToPOS').subscribe(
       (data) => {
         this.Orders = data;
       },

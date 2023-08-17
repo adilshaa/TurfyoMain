@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ResturantControlServiceService } from '../../../core/services/resturant-control-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -13,7 +19,7 @@ import { SocketResAdminServiceService } from '../../../core/services/socket-res-
   templateUrl: './list-foods.component.html',
   styleUrls: ['./list-foods.component.css'],
 })
-export class ListFoodsComponent implements OnInit,OnDestroy {
+export class ListFoodsComponent implements OnInit, OnDestroy {
   @ViewChild('myModal') myModal!: ElementRef;
   @ViewChild('myModal1') myModal1!: ElementRef;
 
@@ -31,6 +37,9 @@ export class ListFoodsComponent implements OnInit,OnDestroy {
   FoodCategory!: any[];
   foodCount!: number;
   categoryName!: string;
+  available!: number;
+  unavailable: number = 0;
+
   constructor(
     private resService: ResturantControlServiceService,
     private _resSocketService: SocketResAdminServiceService,
@@ -39,7 +48,11 @@ export class ListFoodsComponent implements OnInit,OnDestroy {
     private http: HttpClient, // private resStore: Store<{ foodsData: Foodsstructure[] }>
     private notificatons: NotificationsComponent,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.countAvailableFoods();
+
+  }
+  
   ngOnInit(): void {
     this.loadFoods();
     this.updateFoods();
@@ -82,6 +95,8 @@ export class ListFoodsComponent implements OnInit,OnDestroy {
             this.empty = false;
           }
           this.FoodCategory = res.categories;
+          this.available = res.availableFoods.length;
+          this.unavailable = res.unavailableFoods.length;
         },
         (error) => {
           console.error('An error occurred:', error);
@@ -203,6 +218,22 @@ export class ListFoodsComponent implements OnInit,OnDestroy {
       }
     });
   }
+  countAvailableFoods() {
+    // this.foodData.map((items) => {
+    //   console.log('hai');
+    //   console.log(items);
+    //   console.log(items.stock);
+
+    //   if (items.stock > 0) {
+    //     console.log(items.stock);
+
+    //     this.available++;
+    //   } else {
+    //     this.unavailable++;
+    //   }
+    // }); 
+  }
+
   ngOnDestroy(): void {
     this.componentDestroyed$.next();
     this.componentDestroyed$.complete();

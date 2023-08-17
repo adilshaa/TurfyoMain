@@ -1,8 +1,8 @@
+
+
 .container {
-  margin: 4rem 0px;
-  justify-content: center;
+  margin: 0rem 0px;
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: row;
 }
@@ -12,48 +12,51 @@
 }
 
 .orders {
+  padding: 1.6rem 0rem;
   display: grid;
-  grid-template-columns: repeat(2, 200px);
-  row-gap: 20px;
-  column-gap: 20px;
+  grid-template-rows: repeat(4, 91px);
   width: 100%;
+  height: 600px;
   justify-content: space-around;
-  /* flex-direction: column; */
+  overflow-y: auto;
 }
 
 .order-card {
-  width: 290px;
-  height: 10rem;
+  width: 636px;
+  height: 77px;
 
   background-color: white;
-  box-shadow: 1px 2px 18px rgb(196, 195, 195);
+  border: solid 1px orange;
+  box-shadow: 1px 2px 18px rgb(253, 250, 250);
   border-radius: 25px;
   display: flex;
   flex-direction: row;
   transition: width 0.5s ease;
 }
 .order-table {
-  width: 30%;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
+}
+.order-id {
+  padding: 1rem 1rem;
 }
 .order-id h4 {
   font-size: 20px;
   font-weight: 600;
 }
-.table {
-  justify-content: center;
+.table1 {
   display: flex;
+  justify-content: center;
 }
 
 .card-free-table.custom-style-true {
   position: relative;
   margin: 1rem 1rem;
-  width: 160px;
-  height: 100px;
+  width: 81px;
+  height: 47px;
   box-shadow: 10px 15px 30px -12px rgb(48, 229, 12),
     10px 15px 30px -12px rgb(48, 229, 12) inset;
   border: solid rgba(44, 171, 15, 0.899) 10px;
@@ -68,8 +71,8 @@
 .card-free-table.custom-style-false {
   position: relative;
   margin: 1rem 1rem;
-  width: 100px;
-  height: 50px;
+  width: 81px;
+  height: 47px;
   box-shadow: 10px 15px 30px -12px rgb(255, 145, 0, 0.725),
     10px 15px 30px -12px rgba(255, 145, 0, 0.725) inset;
   border: solid rgba(255, 145, 0, 0.725) 10px;
@@ -145,7 +148,7 @@
     font-size: 12px;
     font-weight: 600;
   }
-  .table {
+  .table1 {
     max-width: 96%;
     background-color: transparent;
   }
@@ -239,7 +242,7 @@
     font-size: 14px;
     font-weight: 600;
   }
-  .table {
+  .table1 {
     max-width: 96%;
     background-color: transparent;
   }
@@ -384,7 +387,7 @@ option {
 .items-name,
 .items-type {
   font-size: small;
-  font-weight: 500;
+  font-weight: 400;
   color: rgb(77, 77, 77);
 }
 .items-price {
@@ -403,9 +406,10 @@ option {
 }
 .items-total-price {
   font-size: small;
-  font-weight: 600;
+  font-weight: 400;
   color: #ff8800;
 }
+
 
 .proceed__btn{
   position: relative;
@@ -449,3 +453,8 @@ border-radius: 5px;
   color: #fff;
   
 }
+
+
+
+
+

@@ -15,13 +15,31 @@
               class="product-table"
               type="button"
               (click)="takeCurrentOrder(Table._id)"
-              (click)="openDiv()"
+              
             >
-              <h3 class="table-name">
+              <h3 class="table-name" *ngIf="!Table.table_status">
                 {{ Table.table_Name }}-{{ Table.table_No }}
               </h3>
               <p *ngIf="!Table.table_status">Free</p>
-              <p *ngIf="Table.table_status">Reserved</p>
+              <div>
+                <div class="loadingio-spinner-bean-eater-eey17oykdca" *ngIf="Table.table_status">
+                  <div class="ldio-djpg494qup8" >
+                    <div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p *ngIf="Table.table_status">
+                {{ Table.table_Name }}-{{ Table.table_No }}
+              </p>
             </div>
           </section>
         </div>
@@ -30,46 +48,52 @@
   </div>
 
   <div class="col-md-4 mt-5">
-    <div  [@fadeOut]="closeState" [@fadeIn]="openState" *ngIf="openDIv || CloseDiv" >
-    <section class="cart-card"  >
-      <div class="cart-header">
-        <h3>Current Order</h3>
-        <button class="btn btn-warning" (click)="closeDiv()">close</button>
-      </div>
-      <div class="empty_img" *ngIf="">
-        <img
-          src="../../../../../assets/farmers-food-design-image-file.jpg"
-          alt=""
-        />
-      </div>
-      <div class="empty_cheaker" >
-       
-        <div class="cart-info" *ngFor="let food of allFoods">
-          <div class="items-img">
-            <img
-              alt=""
-              [src]="'http://localhost:5000/foods-images/' + food.food_id.image"
-            />
-          </div>
-          <div class="items-name">{{ food.food_id.name }}</div>
-          <div class="items-type">full</div>
-          <div class="items-price"> {{ food. food_quantity}}</div>
-          <div class="items-x"> X</div>
+    <div
+      [@fadeOut]="closeState"
+      [@fadeIn]="openState"
+      *ngIf="openDIv || CloseDiv"
+    >
+      <section class="cart-card">
+        <div class="cart-header">
+          <h3>Current Order</h3>
+          <button class="btn btn-warning" (click)="closeDiv()">close</button>
+        </div>
+        <div class="empty_img" *ngIf="">
+          <img
+            src="../../../../../assets/farmers-food-design-image-file.jpg"
+            alt=""
+          />
+        </div>
+        <div class="empty_cheaker">
+          <div class="cart-info" *ngFor="let food of allFoods">
+            <div class="items-img">
+              <img
+                alt=""
+                [src]="
+                  'http://localhost:5000/foods-images/' + food.food_id.image
+                "
+              />
+            </div>
+            <div class="items-name">{{ food.food_id.name }}</div>
+            <div class="items-type">full</div>
+            <div class="items-price">{{ food.food_quantity }}</div>
+            <div class="items-x">X</div>
 
-          <div class="items-price">{{ food.food_id.price }} </div>
-          <div class="items-total-price">₹ {{ food.food_totalprice }}</div>
+            <div class="items-price">{{ food.food_id.price }}</div>
+            <div class="items-total-price">₹ {{ food.food_totalprice }}</div>
+          </div>
+        </div>
+      </section>
+      <div class="proceed-btn">
+        <div class="total-amount" *ngIf="total_Foods_Count">
+          <span> Food Count :</span> {{ total_Foods_Count }}
+        </div>
+        <div class="total-amount" *ngIf="total_amount" ng>
+          <span>Total : </span>₹{{ total_amount }}
         </div>
       </div>
-    </section>
-     <div class="proceed-btn" >
-   
-      <div class="total-amount" *ngIf="total_Foods_Count">
-     <span> Food Count :</span> {{total_Foods_Count}}
-     </div>
-       <div class="total-amount" *ngIf="total_amount" ng>
-       <span>Total : </span>₹{{total_amount}}
-     </div>
     </div>
   </div>
-  </div>
 </div>
+
+<style type="text/css"></style>

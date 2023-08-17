@@ -6,6 +6,8 @@ import { SalesComponent } from './components/sales/sales.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { PosAuthGuard } from './core/auth/pos-guard.guard';
+import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +32,17 @@ const routes: Routes = [
       {
         path: 'order',
         component: OrdersComponent,
+        canActivate: [PosAuthGuard],
+      },
+      {
+        path: 'orderdetaile/:id',
+        component: OrderDetailsComponent,
+        canActivate: [PosAuthGuard],
+      },
+
+      {
+        path: 'historyDetailes/:id',
+        component: OrderHistoryDetailsComponent,
         canActivate: [PosAuthGuard],
       },
     ],

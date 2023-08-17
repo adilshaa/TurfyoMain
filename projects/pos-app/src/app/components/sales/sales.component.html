@@ -3,8 +3,17 @@
     <h3>Counter</h3>
     <div class="input-group">
       <input type="search" placeholder="Search Data..." />
+      
       <!-- <img src="images/search.png" alt=""> -->
     </div>
+     <div class="filter__section">
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" [(ngModel)]="startDate" (ngModelChange)="calculateSales()">
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" [(ngModel)]="endDate" (ngModelChange)="calculateSales()">
+  </div>
+
     <div class="export__file">
       <label
         for="export-file"
@@ -49,7 +58,7 @@
             }}
           </td>
           <td>
-           {{ order.order_date | date : "dd / mm / yy" }}
+           {{ order.order_date| date:'dd/MM/yyyy'  }}
           </td>
 
           <td>

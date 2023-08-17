@@ -58,11 +58,16 @@ export class TableViewComponent implements OnInit {
     let orderDetails: any = this.Orders.find(
       (item: any) => item.tableId._id == id
     );
-
-    this.allFoods = orderDetails.foods;
-    console.log(this.allFoods);
-    this.total_Foods_Count = orderDetails.foods.length;
-    this.total_amount = orderDetails.total_price;
+    
+    if (orderDetails) {
+      this.openDiv();
+      this.allFoods = orderDetails.foods;
+      console.log(this.allFoods);
+      this.total_Foods_Count = orderDetails.foods.length;
+      this.total_amount = orderDetails.total_price;
+    } else {
+      this.closeDiv();
+    }
 
     // this.currentOrder = orderDetails.foods.map((item:any)=> console.log(item)
     // )

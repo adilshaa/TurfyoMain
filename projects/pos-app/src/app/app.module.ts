@@ -17,6 +17,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { PosInterceptorInterceptor } from './core/interceptor/pos-interceptor.interceptor';
 import { PosSocketServiceService } from './core/services/pos-socket-service.service';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { PosSocketServiceService } from './core/services/pos-socket-service.serv
     SalesComponent,
     PosLobbyComponent,
     SidebarComponent,
+    OrderDetailsComponent,
+    OrderHistoryDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,9 +13,17 @@ export class SalesComponent implements OnInit {
   socket: any = io('http://localhost:5000');
   resId: string | null = localStorage.getItem('resId');
   ListOrders$!: any[];
-  constructor(private _PosServie: PosServiceService,private _posSocketService:PosSocketServiceService) {}
+  filterType!: string;
+  startDate!: string;
+  endDate!: string;
+  totalSales!: number;
+  constructor(
+    private _PosServie: PosServiceService,
+    private _posSocketService: PosSocketServiceService
+  ) {}
   ngOnInit(): void {
     this.loadOrderHistory();
+    
   }
   loadOrderHistory() {
     this._posSocketService.emit('loadToOrdersHistory', {});
@@ -25,11 +33,19 @@ export class SalesComponent implements OnInit {
       },
       (err) => console.log(err)
     );
-    fromEvent(this.socket, 'listorderHistories').subscribe(
-      (res:any) => {
-        console.log(res);
-      },
-      
-    );
+    fromEvent(this.socket, 'listorderHistories').subscribe((res: any) => {
+      console.log(res);
+    });
   }
+  calculateSales() {
+    console.log(this.startDate,this.endDate);
+    
+    if (this.startDate && this.endDate) {
+      this._PosServie.filterSales(this.startDate, this.endDate).subscribe((res: any) => {
+        console.log(res);
+        
+        this.ListOrders$=res
+      })
+    }
+  };
 }

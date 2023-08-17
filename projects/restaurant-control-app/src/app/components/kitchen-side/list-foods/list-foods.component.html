@@ -137,16 +137,21 @@
 <div class="food_status">
   <div class="total_food">
     <div class="foodscount" *ngIf="!foodCount && !categoryName">
-      Total<span> {{ foodData.length }} food </span>
+      Total {{ foodData.length }}
+      {{ foodData.length == 1 ? "food" : "foods" }} 
     </div>
   </div>
 
   <div class="av_unav">
     <div class="available_foods" *ngIf="!foodCount && !categoryName">
-      Total<span> {{ foodData.length }} food </span>
+      <span>
+        {{ available }} {{ available == 1 ? "food" : "foods" }} in stock
+      </span>
     </div>
     <div class="unavailable_foods" *ngIf="!foodCount && !categoryName">
-      Total<span> {{ foodData.length }} food </span>
+      <span>
+        {{ unavailable }} {{ unavailable == 1 ? "food" : "foods" }} out of stock
+      </span>
     </div>
   </div>
 </div>
@@ -177,10 +182,8 @@
   <div class="order_section" *ngIf="emptyCart">
     <section class="cart-card">
       <div class="cart-header">
-        <h3>Current Order</h3>
-        <select class="tables">
-          <option [value]=""></option>
-        </select>
+        <h3>Food Details</h3>
+     
       </div>
       <!-- <div class="empty_img" 
         <img
@@ -247,24 +250,14 @@
                     <button type="submit" *ngIf="submition">Edit</button>
                   </div>
                 </div>
-                <!-- <button class="item-delete" (click)="removeFromCart(items.foodId)">
-            D
-          </button> -->
+            
               </div>
             </a>
           </div>
         </form>
       </div>
     </section>
-    <!-- <div class="proceed-btn" >
-      <button
-        type="button"
-        data-toggle="modal"
-        data-target=".bd-example-modal-sm"
-      >
-        Proseed Order
-      </button>
-    </div> -->
+   
   </div>
 </div>
 
