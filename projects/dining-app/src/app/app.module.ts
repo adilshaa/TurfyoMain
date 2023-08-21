@@ -56,6 +56,7 @@ import { DiningSocketServiceService } from './core/services/dining-socket-servic
       preventDuplicates: true,
     }),
   ],
+  
   providers: [
     DiningServicesService,
     diningGuardGuard,

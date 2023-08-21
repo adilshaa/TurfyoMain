@@ -19,6 +19,7 @@ import { PosInterceptorInterceptor } from './core/interceptor/pos-interceptor.in
 import { PosSocketServiceService } from './core/services/pos-socket-service.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,10 @@ import { OrderHistoryDetailsComponent } from './components/order-history-details
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center', // Adjust the notification position as per your preference
+      preventDuplicates: true,
+    }),
   ],
 
   providers: [

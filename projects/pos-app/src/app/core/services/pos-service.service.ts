@@ -29,11 +29,14 @@ export class PosServiceService {
       { withCredentials: true }
     );
   }
-  proceesOrder(id: string) {
+  proceesOrder(id: string, paymentType: string) {
     console.log(id);
-
-    return this.http.get(
+    const payment = {
+      paymentType: paymentType,
+    };
+    return this.http.post(
       `${this.mainUrl}${this.backRouter}proceedOrder/${id}`,
+      payment,
       {
         withCredentials: true,
       }
@@ -48,6 +51,14 @@ export class PosServiceService {
       `${this.mainUrl}${this.backRouter}filterSales`,
       data,
       { withCredentials: true }
+    );
+  }
+  takeCurrentOrder(id: String) {
+    return this.http.get(
+      `${this.mainUrl}${this.backRouter}currentOrder/${id}`,
+      {
+        withCredentials: true,
+      }
     );
   }
 }

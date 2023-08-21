@@ -27,7 +27,6 @@
                 "output": "/"
               }
             ],
-
             "styles": ["projects/dining-app/src/styles.css"],
             "scripts": []
           },

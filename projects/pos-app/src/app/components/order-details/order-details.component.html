@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="order_details">
+    <div class="order_data">
+      <div class="table_Details">
+        <div class="table_illu">
+          <div class="table_outlet">
+            <div class="table_name">
+              <h4>Table - 1</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="table_time">table</div>
+        <div class="table_status">
+          <div class="staus_outleet">
+            <h4>reserver</h4>
+          </div>
+        </div>
+      </div>
+      <div class="staff_Details">
+        <div class="table_number">T-1</div>
+        <div class="table_number">table</div>
+        <div class="table_number">T-1</div>
+      </div>
+      <div class="_Details"></div>
+    </div>
+
+    <div class="Order_foods">
+      <div class="food_datas">
+        <div class="card_details">
+          <div class="image">
+            <h5>Image</h5>
+          </div>
+          <div class="name">
+            <h5>Name</h5>
+          </div>
+          <div class="quantity">
+            <h5>Quantity</h5>
+          </div>
+          <div class="price">
+            <h5>Price</h5>
+          </div>
+        </div>
+        <div class="card_container">
+          <div class="food__card" *ngFor="let food of OrderFoods">
+            <div class="food_image">
+              <img
+                [src]="
+                  'http://localhost:5000/foods-images/' + food.food_id.image
+                "
+                alt=""
+              />
+            </div>
+            <div class="food_name">
+              <h5>{{ food.food_id.name }}</h5>
+            </div>
+            <div class="food_queantity">
+              <h5>{{ food.food_quantity }}</h5>
+            </div>
+            <div class="food_price">
+              <h5>{{ food.food_totalprice }}</h5>
+            </div>
+          </div>
+        </div>
+        <hr class="underline" />
+        <div class="Order_summary">
+           
+          <div class="order_tax">
+            <div class="tax_label">Tax</div>
+            <div class="tax_price">{{(Order.total_price/18) | number:'1.0-2'}}</div>
+          </div>
+          <div class=" cgst_tax">
+            <div class="cgst_label">CGST</div>
+            <div class="cgst_price">{{(Order.total_price/18/2) | number:'1.0-2'}}</div>
+          </div>
+           <div class="sgst_tax">
+            <div class="sgst_label">SGST</div>
+            <div class="sgst_price">{{(Order.total_price/18/2) | number:'1.0-2'}}</div>
+          </div>
+          <div class="order_totalprice">
+            <div class="price_label">Total Price</div>
+            <div class="price_number">{{(Order.total_price)|number :'1.0-2'}}</div>
+          </div>
+          <div class="order_pay_price">
+            <div class="pay_label">Total payable Price</div>
+            <div class="pay_number">{{(Order.total_price  )+(Order.total_price/18)|number :'1.0-2'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

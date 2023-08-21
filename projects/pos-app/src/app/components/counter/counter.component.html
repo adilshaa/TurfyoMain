@@ -33,39 +33,50 @@
 
           <th>Order Status <span class="icon-arrow">&UpArrow;</span></th>
           <th>Full Details<span class="icon-arrow">&UpArrow;</span></th>
-
+          <th>Payment<span class="icon-arrow">&UpArrow;</span></th>
           <th>Qr Code <span class="icon-arrow">&UpArrow;</span></th>
+          <th>Proceed <span class="icon-arrow">&UpArrow;</span></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of orders">
           <td>1</td>
-
           <td>{{ order.tableId.table_Name }}-{{ order.tableId.table_No }}</td>
           <td>{{ order.staffId.username }}</td>
           <td>{{ order.foods.length }}</td>
           <td>
             <strong>{{ order.total_price }} </strong>
           </td>
-
           <td>
-            <p class="status cancelled " *ngIf="order.order_status == 'served'">
+            <p class="status cancelled" *ngIf="order.order_status == 'served'">
               Served
             </p>
             <p class="status delivered" *ngIf="order.order_status == 'pending'">
               Pendding
             </p>
-             <p class="status delivered" *ngIf="order.order_status == 'ready'">
+            <p class="status delivered" *ngIf="order.order_status == 'ready'">
               Ready
             </p>
           </td>
-          <td> <a  type="button" (click)="moreView(order._id)"> View</a></td>
-          <td><a  type="button" (click)="generateQr(order._id)"> Q</a></td>
-          <td><a  type="button" (click)="ProceedOrder(order._id)" *ngIf="order.order_status=='served'"> Proceed</a></td>
+          <td><a type="button" (click)="moreView(order._id)"> View</a></td>
+          <td>
+            <select [value]="paymentType" id="" [(ngModel)]="paymentType">
+              <option value="">Upi</option>
+              <option value="">Cash</option>
+            </select>
+          </td>
 
+          <td><a type="button" (click)="generateQr(order._id)"> Q</a></td>
+          <td>
+            <a
+              type="button"
+              (click)="ProceedOrder(order._id)"
+              *ngIf="order.order_status == 'served'"
+            >
+              Proceed</a
+            >
+          </td>
         </tr>
-
-        
       </tbody>
     </table>
   </section>

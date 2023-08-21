@@ -5,6 +5,7 @@ import { fromEvent } from 'rxjs';
 import { SocketKitchenServiceService } from 'projects/kitchen-app/src/app/core/services/socket-kitchen-service.service';
 import { PosSocketServiceService } from '../../core/services/pos-socket-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-counter',
   templateUrl: './counter.component.html',
@@ -15,10 +16,12 @@ export class CounterComponent implements OnInit {
   resId = localStorage.getItem('resId');
   orders!: any;
   totalOrderCash!: Number;
+  paymentType!:string;
   constructor(
     private _posService: PosServiceService,
     private _posSocketService: PosSocketServiceService,
-    private _router:Router
+    private _router: Router,
+    private _toster:ToastrService
   ) {}
   ngOnInit(): void {
     this.loadOrders();
@@ -38,15 +41,22 @@ export class CounterComponent implements OnInit {
     });
   }
   ProceedOrder(id: string) {
-    this._posService.proceesOrder(id).subscribe((res) => {
-      console.log(res);
-      this._posSocketService.emit('loadOrdersToPOS', {});
-      this._posSocketService.emit('loadToOrdersHistory', {});
-    });
+    if (this.paymentType == undefined) {
+      this._toster.warning('Selete Any payment method')
+    } else {
+      console.log(this.paymentType);
+      
+      this._posService.proceesOrder(id, this.paymentType).subscribe((res) => {
+        console.log(res);
+        this._posSocketService.emit('loadOrdersToPOS', {});
+        this._posSocketService.emit('loadToOrdersHistory', {});
+      });
+    }
+    
   }
   moreView(id: string) {
     if (id) {
-      this._router.navigate(['',id])
+      this._router.navigate(['orderdetaile', id]);
     }
   }
 }
