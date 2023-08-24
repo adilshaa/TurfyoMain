@@ -3,6 +3,7 @@ import { PosServiceService } from '../../core/services/pos-service.service';
 import { io } from 'socket.io-client';
 import { fromEvent } from 'rxjs';
 import { PosSocketServiceService } from '../../core/services/pos-socket-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sales',
@@ -19,7 +20,8 @@ export class SalesComponent implements OnInit {
   totalSales!: number;
   constructor(
     private _PosServie: PosServiceService,
-    private _posSocketService: PosSocketServiceService
+    private _posSocketService: PosSocketServiceService,
+    private _toster:ToastrService
   ) {}
   ngOnInit(): void {
     this.loadOrderHistory();
@@ -45,6 +47,7 @@ export class SalesComponent implements OnInit {
         console.log(res);
         
         this.ListOrders$=res
+      }, (err) => {
       })
     }
   };

@@ -40,19 +40,18 @@ export class CounterComponent implements OnInit {
       console.log(res);
     });
   }
-  ProceedOrder(id: string) {
+  ProceedOrder(id: string) { 
     if (this.paymentType == undefined) {
-      this._toster.warning('Selete Any payment method')
+      this._toster.success('Selete Any payment method')
     } else {
       console.log(this.paymentType);
-      
-      this._posService.proceesOrder(id, this.paymentType).subscribe((res) => {
+      let payment=this.paymentType
+      this._posService.proceesOrder(id,payment).subscribe((res) => {
         console.log(res);
         this._posSocketService.emit('loadOrdersToPOS', {});
         this._posSocketService.emit('loadToOrdersHistory', {});
       });
     }
-    
   }
   moreView(id: string) {
     if (id) {
