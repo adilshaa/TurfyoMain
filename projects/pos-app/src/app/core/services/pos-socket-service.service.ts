@@ -10,7 +10,7 @@ export class PosSocketServiceService {
   private resId = localStorage.getItem('resId');
 
   constructor() {
-    this.socket = io('http://localhost:5000');
+    this.socket = io('https://oxres.site');
   }
   listen(eventName: string): Observable<any> {
     return new Observable<any>((observer) => {

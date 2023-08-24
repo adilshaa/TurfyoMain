@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PosServiceService {
-  mainUrl: string = 'http://localhost:5000/';
+  mainUrl: string = 'https://oxres.site/';
   backRouter: string = 'pos/';
   constructor(private http: HttpClient) {}
 

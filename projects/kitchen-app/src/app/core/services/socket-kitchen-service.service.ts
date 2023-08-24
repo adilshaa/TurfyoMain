@@ -9,7 +9,7 @@ export class SocketKitchenServiceService {
   private socket: Socket;
   private resId=localStorage.getItem('resId')
   constructor() {
-    this.socket = io('http://localhost:5000');
+    this.socket = io('https://oxres.site');
   }
  
 

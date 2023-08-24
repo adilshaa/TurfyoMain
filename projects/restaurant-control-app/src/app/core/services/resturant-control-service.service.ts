@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ResturantControlServiceService {
-  url: string = 'http://localhost:5000/';
+  url: string = 'https://oxres.site/';
   backoRouter = 'resadmin/';
   constructor(
     private http: HttpClient,
@@ -25,7 +25,7 @@ export class ResturantControlServiceService {
     return this.http.get(`${this.url}${this.backoRouter}verifyresadmin`, {
       withCredentials: true,
     });
-  };
+  }
 
   fetcheStaffData() {
     console.log('reched service');

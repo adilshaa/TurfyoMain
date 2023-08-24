@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DiningServicesService {
-  mainUrl: string = 'http://localhost:5000/';
+  mainUrl: string = 'https://oxres.site/';
   backRouterUrl: string = 'dining/';
   constructor(private http: HttpClient) {}
   fetchFoods() {

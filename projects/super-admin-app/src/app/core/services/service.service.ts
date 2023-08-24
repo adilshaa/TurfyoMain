@@ -11,6 +11,9 @@ import { retriveResFullDetails } from "../store/super-admin.actions";
   providedIn: "root",
 })
 export class ServiceService implements OnInit {
+  PortUrl: string = "https://oxres.site/";
+  superAdminPathUrl: string = "superadmin/";
+  restarurantPathUrl: string = "restaurants/";
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -24,7 +27,7 @@ export class ServiceService implements OnInit {
     console.log("ahiii");
     console.log(user);
     this.http
-      .post("http://localhost:5000/superadmin/superadminlogin", user, {
+      .post(`${this.PortUrl + this.superAdminPathUrl}superadminlogin`, user, {
         withCredentials: true,
       })
       .subscribe((response: any) => {
@@ -44,7 +47,7 @@ export class ServiceService implements OnInit {
   ParnerRegistration(data: any) {
     console.log(data);
     this.http
-      .post(`http://localhost:5000/restaurants/resgister`, data, {
+      .post(`${this.PortUrl + this.restarurantPathUrl}resgister`, data, {
         withCredentials: true,
       })
       .subscribe(
@@ -57,14 +60,14 @@ export class ServiceService implements OnInit {
   }
   InitailLogin(data: any) {
     return this.http.post(
-      "http://localhost:5000/restaurants/initialLogin",
+      "${this.PortUrl + this.restarurantPathUrl}initialLogin",
       data,
       { withCredentials: true }
     );
   }
   initialLoginWithGoogle(data: any) {
     return this.http.post(
-      `http://localhost:5000/restaurants/initialLogin`,
+      `${this.PortUrl + this.restarurantPathUrl}initialLogin`,
       data,
       {
         withCredentials: true,
@@ -74,7 +77,7 @@ export class ServiceService implements OnInit {
 
   getAllRestaurantsData() {
     return this.http.get(
-      "http://localhost:5000/restaurants/get_allRestaurant",
+      `${this.PortUrl + this.restarurantPathUrl}get_allRestaurant`,
       {
         withCredentials: true,
       }
@@ -85,7 +88,7 @@ export class ServiceService implements OnInit {
     console.log(id);
 
     return this.http.get(
-      `http://localhost:5000/restaurants/full_details/${id}`,
+      `${this.PortUrl + this.restarurantPathUrl}full_details/${id}`,
       {
         withCredentials: true,
       }
@@ -103,7 +106,7 @@ export class ServiceService implements OnInit {
     }
     this.http
       .post(
-        `http://localhost:5000/restaurants/list_restaurants/${id}`,
+        `${this.PortUrl + this.restarurantPathUrl}list_restaurants/${id}`,
         { status: status },
         {
           withCredentials: true,

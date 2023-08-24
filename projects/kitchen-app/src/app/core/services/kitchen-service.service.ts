@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class KitchenServiceService {
-  url: string = 'http://localhost:5000/';
+  url: string = 'https://oxres.site/';
   backoRouter: string = 'kitchen/';
   constructor(private http: HttpClient) {}
 
@@ -56,9 +56,7 @@ export class KitchenServiceService {
   Foodiready(id: string) {
     return this.http.get(`${this.url}${this.backoRouter}readyFood/${id}`);
   }
-  listCategory():Observable<any[]> {
-    return this.http.get<any[]>(
-      `${this.url}${this.backoRouter}listCategory`
-    );
-  };
+  listCategory(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}${this.backoRouter}listCategory`);
+  }
 }
